@@ -9,6 +9,7 @@ import sun.audio.AudioStream;
 public class Main {
 
 	public static void main(String[] args) throws IOException {
+		
 		InputStream in = null;
 		try {
 			in = new FileInputStream("sounds\\sound1.wav");
@@ -25,9 +26,8 @@ public class Main {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}         
-
-		// Use the static class member "player" from class AudioPlayer to play
-		// clip.
+		
+		// Use the static class member "player" from class AudioPlayer to play clip.
 		AudioPlayer.player.start(as);
 		
 		WelcomeScreen screen = new WelcomeScreen();
