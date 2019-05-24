@@ -139,7 +139,6 @@ public class WelcomeScreen extends JFrame{
 	//how to play button
 	class ButtonListener2 implements ActionListener {
 		public void actionPerformed(ActionEvent b) {
-				
 			//x axis location of the frame 
 			locationXOfFrame=welcomeScreenFrame.getX();
 			//y axis location of the frame 
@@ -197,8 +196,7 @@ public class WelcomeScreen extends JFrame{
 	public static void setHowToPlayFrameFlag(int x){
 		howToPlayFrameFlag = x;
     }
-	
-	
+		
 	//get location of jframe
 	public static int getWelcomeScreenFrameX(){
 		return 	locationXOfFrame;
