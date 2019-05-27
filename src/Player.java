@@ -25,9 +25,8 @@ public class Player {
 	}
 	
 	public static void updateScore() {
-		//System.out.println("New round time: "+GameFunctions.getNewRoundTimeMark());
-		//System.out.println("Remaining time: "+Player.getRemainingTime());
-		if (GameFunctions.getNewRoundTimeMark()-Player.getRemainingTime()<=5) {
+		if (GameFunctions.getNewRoundTimeMark()-Player.getRemainingTime()<=5) { 
+			//Player gets bonus if he or she answers correctly in the first 5 seconds of the new round
 			score+=1000;
 			bonus=true;
 		}

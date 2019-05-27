@@ -79,7 +79,6 @@ public class GameFunctions {
 			showMessage("GAME OVER!!!",1300);
 			System.exit(1);
 		}
-		
 		showMessage("Wrong answer!\nLives left: "+Player.getLives(),1200);
 	}
 	

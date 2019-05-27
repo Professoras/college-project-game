@@ -3,6 +3,7 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.concurrent.TimeUnit;
@@ -38,7 +39,7 @@ public class GamePanel {
 		
 		JLabel livesLabel = new JLabel("Lives: " + Player.getLives());	//Fill 1st Panel
 
-		timerLabel = new JLabel("Time Left: " + Player.getRemainingTime());
+		timerLabel = new JLabel("Time Left: " + GameFunctions.TimeConversion(Player.getRemainingTime()));
 		updateTime();
 
 		JLabel scoreLabel = new JLabel("Score: " + Player.getScore());
@@ -46,7 +47,7 @@ public class GamePanel {
 		livesTimeScorePanel.add(timerLabel);
 		livesTimeScorePanel.add(scoreLabel);
 		
-		JLabel roomPanel = new JLabel("Room " + Player.getCurrentRoom());	//Fill 2nd Panel
+		JLabel roomPanel = new JLabel("Room " +  Player.getCurrentRoom());	//Fill 2nd Panel
 		JLabel questionLabel = new JLabel(Story.getQuestion());	
 		roomQuestionPanel.add(roomPanel);
 		roomQuestionPanel.add(questionLabel);
@@ -200,6 +201,7 @@ public class GamePanel {
 				}
 			}
 		};
+		
 		clock.start();
 	}
 	
