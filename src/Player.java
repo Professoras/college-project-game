@@ -13,21 +13,31 @@ public class Player {
 	private static int lives = 3;
 	private static int current_room = 1;
 	private static int score = 0;
-	private static int time=61;
+	private static int time=60;
 	private static Timer gameTimer;
 	private static boolean skipAvailable = true;
+	private static boolean bonus;
 	
 	
 	public static int getScore() {
 		return score;
 	}
 	
-	public static void updateScore(/*int points*/) {	//Need Implementation!
-		int x = 1000;
-		
-		score += x;
+	public static void updateScore() {
+		//System.out.println("New round time: "+GameFunctions.getNewRoundTimeMark());
+		//System.out.println("Remaining time: "+Player.getRemainingTime());
+		if (GameFunctions.getNewRoundTimeMark()-Player.getRemainingTime()<=5) {
+			score+=1000;
+			bonus=true;
+		}
+		else
+			bonus=false;
+		score +=1000;
 	}
-
+	
+	public static boolean gotBonus() {
+		return bonus;
+	}
 	
 	public static int getLives() {
 		return lives;
@@ -43,11 +53,11 @@ public class Player {
 	
 
 	public static void startTheTimer() {
-		System.out.println("Start the timer!");
+		//System.out.println("Start the timer!");
 		gameTimer = new Timer(1000, new AbstractAction() {
 
 			public void actionPerformed(ActionEvent ae) {
-		        	if (time-1==0 || time<=0) {
+		        	if (time<=0) {
 		        		gameTimer.stop();
 		        		GameFunctions.timeIsUp();
 		        		
@@ -58,7 +68,7 @@ public class Player {
 		        	}
 		    	}
 			});
-		gameTimer.setRepeats(true);//the timer should only go off once
+		gameTimer.setRepeats(true);
 
 		gameTimer.start();
 	}
@@ -91,17 +101,5 @@ public class Player {
 		skipAvailable = false;
 	}
 	
-//	public static void setTimeCounterStart() {
-//		timeCounterStart = time;
-//	}
-//	
-//	public static void updateScore() {
-//		timeCounterEnd = time;
-//		int bonus = 20 - (timeCounterStart - timeCounterEnd);
-//		if (bonus < 0)
-//			bonus = 0;
-//		//System.out.println(bonus);
-//		score = score + 1000 + (bonus * 100);
-//	}
 
 }

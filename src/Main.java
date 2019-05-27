@@ -7,6 +7,7 @@ public class Main {
 	
 	public static void openNewGamePanel() {
 		Story.findQuestion(Player.getCurrentRoom());
+		GameFunctions.setNewRoundTimeMark(Player.getRemainingTime());
 		new GamePanel();
 	}
 }

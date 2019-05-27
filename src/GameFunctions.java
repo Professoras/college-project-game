@@ -11,9 +11,8 @@ import javax.swing.SwingConstants;
 import javax.swing.Timer;
 
 public class GameFunctions {
-	//Dialog boxes need to be implemented
 	
-	
+	public static int newRoundTime;
 	public static void showMessage(String info, JFrame aframe, int timeinms) {
 		JOptionPane optionPane = new JOptionPane(info, JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null);
 		
@@ -45,23 +44,20 @@ public class GameFunctions {
 	}
 	
 	public static void rightAnswer(JFrame aframe) {
-		if (Player.getLives() < 5)
+		if (Player.getLives() < 4)
 			Player.addALife();
 		Player.updateCurrentRoom();
 		Player.updateScore();
-		//Player.setTimeCounterStart();
-		showMessage("Good job!\nOn to the next round!\nLives left: "+Player.getLives(),aframe,2200);
+		
+		if (Player.gotBonus())
+			showMessage("Fantastic job! 2x points!!\nOn to the next round!\nLives left: "+Player.getLives(),aframe,1300);
+		else
+			showMessage("Good job!\nOn to the next round!\nLives left: "+Player.getLives(),aframe,1300);
 
 		if (coinflip()==1) {
 			int reducedTime=Enemy.reduceTime();
 			showEnemy(aframe,reducedTime);
-			if (Player.getRemainingTime()-reducedTime<=0) {
-				showMessage("GAME OVER!!!",aframe,2500);
-				System.exit(1);
-			}
-			else
-				Player.reduceTime(reducedTime);
-			
+			Player.reduceTime(reducedTime);	
 		}
 		
 		aframe.dispose();
@@ -71,26 +67,14 @@ public class GameFunctions {
 	public static void wrongAnswer(JFrame aframe) {
 		Player.removeALife();
 		if (Player.getLives() == 0) {
-			showMessage("GAME OVER!!!",aframe,2500);
+			showMessage("GAME OVER!!!",aframe,1300);
 			System.exit(1);
 		}
-		//Player.updateCurrentRoom();  Should it pass the room with wrong answer?
-		showMessage("Wrong answer!\nLives left: "+Player.getLives(),aframe,2200);
+		//Player.updateCurrentRoom();  
+		//Q: Should it pass the room with wrong answer?
+		//A: Good observation, updated so it does not!
 		
-		if (coinflip()==1) {	//SRS states that Enemy should not KILL the player!
-			int reducedTime=Enemy.reduceTime();
-			showEnemy(aframe,reducedTime);
-			if (Player.getRemainingTime()-reducedTime<=0) {
-				showMessage("GAME OVER!!!",aframe,2500);
-				System.exit(1);
-			}
-			else
-				Player.reduceTime(reducedTime);
-			
-		}
-		
-		aframe.dispose();
-		Main.openNewGamePanel();
+		showMessage("Wrong answer!\nLives left: "+Player.getLives(),aframe,1200);
 	}
 	
 	public static void timeIsUp() {
@@ -141,7 +125,7 @@ public class GameFunctions {
         dialog.setLocationRelativeTo(aframe);
         
 		//create timer to dispose of dialog after 4 seconds
-		Timer timer = new Timer(2700, new AbstractAction() {
+		Timer timer = new Timer(1800, new AbstractAction() {
 
 		    public void actionPerformed(ActionEvent ae) {
 		        dialog.dispose();
@@ -152,5 +136,13 @@ public class GameFunctions {
 		//start timer to close JDialog as dialog modal we must start the timer before its visible
 		timer.start();
 		dialog.setVisible(true);
+	}
+	
+	public static void setNewRoundTimeMark(int time) {
+		newRoundTime=time;
+	}
+	
+	public static int getNewRoundTimeMark() {
+		return newRoundTime;
 	}
 }
