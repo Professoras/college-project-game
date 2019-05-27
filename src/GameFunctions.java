@@ -13,7 +13,7 @@ import javax.swing.Timer;
 public class GameFunctions {
 	
 	public static int newRoundTime;
-	public static void showMessage(String info, JFrame aframe, int timeinms) {
+	public static void showMessage(String info, int timeinms) {
 		JOptionPane optionPane = new JOptionPane(info, JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null);
 		
 		final JDialog dialog = new JDialog();
@@ -24,7 +24,7 @@ public class GameFunctions {
 
 		dialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 		dialog.pack();
-		dialog.setLocationRelativeTo(aframe);
+		dialog.setLocationRelativeTo(GamePanel.getFrame());
 		//create timer to dispose of dialog after x seconds
 		Timer timer = new Timer(timeinms, new AbstractAction() {
 
@@ -43,42 +43,48 @@ public class GameFunctions {
 		return (int)(Math.random()*2); //returns integer in the range: [0,2)
 	}
 	
-	public static void rightAnswer(JFrame aframe) {
-		if (Player.getLives() < 4)
-			Player.addALife();
-		Player.updateCurrentRoom();
+	public static void rightAnswer() {
 		Player.updateScore();
 		
+		if (Player.getCurrentRoom()==Story.getNumberOfLevels()) {
+			Player.stopTheTimer();
+			int totalTime=Player.getTotalTime()-Player.getRemainingTime();
+			GameFunctions.showMessage("CONGRATULATIONS!\nYOU WON!\nYour new highscore: "+Player.getScore()+"\nTime: "+totalTime+"s",5000);
+			System.exit(1);
+		}
+		if (Player.getLives() < 4)
+			Player.addALife();
+		
+		Player.updateCurrentRoom();
+		
+		
 		if (Player.gotBonus())
-			showMessage("Fantastic job! 2x points!!\nOn to the next round!\nLives left: "+Player.getLives(),aframe,1300);
+			showMessage("Fantastic job! 2x points!!\nOn to the next round!\nLives left: "+Player.getLives(),1300);
 		else
-			showMessage("Good job!\nOn to the next round!\nLives left: "+Player.getLives(),aframe,1300);
+			showMessage("Good job!\nOn to the next round!\nLives left: "+Player.getLives(),1300);
 
-		if (coinflip()==1) {
+		if (Player.getCurrentRoom()<Story.getNumberOfLevels() && coinflip()==1) {
 			int reducedTime=Enemy.reduceTime();
-			showEnemy(aframe,reducedTime);
+			showEnemy(GamePanel.getFrame(),reducedTime);
 			Player.reduceTime(reducedTime);	
 		}
 		
-		aframe.dispose();
+		GamePanel.getFrame().dispose();
 		Main.openNewGamePanel();
 	}
 	
-	public static void wrongAnswer(JFrame aframe) {
+	public static void wrongAnswer() {
 		Player.removeALife();
 		if (Player.getLives() == 0) {
-			showMessage("GAME OVER!!!",aframe,1300);
+			showMessage("GAME OVER!!!",1300);
 			System.exit(1);
 		}
-		//Player.updateCurrentRoom();  
-		//Q: Should it pass the room with wrong answer?
-		//A: Good observation, updated so it does not!
 		
-		showMessage("Wrong answer!\nLives left: "+Player.getLives(),aframe,1200);
+		showMessage("Wrong answer!\nLives left: "+Player.getLives(),1200);
 	}
 	
 	public static void timeIsUp() {
-		showMessage("Time is up! You lost!",GamePanel.getFrame(),3000);
+		showMessage("Time is up! You lost!",3000);
 		System.exit(1);
 	}
 	
@@ -93,7 +99,7 @@ public class GameFunctions {
 	public static void skipBtn(JFrame aframe) {
 		if (Player.isSkipAvailable()) {
 			if(Player.getLives() > 1) {
-				showMessage("You skipped the question!" + System.lineSeparator() + "The correct answer was: " + Story.getRightAnswer() + System.lineSeparator() + "You lost 1 life!", aframe,3000);
+				showMessage("You skipped the question!" + System.lineSeparator() + "The correct answer was: " + Story.getRightAnswer() + System.lineSeparator() + "You lost 1 life!",1600);
 				Player.removeALife();
 				Player.setSkipNotAvailable();
 				Player.updateCurrentRoom();
@@ -101,10 +107,10 @@ public class GameFunctions {
 				Main.openNewGamePanel();
 			}
 			else
-				showMessage("You don't have enough lives to skip the question!", aframe,3000);
+				showMessage("You don't have enough lives to skip the question!",1600);
 		}
 		else
-			showMessage("You already used the skip option once!", aframe,3000);
+			showMessage("You already used the skip option once!",1600);
 	}
 	
 	public static void showEnemy(JFrame aframe,int reducedTime) {

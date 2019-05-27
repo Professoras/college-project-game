@@ -15,6 +15,7 @@ public class Story {
 	private static JSONArray level_question_set;
 	private static ArrayList<String> answers;
 	private static final int NUMBEROFQUESTIONS = 2;
+	private static final int storyLevels=3;
 	
 	public static void getLevelQuestions(int level) {
 		JSONParser parser = new JSONParser();
@@ -63,5 +64,9 @@ public class Story {
 	
 	public static String getRightAnswer() {
 		return answers.get(0);
+	}
+	
+	public static int getNumberOfLevels() {
+		return storyLevels;
 	}
 }

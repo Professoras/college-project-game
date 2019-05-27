@@ -14,6 +14,7 @@ public class Player {
 	private static int current_room = 1;
 	private static int score = 0;
 	private static int time=60;
+	private static final int totalTime=60;
 	private static Timer gameTimer;
 	private static boolean skipAvailable = true;
 	private static boolean bonus;
@@ -81,10 +82,14 @@ public class Player {
 	public static void reduceTime(int reduceTimeSeconds) {
 		time-=reduceTimeSeconds;
 	}
-	public static String printScore() {
-		return "Hey"+name+"\nYour score is"+score;
+	
+	public static void stopTheTimer() {
+		gameTimer.stop();
 	}
-
+	
+	public static int getTotalTime() {
+		return totalTime;
+	}
 	public static int getCurrentRoom() {
 		return current_room;
 	}

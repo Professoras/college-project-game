@@ -122,29 +122,29 @@ public class GamePanel {
 			public void actionPerformed(ActionEvent e) {
 				if (door1RBtn.isSelected()) {	//1st Btn selected
 					if (answer1Label.getText().equals(Story.getRightAnswer())) {	//correct answer
-						GameFunctions.rightAnswer(frame);
+						GameFunctions.rightAnswer();
 						
 					}
 					else {	//wrong answer
-						GameFunctions.wrongAnswer(frame);
+						GameFunctions.wrongAnswer();
 						
 					}
 				}
 				else if (door2RBtn.isSelected()) {	//2nd Btn selected
 					if (answer2Label.getText().equals(Story.getRightAnswer())) {
-						GameFunctions.rightAnswer(frame);
+						GameFunctions.rightAnswer();
 					}
 					else {
-						GameFunctions.wrongAnswer(frame);
+						GameFunctions.wrongAnswer();
 							
 					}
 				}
 				else if (door3RBtn.isSelected()) {	//3rd Btn selected
 					if (answer3Label.getText().equals(Story.getRightAnswer())) {
-						GameFunctions.rightAnswer(frame);
+						GameFunctions.rightAnswer();
 					}
 					else {
-						GameFunctions.wrongAnswer(frame);
+						GameFunctions.wrongAnswer();
 					}		
 				}
 				else {
