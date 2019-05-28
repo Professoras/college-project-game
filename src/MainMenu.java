@@ -6,9 +6,9 @@ import java.io.InputStream;
 import sun.audio.AudioPlayer;
 import sun.audio.AudioStream;
 
-public class Main {
+public class MainMenu {
 
-	public static void main(String[] args) throws IOException {
+	public static void launchMainMenu() throws IOException {
 		
 		InputStream in = null;
 		try {

@@ -54,14 +54,14 @@ public class GamePanel {
 		roomQuestionPanel.add(questionLabel);
 		
 		JLabel playerImage = new JLabel("");	//Fill 3rd Panel
-		Image playerIcon = new ImageIcon(this.getClass().getResource("/char2.jpg")).getImage();
+		Image playerIcon = new ImageIcon("Images/char2.jpg").getImage();
 		playerImage.setIcon(new ImageIcon(playerIcon));
 		playerPanel.add(playerImage);
 		
 		JLabel door1Image = new JLabel("");	//Fill 4th Panel
 		JLabel door2Image = new JLabel("");
 		JLabel door3Image = new JLabel("");
-		Image doorIcon = new ImageIcon(this.getClass().getResource("/LogOut.png")).getImage();
+		Image doorIcon = new ImageIcon("Images/LogOut.png").getImage();
 		door1Image.setIcon(new ImageIcon(doorIcon));
 		door2Image.setIcon(new ImageIcon(doorIcon));
 		door3Image.setIcon(new ImageIcon(doorIcon));
