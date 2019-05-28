@@ -12,10 +12,11 @@ import javax.swing.Timer;
 
 public class GameFunctions {
 	
-	public static int newRoundTime;
-	
+	private static int newRoundTime;
+	private static boolean launch=true;
 	
 	public static void launchTheGame(int charid) {
+		MainMenu.stopAudioStream();
 		Player.setPhoto(charid);
 		Player.startTheTimer();
 		openNewGamePanel();
@@ -26,6 +27,7 @@ public class GameFunctions {
 		Story.findQuestion(Player.getCurrentRoom());
 		GameFunctions.setNewRoundTimeMark(Player.getRemainingTime());
 		new GamePanel();
+		
 	}
 	
 	public static int coinflip() {
