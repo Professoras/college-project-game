@@ -22,6 +22,7 @@ import javax.swing.JRadioButton;
 public class GamePanel {
 	private JLabel timerLabel;
 	private static JFrame frame;
+	private JLabel livesLabel;
 	
 	public GamePanel() {
 		frame = new JFrame("Escape Room");
@@ -128,6 +129,7 @@ public class GamePanel {
 					}
 					else {	//wrong answer
 						GameFunctions.wrongAnswer();
+						livesLabel.setText("Lives: " + Player.getLives());
 						
 					}
 				}
@@ -137,7 +139,7 @@ public class GamePanel {
 					}
 					else {
 						GameFunctions.wrongAnswer();
-							
+						livesLabel.setText("Lives: " + Player.getLives());	
 					}
 				}
 				else if (door3RBtn.isSelected()) {	//3rd Btn selected
@@ -146,6 +148,7 @@ public class GamePanel {
 					}
 					else {
 						GameFunctions.wrongAnswer();
+						livesLabel.setText("Lives: " + Player.getLives());
 					}		
 				}
 				else {
