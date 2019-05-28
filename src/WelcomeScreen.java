@@ -1,25 +1,18 @@
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Toolkit;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
-
-import sun.audio.AudioPlayer;
-import sun.audio.AudioStream;
+import javax.swing.JToggleButton;
 
 
 
@@ -27,8 +20,9 @@ import sun.audio.AudioStream;
 public class WelcomeScreen extends JFrame{
 
 	private String instructions;
-	private JButton startButton,howToPlayButton,exitButton,backButton,char1,char2;
+	private JButton startButton,howToPlayButton,exitButton,backButton;//char1,char2;
 	private JLabel label;
+	private JToggleButton char1,char2;
 	private JTextField text;
 	private JRadioButton choice1,choice2;
 	private static int howToPlayFrameFlag = 0, locationXOfFrame = 0 , locationYOfFrame = 0;
@@ -102,7 +96,7 @@ public class WelcomeScreen extends JFrame{
 			getContentPane().setLayout(null);
 			welcomeScreenFrame.getContentPane().add(backButton);
 			
-			char1 = new JButton("");
+			char1 = new JToggleButton("");
 			char1.setIcon(new ImageIcon("images\\char1.jpg"));
 			char1.setBackground(Color.WHITE);
 			char1.setBounds(28, 90, 200, 300);
@@ -111,13 +105,12 @@ public class WelcomeScreen extends JFrame{
 			
 			welcomeScreenFrame.getContentPane().add(char1);	
 			
-			char2 = new JButton("");
+			char2 = new JToggleButton("");
 			char2.setIcon(new ImageIcon("images\\char2.jpg"));
 			char2.setBackground(Color.WHITE);
 			char2.setBounds(259, 90, 200, 300);
-			ButtonListener6 listener2 = new ButtonListener6();
-			char2.addActionListener(listener2);			
-			
+//			ButtonListener6 listener2 = new ButtonListener6();
+			char2.addActionListener(listener1);			
 			welcomeScreenFrame.getContentPane().add(char2);
 					
 			JButton okButton = new JButton("");
@@ -125,6 +118,7 @@ public class WelcomeScreen extends JFrame{
 			okButton.setForeground(new Color(0, 128, 128));
 			okButton.setBackground(new Color(0, 128, 128));
 			okButton.setBounds(140, 401, 200, 60);
+			okButton.addActionListener(listener1);
 			
 			welcomeScreenFrame.getContentPane().add(okButton);
 			
@@ -178,19 +172,56 @@ public class WelcomeScreen extends JFrame{
 	
 	//character 1 selected
 	class ButtonListener5 implements ActionListener {
-		public void actionPerformed(ActionEvent a) {		
-			char1.setIcon(new ImageIcon("images\\char1selected.jpg"));
-			char2.setIcon(new ImageIcon("images\\char2.jpg"));
+		public void actionPerformed(ActionEvent a) {
+			
+			if (a.getSource()==char1) {
+				if (char1.isSelected()) {
+					char2.setSelected(false);
+					char1.setIcon(new ImageIcon("images\\char1selected.jpg"));
+					char2.setIcon(new ImageIcon("images\\char2.jpg"));
+				
+				}
+				else {
+					char2.setSelected(false);
+					char1.setIcon(new ImageIcon("images\\char1.jpg"));
+				}
+			}
+			else if (a.getSource()==char2) {
+				if (char2.isSelected()) {
+					char1.setSelected(false);
+					char2.setIcon(new ImageIcon("images\\char2selected.jpg"));
+					char1.setIcon(new ImageIcon("images\\char1.jpg"));
+				}
+				else {
+					char1.setSelected(false);
+					char2.setIcon(new ImageIcon("images\\char2.jpg"));
+				}
+				
+			}
+			else {
+				if (char1.isSelected()) {
+					System.out.println(1);
+				}
+				else if (char2.isSelected()) {
+					System.out.println(2);
+				}
+				else {
+					System.out.println("No player selected");
+				}
+					
+			}
+				
+				
 		}
 	}
 	
-	//character 2 selected
-	class ButtonListener6 implements ActionListener {
-		public void actionPerformed(ActionEvent b) {		
-			char2.setIcon(new ImageIcon("images\\char2selected.jpg"));
-			char1.setIcon(new ImageIcon("images\\char1.jpg"));
-		}
-	}
+//	//character 2 selected
+//	class ButtonListener6 implements ActionListener {
+//		public void actionPerformed(ActionEvent b) {		
+//			char2.setIcon(new ImageIcon("images\\char2selected.jpg"));
+//			char1.setIcon(new ImageIcon("images\\char1.jpg"));
+//		}
+//	}
 	
 	//number of how to play screens max = 1 
 	public static void setHowToPlayFrameFlag(int x){
