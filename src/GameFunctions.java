@@ -98,7 +98,7 @@ public class GameFunctions {
 	public static void skipBtn(JFrame aframe) {
 		if (Player.isSkipAvailable()) {
 			if(Player.getLives() > 1) {
-				showMessage("You skipped the question!" + System.lineSeparator() + "The correct answer was: " + Story.getRightAnswer() + System.lineSeparator() + "You lost 1 life!",1600);
+				showMessage("You skipped the question!" + System.lineSeparator() + "The correct answer was: " + Story.getRightAnswer() + System.lineSeparator() + "You lost 1 life!",1800);
 				Player.removeALife();
 				Player.setSkipNotAvailable();
 				Player.updateCurrentRoom();
@@ -130,7 +130,7 @@ public class GameFunctions {
         dialog.setLocationRelativeTo(aframe);
         
 		//create timer to dispose of dialog after 4 seconds
-		Timer timer = new Timer(1800, new AbstractAction() {
+		Timer timer = new Timer(1950, new AbstractAction() {
 
 		    public void actionPerformed(ActionEvent ae) {
 		        dialog.dispose();
