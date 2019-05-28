@@ -54,7 +54,7 @@ public class GamePanel {
 		roomQuestionPanel.add(questionLabel);
 		
 		JLabel playerImage = new JLabel("");	//Fill 3rd Panel
-		Image playerIcon = new ImageIcon("Images/char2.jpg").getImage();
+		Image playerIcon = Player.getPhoto();
 		playerImage.setIcon(new ImageIcon(playerIcon));
 		playerPanel.add(playerImage);
 		

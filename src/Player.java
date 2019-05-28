@@ -1,10 +1,8 @@
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
-
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-
+import javax.swing.ImageIcon;
 import javax.swing.Timer;
 
 public class Player {
@@ -18,6 +16,7 @@ public class Player {
 	private static Timer gameTimer;
 	private static boolean skipAvailable = true;
 	private static boolean bonus;
+	private static Image photo;
 	
 	
 	public static int getScore() {
@@ -51,6 +50,13 @@ public class Player {
 		lives -= 1;
 	}
 	
+	public static void setPhoto(int photoid) {
+		photo= new ImageIcon("Images/char"+photoid+".jpg").getImage(); 
+	}
+	
+	public static Image getPhoto() {
+		return photo;
+	}
 
 	public static void startTheTimer() {
 		//System.out.println("Start the timer!");

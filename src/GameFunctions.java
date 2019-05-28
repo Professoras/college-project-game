@@ -13,6 +13,22 @@ import javax.swing.Timer;
 public class GameFunctions {
 	
 	public static int newRoundTime;
+	
+	
+	public static void launchTheGame(int charid) {
+		Player.setPhoto(charid);
+		Player.startTheTimer();
+		openNewGamePanel();
+	}
+	
+	
+	public static void openNewGamePanel() {
+		Story.findQuestion(Player.getCurrentRoom());
+		GameFunctions.setNewRoundTimeMark(Player.getRemainingTime());
+		new GamePanel();
+	}
+	
+	
 	public static void showMessage(String info, int timeinms) {
 		JOptionPane optionPane = new JOptionPane(info, JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null);
 		
@@ -70,7 +86,7 @@ public class GameFunctions {
 		}
 		
 		GamePanel.getFrame().dispose();
-		Main.openNewGamePanel();
+		openNewGamePanel();
 	}
 	
 	public static void wrongAnswer() {
@@ -103,7 +119,7 @@ public class GameFunctions {
 				Player.setSkipNotAvailable();
 				Player.updateCurrentRoom();
 				aframe.dispose();
-				Main.openNewGamePanel();
+				openNewGamePanel();
 			}
 			else
 				showMessage("You don't have enough lives to skip the question!",1600);

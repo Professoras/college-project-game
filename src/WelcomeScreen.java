@@ -26,7 +26,7 @@ public class WelcomeScreen extends JFrame{
 	private JTextField text;
 	private JRadioButton choice1,choice2;
 	private static int howToPlayFrameFlag = 0, locationXOfFrame = 0 , locationYOfFrame = 0;
-	JFrame welcomeScreenFrame = new JFrame();
+	private static JFrame welcomeScreenFrame = new JFrame();
 	
 	public WelcomeScreen() throws IOException {		
 
@@ -201,12 +201,16 @@ public class WelcomeScreen extends JFrame{
 			else {
 				if (char1.isSelected()) {
 					System.out.println(1);
+					welcomeScreenFrame.dispose();
+					GameFunctions.launchTheGame(1);
 				}
 				else if (char2.isSelected()) {
 					System.out.println(2);
+					welcomeScreenFrame.dispose();
+					GameFunctions.launchTheGame(2);
 				}
 				else {
-					System.out.println("No player selected");
+					GameFunctions.showMessage("Select character first!", 2000);;
 				}
 					
 			}
