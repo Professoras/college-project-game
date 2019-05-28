@@ -8,7 +8,7 @@ import sun.audio.AudioStream;
 
 public class MainMenu {
 	
-	private static AudioStream as;
+	private static AudioStream audioSource;
 	public static void launchMainMenu() throws IOException {
 		
 		InputStream in = null;
@@ -21,22 +21,21 @@ public class MainMenu {
 
 		// Create an AudioStream object from the input stream.
 		try {
-			as = new AudioStream(in); 
+			audioSource = new AudioStream(in); 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}         
 		
 		// Use the static class member "player" from class AudioPlayer to play clip.
-		AudioPlayer.player.start(as);
+		AudioPlayer.player.start(audioSource);
 		
 		
 		new WelcomeScreen();
 	}
 	
 	public static void stopAudioStream() {
-		System.out.println("STOP!");
-		AudioPlayer.player.stop(as);
+		AudioPlayer.player.stop(audioSource);
 	}
 
 }
