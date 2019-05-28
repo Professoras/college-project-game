@@ -1,6 +1,7 @@
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Time;
@@ -180,6 +181,7 @@ public class GamePanel {
 		restartSkipExitPanel.setBackground(Color.LIGHT_GRAY);
 		answersDoorsRBtnPanel.setBackground(Color.LIGHT_GRAY);
 		
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("images\\stickman.png"));
 		frame.setContentPane(mainPanel);	//Frame settings - size settings need to be adjusted!
 		frame.setSize(1200, 700);
 		//frame.setResizable(false);

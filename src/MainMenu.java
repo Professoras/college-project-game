@@ -30,7 +30,7 @@ public class MainMenu {
 		// Use the static class member "player" from class AudioPlayer to play clip.
 		AudioPlayer.player.start(as);
 		
-		WelcomeScreen screen = new WelcomeScreen();
+		new WelcomeScreen();
 	}
 
 }

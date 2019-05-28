@@ -200,17 +200,17 @@ public class WelcomeScreen extends JFrame{
 			}
 			else {
 				if (char1.isSelected()) {
-					System.out.println(1);
+					//System.out.println(1);
 					welcomeScreenFrame.dispose();
 					GameFunctions.launchTheGame(1);
 				}
 				else if (char2.isSelected()) {
-					System.out.println(2);
+					//System.out.println(2);
 					welcomeScreenFrame.dispose();
 					GameFunctions.launchTheGame(2);
 				}
 				else {
-					GameFunctions.showMessage("Select character first!", 2000);;
+					GameFunctions.showMessage("Select character first!", 1500);;
 				}
 					
 			}
@@ -218,14 +218,6 @@ public class WelcomeScreen extends JFrame{
 				
 		}
 	}
-	
-//	//character 2 selected
-//	class ButtonListener6 implements ActionListener {
-//		public void actionPerformed(ActionEvent b) {		
-//			char2.setIcon(new ImageIcon("images\\char2selected.jpg"));
-//			char1.setIcon(new ImageIcon("images\\char1.jpg"));
-//		}
-//	}
 	
 	//number of how to play screens max = 1 
 	public static void setHowToPlayFrameFlag(int x){
@@ -242,8 +234,3 @@ public class WelcomeScreen extends JFrame{
     }
 	
 }
-
-	
-
-
-

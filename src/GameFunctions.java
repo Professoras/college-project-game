@@ -28,33 +28,6 @@ public class GameFunctions {
 		new GamePanel();
 	}
 	
-	
-	public static void showMessage(String info, int timeinms) {
-		JOptionPane optionPane = new JOptionPane(info, JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null);
-		
-		final JDialog dialog = new JDialog();
-		dialog.setTitle("Message");
-		dialog.setModal(true);
-
-		dialog.setContentPane(optionPane);
-
-		dialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
-		dialog.pack();
-		dialog.setLocationRelativeTo(GamePanel.getFrame());
-		//create timer to dispose of dialog after x seconds
-		Timer timer = new Timer(timeinms, new AbstractAction() {
-
-		    public void actionPerformed(ActionEvent ae) {
-		        dialog.dispose();
-		    }
-		});
-		timer.setRepeats(false);//the timer should only go off once
-
-		//start timer to close JDialog as dialog modal we must start the timer before its visible
-		timer.start();
-		dialog.setVisible(true);
-	}
-	
 	public static int coinflip() {
 		return (int)(Math.random()*2); //returns integer in the range: [0,2)
 	}
@@ -165,5 +138,31 @@ public class GameFunctions {
 	
 	public static int getNewRoundTimeMark() {
 		return newRoundTime;
+	}
+	
+	public static void showMessage(String info, int timeinms) {
+		JOptionPane optionPane = new JOptionPane(info, JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null);
+		
+		final JDialog dialog = new JDialog();
+		dialog.setTitle("Message");
+		dialog.setModal(true);
+
+		dialog.setContentPane(optionPane);
+
+		dialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+		dialog.pack();
+		dialog.setLocationRelativeTo(GamePanel.getFrame());
+		//create timer to dispose of dialog after x seconds
+		Timer timer = new Timer(timeinms, new AbstractAction() {
+
+		    public void actionPerformed(ActionEvent ae) {
+		        dialog.dispose();
+		    }
+		});
+		timer.setRepeats(false);//the timer should only go off once
+
+		//start timer to close JDialog as dialog modal we must start the timer before its visible
+		timer.start();
+		dialog.setVisible(true);
 	}
 }
