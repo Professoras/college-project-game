@@ -4,15 +4,26 @@ import java.awt.Toolkit;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
+import java.util.Scanner;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.JToggleButton;
+import javax.swing.SwingConstants;
+
+
+import java.nio.charset.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 
 
@@ -20,24 +31,17 @@ import javax.swing.JToggleButton;
 public class WelcomeScreen extends JFrame{
 
 	private String instructions;
-	private JButton startButton,howToPlayButton,exitButton,backButton;//char1,char2;
+	private JButton startButton,howToPlayButton,exitButton,backButton,char1,char2;
 	private JLabel label;
-	private JToggleButton char1,char2;
-	private JTextField text;
+	private JTextArea text;
 	private JRadioButton choice1,choice2;
-	private static int howToPlayFrameFlag = 0, locationXOfFrame = 0 , locationYOfFrame = 0;
-	private static JFrame welcomeScreenFrame;
+	private static int howToPlayFrameFlag = 0, locationXOfFrame = 0 , locationYOfFrame = 0, characterSelected = 0;
+	JFrame welcomeScreenFrame = new JFrame();
 	
 	public WelcomeScreen() throws IOException {		
 
 		getContentPane().setLayout(null);
-		if (welcomeScreenFrame==null)
-			welcomeScreenFrame= new JFrame();
-		else {
-			welcomeScreenFrame.getContentPane().removeAll();
-			welcomeScreenFrame.repaint();
-		}
-	
+		
 		startButton = new JButton("");
 		startButton.setIcon(new ImageIcon("images\\StartButtonV2.png"));
 		startButton.setBackground(new Color(0, 128, 128));
@@ -102,7 +106,7 @@ public class WelcomeScreen extends JFrame{
 			getContentPane().setLayout(null);
 			welcomeScreenFrame.getContentPane().add(backButton);
 			
-			char1 = new JToggleButton("");
+			char1 = new JButton("");
 			char1.setIcon(new ImageIcon("images\\char1.jpg"));
 			char1.setBackground(Color.WHITE);
 			char1.setBounds(28, 90, 200, 300);
@@ -111,33 +115,37 @@ public class WelcomeScreen extends JFrame{
 			
 			welcomeScreenFrame.getContentPane().add(char1);	
 			
-			char2 = new JToggleButton("");
+			char2 = new JButton("");
 			char2.setIcon(new ImageIcon("images\\char2.jpg"));
 			char2.setBackground(Color.WHITE);
 			char2.setBounds(259, 90, 200, 300);
-			char2.addActionListener(listener1);			
+			ButtonListener6 listener2 = new ButtonListener6();
+			char2.addActionListener(listener2);			
+			
 			welcomeScreenFrame.getContentPane().add(char2);
 					
-			JButton okButton = new JButton("");
-			okButton.setIcon(new ImageIcon("images\\OkButton.png"));
-			okButton.setForeground(new Color(0, 128, 128));
-			okButton.setBackground(new Color(0, 128, 128));
-			okButton.setBounds(140, 401, 200, 60);
-			okButton.addActionListener(listener1);
+			JButton nextButton = new JButton("");
+			nextButton.setIcon(new ImageIcon("images\\OkButton.png"));
+			nextButton.setForeground(new Color(0, 128, 128));
+			nextButton.setBackground(new Color(0, 128, 128));
+			nextButton.setBounds(140, 401, 200, 60);
+			ButtonListener7 listener3 = new ButtonListener7();
+			nextButton.addActionListener(listener3);		
 			
-			welcomeScreenFrame.getContentPane().add(okButton);
+			welcomeScreenFrame.getContentPane().add(nextButton);
 			
 			JLabel label = new JLabel("");
 			label.setBounds(0, 0, 484, 482);
 			label.setIcon(new ImageIcon("images\\Labyrinth_03.jpg"));
 			
-			welcomeScreenFrame.getContentPane().add(label); 
+			welcomeScreenFrame.getContentPane().add(label);
 		}
 	}
 	
 	//how to play button
 	class ButtonListener2 implements ActionListener {
 		public void actionPerformed(ActionEvent b) {
+				
 			//x axis location of the frame 
 			locationXOfFrame=welcomeScreenFrame.getX();
 			//y axis location of the frame 
@@ -165,9 +173,9 @@ public class WelcomeScreen extends JFrame{
 	//back button from character selection screen
 	class ButtonListener4 implements ActionListener {
 		public void actionPerformed(ActionEvent c) {
-			
+			welcomeScreenFrame.dispose();
 			try {
-				new WelcomeScreen();
+				WelcomeScreen screen = new WelcomeScreen();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -178,47 +186,78 @@ public class WelcomeScreen extends JFrame{
 	//character 1 selected
 	class ButtonListener5 implements ActionListener {
 		public void actionPerformed(ActionEvent a) {
+			characterSelected = 1;
+			char1.setIcon(new ImageIcon("images\\char1selected.jpg"));
+			char2.setIcon(new ImageIcon("images\\char2.jpg"));
+		}
+	}
+	
+	//character 2 selected
+	class ButtonListener6 implements ActionListener {
+		public void actionPerformed(ActionEvent b) {	
+			characterSelected = 2;
+			char2.setIcon(new ImageIcon("images\\char2selected.jpg"));
+			char1.setIcon(new ImageIcon("images\\char1.jpg"));
+		}
+	}
+	
+	//next button
+	class ButtonListener7 implements ActionListener {
+		public void actionPerformed(ActionEvent b) {	
 			
-			if (a.getSource()==char1) {
-				if (char1.isSelected()) {
-					char2.setSelected(false);
-					char1.setIcon(new ImageIcon("images\\char1selected.jpg"));
-					char2.setIcon(new ImageIcon("images\\char2.jpg"));
-				
-				}
-				else {
-					char2.setSelected(false);
-					char1.setIcon(new ImageIcon("images\\char1.jpg"));
-				}
+			welcomeScreenFrame.getContentPane().removeAll();
+			welcomeScreenFrame.repaint();
+			getContentPane().setLayout(null);
+			
+			//read story file
+			String story = "";
+			try {
+				story = new String(Files.readAllBytes(Paths.get("docs\\story.txt")), "ISO-8859-7");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-			else if (a.getSource()==char2) {
-				if (char2.isSelected()) {
-					char1.setSelected(false);
-					char2.setIcon(new ImageIcon("images\\char2selected.jpg"));
-					char1.setIcon(new ImageIcon("images\\char1.jpg"));
-				}
-				else {
-					char1.setSelected(false);
-					char2.setIcon(new ImageIcon("images\\char2.jpg"));
-				}
 				
+			text = new JTextArea();
+			text.setToolTipText("");
+			text.setText(story);
+			text.setBackground(Color.DARK_GRAY);
+			text.setForeground(Color.WHITE);
+			text.setBounds(10, 40, 484, 400);
+			text.setAlignmentX(CENTER_ALIGNMENT);
+			text.setAlignmentY(CENTER_ALIGNMENT);			
+			
+			JButton okButton = new JButton("");
+			okButton.setIcon(new ImageIcon("images\\OkButton.png"));
+			okButton.setForeground(new Color(0, 128, 128));
+			okButton.setBackground(new Color(0, 128, 128));
+			okButton.setBounds(140, 330, 200, 60);
+			ButtonListener8 listener = new ButtonListener8();
+			okButton.addActionListener(listener);	
+			
+			welcomeScreenFrame.getContentPane().setBackground(Color.DARK_GRAY);
+			welcomeScreenFrame.getContentPane().add(okButton);
+			welcomeScreenFrame.getContentPane().add(text);
+		
+		}
+	}
+	
+	//ok button
+	class ButtonListener8 implements ActionListener {
+		public void actionPerformed(ActionEvent b) {	
+			
+			if (characterSelected == 1) {
+				welcomeScreenFrame.dispose();
+				//GameFunctions.launchTheGame(1);
+			}
+			else if (characterSelected == 2) {
+				welcomeScreenFrame.dispose();
+				//GameFunctions.launchTheGame(2);
 			}
 			else {
-				if (char1.isSelected()) {
-					welcomeScreenFrame.dispose();
-					GameFunctions.launchTheGame(1);
-				}
-				else if (char2.isSelected()) {
-					welcomeScreenFrame.dispose();
-					GameFunctions.launchTheGame(2);
-				}
-				else {
-					GameFunctions.showMessage("Select character first!", 1500);;
-				}
-					
+				//GameFunctions.showMessage("Select character first!", 1500);;
 			}
-				
-				
+
 		}
 	}
 	
@@ -226,7 +265,8 @@ public class WelcomeScreen extends JFrame{
 	public static void setHowToPlayFrameFlag(int x){
 		howToPlayFrameFlag = x;
     }
-		
+	
+	
 	//get location of jframe
 	public static int getWelcomeScreenFrameX(){
 		return 	locationXOfFrame;
@@ -237,3 +277,8 @@ public class WelcomeScreen extends JFrame{
     }
 	
 }
+
+	
+
+
+
