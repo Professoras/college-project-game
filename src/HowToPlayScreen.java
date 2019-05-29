@@ -4,7 +4,7 @@ import javax.swing.*;
 
 public class HowToPlayScreen extends JFrame {
 
-	private JTextField text;
+	private JTextArea text;
 
 	public HowToPlayScreen() {
 
@@ -15,9 +15,10 @@ public class HowToPlayScreen extends JFrame {
 		this.setBounds(100, 100, 407, 330);
 		this.getContentPane().setLayout(null);
 
-		text = new JTextField();
+		text = new JTextArea();
 		text.setToolTipText("");
-		text.setHorizontalAlignment(SwingConstants.CENTER);
+		text.setAlignmentX(CENTER_ALIGNMENT);
+		text.setAlignmentY(CENTER_ALIGNMENT);
 		text.setText("*rules*");
 		text.setBackground(Color.DARK_GRAY);
 		text.setForeground(Color.WHITE);
