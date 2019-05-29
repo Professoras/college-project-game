@@ -18,6 +18,7 @@ public class GameFunctions {
 	public static void launchTheGame(int charid) {
 		MainMenu.stopAudioStream();
 		Player.setPhoto(charid);
+		//PrintStory(); //we need to implement a method within GameFunctions that prints the story before the game begins
 		Player.startTheTimer();
 		openNewGamePanel();
 	}
@@ -38,9 +39,13 @@ public class GameFunctions {
 		Player.updateScore();
 		
 		if (Player.getCurrentRoom()==Story.getNumberOfLevels()) {
+			
 			Player.stopTheTimer();
+			
 			int totalTime=Player.getTotalTime()-Player.getRemainingTime();
+			
 			GameFunctions.showMessage("CONGRATULATIONS!\nYOU WON!\nYour new highscore: "+Player.getScore()+"\nTime: "+totalTime+"s",5000);
+			
 			try {
 				Runtime.getRuntime().exec(new String[]{"cmd", "/c","start chrome https://youtu.be/04854XqcfCY?t=37"});
 			} catch (IOException e) {
@@ -49,17 +54,17 @@ public class GameFunctions {
 			}
 			System.exit(1);
 		}
+		
 		if (Player.getLives() < 3)
 			Player.addALife();
 		
-		Player.updateCurrentRoom();
-		
-		
 		if (Player.gotBonus())
-			showMessage("Fantastic job! 2x points!!\nOn to the next round!\nLives left: "+Player.getLives(),1300);
+			showMessage("Fantastic job! 2x POINTS!!\nOn to the next round!\nLives left: "+Player.getLives(),1300);
 		else
 			showMessage("Good job!\nOn to the next round!\nLives left: "+Player.getLives(),1300);
-
+		
+		Player.updateCurrentRoom();
+		
 		if (Player.getCurrentRoom()<Story.getNumberOfLevels() && coinflip()==1) {
 			int reducedTime=Enemy.reduceTime();
 			showEnemy(GamePanel.getFrame(),reducedTime);
@@ -100,7 +105,7 @@ public class GameFunctions {
 	public static void skipBtn(JFrame aframe) {
 		if (Player.isSkipAvailable()) {
 			if(Player.getLives() > 1) {
-				showMessage("You skipped the question!" + System.lineSeparator() + "The correct answer was: " + Story.getRightAnswer() + System.lineSeparator() + "You lost 1 life!",1800);
+				showMessage("You skipped the question!" + System.lineSeparator() + "The correct answers were:\n" +"1.)"+Story.getFirstRightAnswer()+"\n2.)"+Story.getSecondRightAnswer()+ System.lineSeparator() + "You lost 1 life!",1800);
 				Player.removeALife();
 				Player.setSkipNotAvailable();
 				Player.updateCurrentRoom();
