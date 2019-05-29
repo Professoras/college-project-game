@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.event.ActionEvent;
+import java.io.IOException;
 
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
@@ -7,7 +8,6 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.SwingConstants;
 import javax.swing.Timer;
 
 public class GameFunctions {
@@ -41,9 +41,15 @@ public class GameFunctions {
 			Player.stopTheTimer();
 			int totalTime=Player.getTotalTime()-Player.getRemainingTime();
 			GameFunctions.showMessage("CONGRATULATIONS!\nYOU WON!\nYour new highscore: "+Player.getScore()+"\nTime: "+totalTime+"s",5000);
+			try {
+				Runtime.getRuntime().exec(new String[]{"cmd", "/c","start chrome https://www.youtube.com/watch?v=04854XqcfCY"});
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			System.exit(1);
 		}
-		if (Player.getLives() < 4)
+		if (Player.getLives() < 3)
 			Player.addALife();
 		
 		Player.updateCurrentRoom();
