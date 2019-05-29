@@ -131,7 +131,7 @@ public class WelcomeScreen extends JFrame{
 			label.setBounds(0, 0, 484, 482);
 			label.setIcon(new ImageIcon("images\\Labyrinth_03.jpg"));
 			
-			welcomeScreenFrame.getContentPane().add(label);
+			welcomeScreenFrame.getContentPane().add(label); 
 		}
 	}
 	

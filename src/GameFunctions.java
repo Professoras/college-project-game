@@ -60,7 +60,6 @@ public class GameFunctions {
 			Player.reduceTime(reducedTime);	
 		}
 		
-		GamePanel.getFrame().dispose();
 		openNewGamePanel();
 	}
 	

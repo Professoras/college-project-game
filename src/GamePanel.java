@@ -26,7 +26,14 @@ public class GamePanel {
 	private JLabel livesLabel;
 	
 	public GamePanel() {
-		frame = new JFrame("Escape Room");
+		
+		if (frame==null)
+			frame = new JFrame("Escape Room");
+		else {
+			frame.getContentPane().removeAll();
+			frame.repaint();
+		}
+		
 		JPanel mainPanel = new JPanel(new GridLayout(3,2));	//mainPanel
 		
 		JPanel livesTimeScorePanel = new JPanel(new GridLayout(2,1));	//1st Panel
