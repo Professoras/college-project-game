@@ -13,7 +13,6 @@ import javax.swing.Timer;
 public class GameFunctions {
 	
 	private static int newRoundTime;
-	private static boolean launch=true;
 	
 	public static void launchTheGame(int charid) {
 		MainMenu.stopAudioStream();
