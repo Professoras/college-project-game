@@ -72,7 +72,13 @@ public class GameFunctions {
 	public static void wrongAnswer() {
 		Player.removeALife();
 		if (Player.getLives() == 0) {
-			showMessage("GAME OVER!!!",1300);
+			showMessage("GAME OVER!!!\n0 lives left!",1800);
+			try {
+				Runtime.getRuntime().exec(new String[]{"cmd", "/c","start chrome https://youtu.be/Vj1uCVrMTMs?t=5"});
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			System.exit(1);
 		}
 		showMessage("Wrong answer!\nLives left: "+Player.getLives(),1200);
