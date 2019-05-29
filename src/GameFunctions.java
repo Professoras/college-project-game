@@ -42,7 +42,7 @@ public class GameFunctions {
 			int totalTime=Player.getTotalTime()-Player.getRemainingTime();
 			GameFunctions.showMessage("CONGRATULATIONS!\nYOU WON!\nYour new highscore: "+Player.getScore()+"\nTime: "+totalTime+"s",5000);
 			try {
-				Runtime.getRuntime().exec(new String[]{"cmd", "/c","start chrome https://www.youtube.com/watch?v=04854XqcfCY"});
+				Runtime.getRuntime().exec(new String[]{"cmd", "/c","start chrome https://youtu.be/04854XqcfCY?t=37"});
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
