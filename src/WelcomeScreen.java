@@ -26,12 +26,18 @@ public class WelcomeScreen extends JFrame{
 	private JTextField text;
 	private JRadioButton choice1,choice2;
 	private static int howToPlayFrameFlag = 0, locationXOfFrame = 0 , locationYOfFrame = 0;
-	private static JFrame welcomeScreenFrame = new JFrame();
+	private static JFrame welcomeScreenFrame;
 	
 	public WelcomeScreen() throws IOException {		
 
 		getContentPane().setLayout(null);
-		
+		if (welcomeScreenFrame==null)
+			welcomeScreenFrame= new JFrame();
+		else {
+			welcomeScreenFrame.getContentPane().removeAll();
+			welcomeScreenFrame.repaint();
+		}
+	
 		startButton = new JButton("");
 		startButton.setIcon(new ImageIcon("images\\StartButtonV2.png"));
 		startButton.setBackground(new Color(0, 128, 128));
@@ -109,7 +115,6 @@ public class WelcomeScreen extends JFrame{
 			char2.setIcon(new ImageIcon("images\\char2.jpg"));
 			char2.setBackground(Color.WHITE);
 			char2.setBounds(259, 90, 200, 300);
-//			ButtonListener6 listener2 = new ButtonListener6();
 			char2.addActionListener(listener1);			
 			welcomeScreenFrame.getContentPane().add(char2);
 					
@@ -160,9 +165,9 @@ public class WelcomeScreen extends JFrame{
 	//back button from character selection screen
 	class ButtonListener4 implements ActionListener {
 		public void actionPerformed(ActionEvent c) {
-			welcomeScreenFrame.dispose();
+			
 			try {
-				WelcomeScreen screen = new WelcomeScreen();
+				new WelcomeScreen();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -200,12 +205,10 @@ public class WelcomeScreen extends JFrame{
 			}
 			else {
 				if (char1.isSelected()) {
-					//System.out.println(1);
 					welcomeScreenFrame.dispose();
 					GameFunctions.launchTheGame(1);
 				}
 				else if (char2.isSelected()) {
-					//System.out.println(2);
 					welcomeScreenFrame.dispose();
 					GameFunctions.launchTheGame(2);
 				}
