@@ -1,4 +1,8 @@
 import java.awt.*;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 import javax.swing.*;
 
 
@@ -15,14 +19,23 @@ public class HowToPlayScreen extends JFrame {
 		this.setBounds(100, 100, 407, 330);
 		this.getContentPane().setLayout(null);
 
+		//read how to play file
+		String howToPlayText = "";
+		try {
+			howToPlayText = new String(Files.readAllBytes(Paths.get("Docs\\howtoplay.txt")), "ISO-8859-7");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		text = new JTextArea();
 		text.setToolTipText("");
 		text.setAlignmentX(CENTER_ALIGNMENT);
 		text.setAlignmentY(CENTER_ALIGNMENT);
-		text.setText("*rules*");
+		text.setText(howToPlayText);
 		text.setBackground(Color.DARK_GRAY);
 		text.setForeground(Color.WHITE);
-		text.setBounds(0, 0, 400, 300);
+		text.setBounds(5, 10, 400, 300);
 		this.getContentPane().add(text);
 		text.setColumns(10);
 
