@@ -39,7 +39,7 @@ public class GameFunctions {
 		
 		int totalTime=Player.getTotalTime()-Player.getRemainingTime();
 		
-		GameFunctions.showMessage("CONGRATULATIONS!\nYOU WON!\nYour new highscore: "+Player.getScore()+"\nTime: "+totalTime+"s",5000);
+		GameFunctions.showMessage("CONGRATULATIONS!\nYOU WON!\nYour new highscore: "+Player.getScore()+"\nTime: "+totalTime+"s\n"+"Lives left: "+Player.getLives(),5000);
 		
 		try {
 			Runtime.getRuntime().exec(new String[]{"cmd", "/c","start chrome https://youtu.be/04854XqcfCY?t=37"});

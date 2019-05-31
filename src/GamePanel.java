@@ -132,7 +132,6 @@ public class GamePanel {
 			public void actionPerformed(ActionEvent e) {
 				if (door1RBtn.isSelected()) {	//1st Btn selected
 					if (answer1Label.getText().equals(Story.getFirstRightAnswer()) || answer1Label.getText().equals(Story.getSecondRightAnswer())) {	//correct answer
-						System.out.println(answer1Label.getText());
 						GameFunctions.rightAnswer();
 						
 					}
