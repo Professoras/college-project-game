@@ -34,25 +34,27 @@ public class GameFunctions {
 		return (int)(Math.random()*2); //returns integer in the range: [0,2)
 	}
 	
+	public static void playerWon() {
+		Player.stopTheTimer();
+		
+		int totalTime=Player.getTotalTime()-Player.getRemainingTime();
+		
+		GameFunctions.showMessage("CONGRATULATIONS!\nYOU WON!\nYour new highscore: "+Player.getScore()+"\nTime: "+totalTime+"s",5000);
+		
+		try {
+			Runtime.getRuntime().exec(new String[]{"cmd", "/c","start chrome https://youtu.be/04854XqcfCY?t=37"});
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.exit(1);
+	}
+	
 	public static void rightAnswer() {
 		Player.updateScore();
 		
-		if (Player.getCurrentRoom()==Story.getNumberOfLevels()) {
-			
-			Player.stopTheTimer();
-			
-			int totalTime=Player.getTotalTime()-Player.getRemainingTime();
-			
-			GameFunctions.showMessage("CONGRATULATIONS!\nYOU WON!\nYour new highscore: "+Player.getScore()+"\nTime: "+totalTime+"s",5000);
-			
-			try {
-				Runtime.getRuntime().exec(new String[]{"cmd", "/c","start chrome https://youtu.be/04854XqcfCY?t=37"});
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			System.exit(1);
-		}
+		if (Player.getCurrentRoom()==Story.getNumberOfLevels())
+			playerWon();
 		
 		if (Player.getLives() < 3)
 			Player.addALife();
@@ -107,6 +109,8 @@ public class GameFunctions {
 				showMessage("You skipped the question!" + System.lineSeparator() + "The correct answers were:\n" +"1.)"+Story.getFirstRightAnswer()+"\n2.)"+Story.getSecondRightAnswer()+ System.lineSeparator() + "You lost 1 life!",1800);
 				Player.removeALife();
 				Player.setSkipNotAvailable();
+				if (Player.getCurrentRoom()==Story.getNumberOfLevels())
+					playerWon();
 				Player.updateCurrentRoom();
 				aframe.dispose();
 				openNewGamePanel();

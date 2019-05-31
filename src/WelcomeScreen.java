@@ -262,12 +262,10 @@ public class WelcomeScreen extends JFrame{
 	class ButtonListener8 implements ActionListener {
 		public void actionPerformed(ActionEvent b) {	
 			
-			if (characterSelected >= 1 ) {
+			if (characterSelected >= 1 )
 				ShowStory();
-			}
-			else {
+			else
 				GameFunctions.showMessage("Select character first!", 1500);;
-			}
 
 		}
 	}
