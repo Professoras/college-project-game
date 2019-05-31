@@ -36,12 +36,19 @@ public class WelcomeScreen extends JFrame{
 	private JTextArea text;
 	private JRadioButton choice1,choice2;
 	private static int howToPlayFrameFlag = 0, locationXOfFrame = 0 , locationYOfFrame = 0, characterSelected = 0;
-	JFrame welcomeScreenFrame = new JFrame();
+	private static JFrame welcomeScreenFrame;
 	
 	public WelcomeScreen() throws IOException {		
 
 		getContentPane().setLayout(null);
-		
+		if (welcomeScreenFrame==null) {
+			welcomeScreenFrame = new JFrame("Escape Room");
+		}
+		else {
+			characterSelected=0;
+			welcomeScreenFrame.getContentPane().removeAll();
+			welcomeScreenFrame.repaint();
+		}
 		startButton = new JButton("");
 		startButton.setIcon(new ImageIcon("images\\StartButtonV2.png"));
 		startButton.setBackground(new Color(0, 128, 128));
@@ -106,12 +113,13 @@ public class WelcomeScreen extends JFrame{
 			getContentPane().setLayout(null);
 			welcomeScreenFrame.getContentPane().add(backButton);
 			
+			
 			char1 = new JButton("");
 			char1.setIcon(new ImageIcon("images\\char1.jpg"));
 			char1.setBackground(Color.WHITE);
 			char1.setBounds(28, 90, 200, 300);
 			ButtonListener5 listener1 = new ButtonListener5();
-			char1.addActionListener(listener1);	
+			char1.addActionListener(listener1);
 			
 			welcomeScreenFrame.getContentPane().add(char1);	
 			
@@ -124,12 +132,12 @@ public class WelcomeScreen extends JFrame{
 			
 			welcomeScreenFrame.getContentPane().add(char2);
 					
-			JButton nextButton = new JButton("");
+			JButton nextButton = new JButton("NEXT");
 			nextButton.setIcon(new ImageIcon("images\\OkButton.png"));
 			nextButton.setForeground(new Color(0, 128, 128));
 			nextButton.setBackground(new Color(0, 128, 128));
 			nextButton.setBounds(140, 401, 200, 60);
-			ButtonListener7 listener3 = new ButtonListener7();
+			ButtonListener8 listener3 = new ButtonListener8();
 			nextButton.addActionListener(listener3);		
 			
 			welcomeScreenFrame.getContentPane().add(nextButton);
@@ -173,9 +181,11 @@ public class WelcomeScreen extends JFrame{
 	//back button from character selection screen
 	class ButtonListener4 implements ActionListener {
 		public void actionPerformed(ActionEvent c) {
-			welcomeScreenFrame.dispose();
+			
+			char1.setSelected(false);
+			char2.setSelected(false);
 			try {
-				WelcomeScreen screen = new WelcomeScreen();
+				new WelcomeScreen();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -201,9 +211,9 @@ public class WelcomeScreen extends JFrame{
 		}
 	}
 	
-	//next button
-	class ButtonListener7 implements ActionListener {
-		public void actionPerformed(ActionEvent b) {	
+	//after character selection
+	
+	public void ShowStory() {	
 			
 			welcomeScreenFrame.getContentPane().removeAll();
 			welcomeScreenFrame.repaint();
@@ -232,7 +242,7 @@ public class WelcomeScreen extends JFrame{
 			okButton.setForeground(new Color(0, 128, 128));
 			okButton.setBackground(new Color(0, 128, 128));
 			okButton.setBounds(140, 330, 200, 60);
-			ButtonListener8 listener = new ButtonListener8();
+			ButtonListener9 listener = new ButtonListener9();
 			okButton.addActionListener(listener);	
 			
 			welcomeScreenFrame.getContentPane().setBackground(Color.DARK_GRAY);
@@ -240,22 +250,23 @@ public class WelcomeScreen extends JFrame{
 			welcomeScreenFrame.getContentPane().add(text);
 		
 		}
-	}
 	
+	class ButtonListener9 implements ActionListener {
+		public void actionPerformed(ActionEvent b) {	
+			welcomeScreenFrame.dispose();
+			GameFunctions.launchTheGame(characterSelected);
+
+		}
+	}
 	//ok button
 	class ButtonListener8 implements ActionListener {
 		public void actionPerformed(ActionEvent b) {	
 			
-			if (characterSelected == 1) {
-				welcomeScreenFrame.dispose();
-				//GameFunctions.launchTheGame(1);
-			}
-			else if (characterSelected == 2) {
-				welcomeScreenFrame.dispose();
-				//GameFunctions.launchTheGame(2);
+			if (characterSelected >= 1 ) {
+				ShowStory();
 			}
 			else {
-				//GameFunctions.showMessage("Select character first!", 1500);;
+				GameFunctions.showMessage("Select character first!", 1500);;
 			}
 
 		}
