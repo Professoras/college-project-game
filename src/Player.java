@@ -111,5 +111,12 @@ public class Player {
 		skipAvailable = false;
 	}
 	
-
+	public static void reset() {
+		lives = 2;
+		current_room = 1;
+		score = 0;
+		time=60;
+		skipAvailable = true;
+		gameTimer.restart();
+	}
 }

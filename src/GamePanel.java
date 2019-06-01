@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -19,11 +20,11 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JTextArea;
 
 public class GamePanel {
 	private JLabel timerLabel;
 	private static JFrame frame;
-	private JLabel livesLabel;
 	
 	public GamePanel() {
 		
@@ -57,9 +58,14 @@ public class GamePanel {
 		livesTimeScorePanel.add(scoreLabel);
 		
 		JLabel roomPanel = new JLabel("Room " +  Player.getCurrentRoom());	//Fill 2nd Panel
-		JLabel questionLabel = new JLabel(Story.getQuestion());	
+		JTextArea questionArea = new JTextArea(Story.getQuestion());
+		questionArea.setEditable(false);
+		questionArea.setBackground(Color.LIGHT_GRAY);
+		questionArea.setHighlighter(null);
+		questionArea.setFont(new Font(null, Font.BOLD, 15));
+		
 		roomQuestionPanel.add(roomPanel);
-		roomQuestionPanel.add(questionLabel);
+		roomQuestionPanel.add(questionArea);
 		
 		JLabel playerImage = new JLabel("");	//Fill 3rd Panel
 		Image playerIcon = Player.getPhoto();
@@ -87,8 +93,12 @@ public class GamePanel {
 		restartBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int response = JOptionPane.showOptionDialog(null, "Are you sure you want to Restart?", "Restart", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
-				if (response == JOptionPane.YES_NO_OPTION)
-					System.exit(0);	//Later this should restart the application!
+				if (response == JOptionPane.YES_NO_OPTION) {
+					MainMenu.stopAudioStream();
+					frame.dispose();
+					Player.reset();
+					MainMenu.launchMainMenu();
+				}
 			}
 		});
 		JButton exitBtn = new JButton("         Exit         ");
@@ -110,9 +120,23 @@ public class GamePanel {
 		ArrayList<String> shuffledAnswers = new ArrayList<>(Story.getAnswers());	//Fill 6th Panel
 		Collections.shuffle(shuffledAnswers);	//shuffle the answers
 		
-		JLabel answer1Label = new JLabel(shuffledAnswers.get(0));
-		JLabel answer2Label = new JLabel(shuffledAnswers.get(1));
-		JLabel answer3Label = new JLabel(shuffledAnswers.get(2));
+		JTextArea answer1Area = new JTextArea(shuffledAnswers.get(0));
+		answer1Area.setEditable(false);
+		answer1Area.setBackground(Color.LIGHT_GRAY);
+		answer1Area.setHighlighter(null);
+		answer1Area.setFont(new Font(null, Font.BOLD, 15));
+
+		JTextArea answer2Area = new JTextArea(shuffledAnswers.get(1));
+		answer2Area.setEditable(false);
+		answer2Area.setBackground(Color.LIGHT_GRAY);
+		answer2Area.setHighlighter(null);
+		answer2Area.setFont(new Font(null, Font.BOLD, 15));
+
+		JTextArea answer3Area = new JTextArea(shuffledAnswers.get(2));
+		answer3Area.setEditable(false);
+		answer3Area.setBackground(Color.LIGHT_GRAY);
+		answer3Area.setHighlighter(null);
+		answer3Area.setFont(new Font(null, Font.BOLD, 15));
 		
 		JRadioButton door1RBtn = new JRadioButton("Door 1");
 		JRadioButton door2RBtn = new JRadioButton("Door 2");
@@ -131,7 +155,7 @@ public class GamePanel {
 		confirmBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (door1RBtn.isSelected()) {	//1st Btn selected
-					if (answer1Label.getText().equals(Story.getFirstRightAnswer()) || answer1Label.getText().equals(Story.getSecondRightAnswer())) {	//correct answer
+					if (answer1Area.getText().equals(Story.getFirstRightAnswer()) || answer1Area.getText().equals(Story.getSecondRightAnswer())) {	//correct answer
 						GameFunctions.rightAnswer();
 						
 					}
@@ -142,7 +166,7 @@ public class GamePanel {
 					}
 				}
 				else if (door2RBtn.isSelected()) {	//2nd Btn selected
-					if (answer2Label.getText().equals(Story.getFirstRightAnswer()) || answer2Label.getText().equals(Story.getSecondRightAnswer())) {
+					if (answer2Area.getText().equals(Story.getFirstRightAnswer()) || answer2Area.getText().equals(Story.getSecondRightAnswer())) {
 						GameFunctions.rightAnswer();
 					}
 					else {
@@ -151,7 +175,7 @@ public class GamePanel {
 					}
 				}
 				else if (door3RBtn.isSelected()) {	//3rd Btn selected
-					if (answer3Label.getText().equals(Story.getFirstRightAnswer()) || answer3Label.getText().equals(Story.getSecondRightAnswer())) {
+					if (answer3Area.getText().equals(Story.getFirstRightAnswer()) || answer3Area.getText().equals(Story.getSecondRightAnswer())) {
 						GameFunctions.rightAnswer();
 					}
 					else {
@@ -165,9 +189,9 @@ public class GamePanel {
 			}
 		}
 		);
-		answersDoorsRBtnPanel.add(answer1Label);
-		answersDoorsRBtnPanel.add(answer2Label);
-		answersDoorsRBtnPanel.add(answer3Label);
+		answersDoorsRBtnPanel.add(answer1Area);
+		answersDoorsRBtnPanel.add(answer2Area);
+		answersDoorsRBtnPanel.add(answer3Area);
 		answersDoorsRBtnPanel.add(door1RBtn);
 		answersDoorsRBtnPanel.add(door2RBtn);
 		answersDoorsRBtnPanel.add(door3RBtn);

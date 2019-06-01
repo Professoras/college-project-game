@@ -15,7 +15,7 @@ public class GameFunctions {
 	private static int newRoundTime;
 	
 	public static void launchTheGame(int charid) {
-		MainMenu.stopAudioStream();
+		//MainMenu.stopAudioStream();
 		Player.setPhoto(charid);
 		//PrintStory(); //we need to implement a method within GameFunctions that prints the story before the game begins
 		Player.startTheTimer();
