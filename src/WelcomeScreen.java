@@ -131,7 +131,7 @@ public class WelcomeScreen extends JFrame{
 			
 			welcomeScreenFrame.getContentPane().add(char2);
 					
-			JButton nextButton = new JButton("NEXT");
+			JButton nextButton = new JButton();
 			nextButton.setIcon(new ImageIcon("images\\OkButton.png"));
 			nextButton.setForeground(new Color(0, 128, 128));
 			nextButton.setBackground(new Color(0, 128, 128));
