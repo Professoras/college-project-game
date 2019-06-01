@@ -17,7 +17,6 @@ public class GameFunctions {
 	public static void launchTheGame(int charid) {
 		//MainMenu.stopAudioStream();
 		Player.setPhoto(charid);
-		//PrintStory(); //we need to implement a method within GameFunctions that prints the story before the game begins
 		Player.startTheTimer();
 		openNewGamePanel();
 	}
@@ -40,13 +39,6 @@ public class GameFunctions {
 		int totalTime=Player.getTotalTime()-Player.getRemainingTime();
 		
 		GameFunctions.showMessage("CONGRATULATIONS!\nYOU WON!\nYour new highscore: "+Player.getScore()+"\nTime: "+totalTime+"s\n"+"Lives left: "+Player.getLives(),5000);
-		
-		try {
-			Runtime.getRuntime().exec(new String[]{"cmd", "/c","start chrome https://youtu.be/04854XqcfCY?t=37"});
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		System.exit(1);
 	}
 	
@@ -79,12 +71,6 @@ public class GameFunctions {
 		Player.removeALife();
 		if (Player.getLives() == 0) {
 			showMessage("GAME OVER!!!\n0 lives left!",1800);
-			try {
-				Runtime.getRuntime().exec(new String[]{"cmd", "/c","start chrome https://youtu.be/Vj1uCVrMTMs?t=5"});
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 			System.exit(1);
 		}
 		showMessage("Wrong answer!\nLives left: "+Player.getLives(),1200);

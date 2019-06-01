@@ -62,6 +62,7 @@ public class GamePanel {
 		questionArea.setEditable(false);
 		questionArea.setBackground(Color.LIGHT_GRAY);
 		questionArea.setHighlighter(null);
+		questionArea.setLineWrap(true);
 		questionArea.setFont(new Font(null, Font.BOLD, 15));
 		
 		roomQuestionPanel.add(roomPanel);
@@ -124,18 +125,21 @@ public class GamePanel {
 		answer1Area.setEditable(false);
 		answer1Area.setBackground(Color.LIGHT_GRAY);
 		answer1Area.setHighlighter(null);
+		answer1Area.setLineWrap(true);
 		answer1Area.setFont(new Font(null, Font.BOLD, 15));
 
 		JTextArea answer2Area = new JTextArea(shuffledAnswers.get(1));
 		answer2Area.setEditable(false);
 		answer2Area.setBackground(Color.LIGHT_GRAY);
 		answer2Area.setHighlighter(null);
+		answer2Area.setLineWrap(true);
 		answer2Area.setFont(new Font(null, Font.BOLD, 15));
 
 		JTextArea answer3Area = new JTextArea(shuffledAnswers.get(2));
 		answer3Area.setEditable(false);
 		answer3Area.setBackground(Color.LIGHT_GRAY);
 		answer3Area.setHighlighter(null);
+		answer3Area.setLineWrap(true);
 		answer3Area.setFont(new Font(null, Font.BOLD, 15));
 		
 		JRadioButton door1RBtn = new JRadioButton("Door 1");
