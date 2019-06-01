@@ -30,11 +30,10 @@ import java.nio.file.Paths;
 
 public class WelcomeScreen extends JFrame{
 
-	private String instructions;
+
 	private JButton startButton,howToPlayButton,exitButton,backButton,char1,char2;
 	private JLabel label;
 	private JTextArea text;
-	private JRadioButton choice1,choice2;
 	private static int howToPlayFrameFlag = 0, locationXOfFrame = 0 , locationYOfFrame = 0, characterSelected = 0;
 	private static JFrame welcomeScreenFrame;
 	
