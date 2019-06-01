@@ -117,6 +117,6 @@ public class Player {
 		score = 0;
 		time=60;
 		skipAvailable = true;
-		gameTimer.restart();
+		gameTimer.stop();
 	}
 }
