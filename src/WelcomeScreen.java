@@ -251,7 +251,8 @@ public class WelcomeScreen extends JFrame{
 		}
 	//game START
 	class ButtonListener9 implements ActionListener {
-		public void actionPerformed(ActionEvent b) {	
+		public void actionPerformed(ActionEvent b) {
+			MainMenu.stopAudioStream();
 			Frame[] frames = Frame.getFrames();
 			for (final Window w : frames) {
 			    w.dispose();
