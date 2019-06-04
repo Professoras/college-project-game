@@ -238,7 +238,7 @@ public class GamePanel {
 			}
 		}
 		);	
-		confirmBtn.setBounds(659, 600, 118, 40);
+		confirmBtn.setBounds(640, 580, 118, 40);
 		frame.getContentPane().add(confirmBtn);
 
 
