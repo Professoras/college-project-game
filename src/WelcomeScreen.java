@@ -249,10 +249,13 @@ public class WelcomeScreen extends JFrame{
 			welcomeScreenFrame.getContentPane().add(text);
 		
 		}
-	
+	//game START
 	class ButtonListener9 implements ActionListener {
 		public void actionPerformed(ActionEvent b) {	
-			welcomeScreenFrame.dispose();
+			Frame[] frames = Frame.getFrames();
+			for (final Window w : frames) {
+			    w.dispose();
+			}
 			GameFunctions.launchTheGame(characterSelected);
 
 		}
