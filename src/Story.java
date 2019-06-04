@@ -1,7 +1,6 @@
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
@@ -20,13 +19,11 @@ public class Story {
 	public static void getLevelQuestions(int level) {
 		JSONParser parser = new JSONParser();
 		
-		
 		try {
 			Object obj = new Object();
 			try {
 				obj = parser.parse(new FileReader("JSONS/questions.json"));
 			} catch (org.json.simple.parser.ParseException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 	
@@ -65,10 +62,10 @@ public class Story {
 	public static String getFirstRightAnswer() {
 		return answers.get(0);
 	}
+	
 	public static String getSecondRightAnswer() {
 		return answers.get(1);
 	}
-	
 	
 	public static int getNumberOfLevels() {
 		return storyLevels;

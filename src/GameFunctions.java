@@ -1,7 +1,5 @@
 import java.awt.Color;
 import java.awt.event.ActionEvent;
-import java.io.IOException;
-
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
@@ -15,25 +13,26 @@ public class GameFunctions {
 	private static int newRoundTime;
 	
 	public static void launchTheGame(int charid) {
-		//MainMenu.stopAudioStream();
+		Sound.startPlaying("sounds/Main.wav");
 		Player.setPhoto(charid);
 		Player.startTheTimer();
 		openNewGamePanel();
 	}
 	
-	
 	public static void openNewGamePanel() {
 		Story.findQuestion(Player.getCurrentRoom());
 		GameFunctions.setNewRoundTimeMark(Player.getRemainingTime());
 		new GamePanel();
-		
 	}
 	
 	public static int coinflip() {
-		return (int)(Math.random()*2); //returns integer in the range: [0,2)
+		//returns integer in the range: [0,2)
+		return (int)(Math.random()*2);
 	}
 	
 	public static void playerWon() {
+		Sound.stopPlaying();
+		Sound.playShortSound("sounds/Win.wav");
 		Player.stopTheTimer();
 		
 		int totalTime=Player.getTotalTime()-Player.getRemainingTime();
@@ -43,6 +42,7 @@ public class GameFunctions {
 	}
 	
 	public static void rightAnswer() {
+		Sound.playShortSound("sounds/CorrectAnswer.wav");
 		Player.updateScore();
 		
 		if (Player.getCurrentRoom()==Story.getNumberOfLevels())
@@ -60,6 +60,7 @@ public class GameFunctions {
 		
 		if (Player.getCurrentRoom()<Story.getNumberOfLevels() && coinflip()==1) {
 			int reducedTime=Enemy.reduceTime();
+			Sound.playShortSound("sounds/DamageFromEnemy.wav");
 			showEnemy(GamePanel.getFrame(),reducedTime);
 			Player.reduceTime(reducedTime);	
 		}
@@ -68,8 +69,10 @@ public class GameFunctions {
 	}
 	
 	public static void wrongAnswer() {
+		Sound.playShortSound("sounds/WrongAnswer.wav");
 		Player.removeALife();
 		if (Player.getLives() == 0) {
+			Sound.playShortSound("sounds/Lose.wav");
 			showMessage("GAME OVER!!!\n0 lives left!",1800);
 			System.exit(1);
 		}
@@ -132,7 +135,8 @@ public class GameFunctions {
 		        dialog.dispose();
 		    }
 		});
-		timer.setRepeats(false);//the timer should only go off once
+		//the timer should only go off once
+		timer.setRepeats(false);
 
 		//start timer to close JDialog as dialog modal we must start the timer before its visible
 		timer.start();
@@ -166,7 +170,8 @@ public class GameFunctions {
 		        dialog.dispose();
 		    }
 		});
-		timer.setRepeats(false);//the timer should only go off once
+		//the timer should only go off once
+		timer.setRepeats(false);
 
 		//start timer to close JDialog as dialog modal we must start the timer before its visible
 		timer.start();

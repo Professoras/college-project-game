@@ -24,7 +24,6 @@ public class HowToPlayScreen extends JFrame {
 		try {
 			howToPlayText = new String(Files.readAllBytes(Paths.get("Docs\\howtoplay.txt")), "ISO-8859-7");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

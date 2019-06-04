@@ -7,17 +7,15 @@ import javax.swing.Timer;
 
 public class Player {
 	
-	private static String name;
 	private static int lives = 2;
 	private static int current_room = 1;
 	private static int score = 0;
-	private static int time=60;
-	private static final int totalTime=60;
+	private static int time = 60;
+	private static final int totalTime = 60;
 	private static Timer gameTimer;
 	private static boolean skipAvailable = true;
 	private static boolean bonus;
 	private static Image photo;
-	
 	
 	public static int getScore() {
 		return score;
@@ -59,23 +57,24 @@ public class Player {
 	}
 
 	public static void startTheTimer() {
-		//System.out.println("Start the timer!");
 		gameTimer = new Timer(1000, new AbstractAction() {
 
 			public void actionPerformed(ActionEvent ae) {
-		        	if (time<=0) {
+		        	if (time <= 0) {
 		        		gameTimer.stop();
 		        		GameFunctions.timeIsUp();
-		        		
 		        	}
 		        	else {
 		        		//System.out.println(time);
 		        		reduceTime(1);
 		        	}
+		        	if (time == 9) {
+		        		Sound.stopPlaying();
+		        		Sound.playShortSound("sounds/Ending.wav");
+		        	}
 		    	}
 			});
 		gameTimer.setRepeats(true);
-
 		gameTimer.start();
 	}
 	

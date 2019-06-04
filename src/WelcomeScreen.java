@@ -4,29 +4,14 @@ import java.awt.Toolkit;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
-import java.util.Scanner;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-
-
-import java.nio.charset.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-
-
-
 
 public class WelcomeScreen extends JFrame{
 
@@ -180,13 +165,11 @@ public class WelcomeScreen extends JFrame{
 	//back button from character selection screen
 	class ButtonListener4 implements ActionListener {
 		public void actionPerformed(ActionEvent c) {
-			
 			char1.setSelected(false);
 			char2.setSelected(false);
 			try {
 				new WelcomeScreen();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -223,7 +206,6 @@ public class WelcomeScreen extends JFrame{
 			try {
 				story = new String(Files.readAllBytes(Paths.get("docs\\story.txt")), "ISO-8859-7");
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 				
@@ -252,24 +234,21 @@ public class WelcomeScreen extends JFrame{
 	//game START
 	class ButtonListener9 implements ActionListener {
 		public void actionPerformed(ActionEvent b) {
-			MainMenu.stopAudioStream();
 			Frame[] frames = Frame.getFrames();
 			for (final Window w : frames) {
 			    w.dispose();
 			}
+			Sound.stopPlaying();
 			GameFunctions.launchTheGame(characterSelected);
-
 		}
 	}
 	//ok button
 	class ButtonListener8 implements ActionListener {
 		public void actionPerformed(ActionEvent b) {	
-			
 			if (characterSelected >= 1 )
 				ShowStory();
 			else
 				GameFunctions.showMessage("Select character first!", 1500);;
-
 		}
 	}
 	
@@ -277,7 +256,6 @@ public class WelcomeScreen extends JFrame{
 	public static void setHowToPlayFrameFlag(int x){
 		howToPlayFrameFlag = x;
     }
-	
 	
 	//get location of jframe
 	public static int getWelcomeScreenFrameX(){
@@ -287,10 +265,4 @@ public class WelcomeScreen extends JFrame{
 	public static int getWelcomeScreenFrameY(){
 		return 	locationYOfFrame;
     }
-	
 }
-
-	
-
-
-
