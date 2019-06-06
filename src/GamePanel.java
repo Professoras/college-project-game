@@ -142,6 +142,7 @@ public class GamePanel {
 					//MainMenu.stopAudioStream();
 					frame.dispose();
 					Player.reset();
+					Sound.stopPlaying();
 					MainMenu.launchMainMenu();
 				}
 			}
