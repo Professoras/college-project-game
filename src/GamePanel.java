@@ -1,29 +1,27 @@
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collections;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.ButtonGroup;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
 
 public class GamePanel {
-	private JLabel timerLabel;
 	private static JFrame frame;
+	private JTextArea timeArea,livesArea;
+	private int doorSelected = 0;
+
 	
 	public GamePanel() {
+		
 		
 		if (frame==null)
 			frame = new JFrame("Escape Room");
@@ -32,83 +30,127 @@ public class GamePanel {
 			frame.repaint();
 		}
 		
-		//mainPanel
-		JPanel mainPanel = new JPanel(new GridLayout(3,2));
-		//1st Panel
-		JPanel livesTimeScorePanel = new JPanel(new GridLayout(2,1));
-		//2nd Panel
-		JPanel roomQuestionPanel = new JPanel(new GridLayout(2,1));
-		//3rd Panel
-		JPanel playerPanel = new JPanel();
-		//4th Panel
-		JPanel doorsImagePanel = new JPanel();
-		//5th Panel
-		JPanel restartSkipExitPanel = new JPanel();
-		restartSkipExitPanel.setLayout(new BoxLayout(restartSkipExitPanel, BoxLayout.Y_AXIS));
-		//6th Panel
-		JPanel answersDoorsRBtnPanel = new JPanel(new GridLayout(3,3));
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("images\\stickman.png"));
+		frame.setSize(1200, 700);
+		frame.setResizable(false);
+		frame.setLocationRelativeTo(null);
+		frame.setVisible(true);
+		frame.getContentPane().setBackground(Color.LIGHT_GRAY);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
 		
-		//Fill 1st Panel
-		JLabel livesLabel = new JLabel("Lives: " + Player.getLives());
-
-		timerLabel = new JLabel("Time Left: " + GameFunctions.TimeConversion(Player.getRemainingTime()));
+		
+		timeArea = new JTextArea();
+		timeArea.setFont(new Font("Monospaced", Font.PLAIN, 14));
+		timeArea.setEditable(false);
+		timeArea.setBounds(43, 455, 169, 30);
+		timeArea.setBackground(Color.LIGHT_GRAY);
+		frame.getContentPane().add(timeArea);	
 		updateTime();
-
-		JLabel scoreLabel = new JLabel("Score: " + Player.getScore());
-		livesTimeScorePanel.add(livesLabel);
-		livesTimeScorePanel.add(timerLabel);
-		livesTimeScorePanel.add(scoreLabel);
 		
-		//Fill 2nd Panel
-		JLabel roomPanel = new JLabel("Room " +  Player.getCurrentRoom());
-		JTextArea questionArea = new JTextArea(Story.getQuestion());
+		livesArea = new JTextArea();
+		livesArea.setFont(new Font("Monospaced", Font.PLAIN, 14));
+		livesArea.setText("Lives: " + Player.getLives());
+		livesArea.setEditable(false);
+		livesArea.setBounds(43, 485, 169, 30);
+		livesArea.setBackground(Color.LIGHT_GRAY);
+		frame.getContentPane().add(livesArea);
+		
+		JTextArea scoreArea = new JTextArea();
+		scoreArea.setFont(new Font("Monospaced", Font.PLAIN, 14));
+		scoreArea.setText("Score: " + Player.getScore());
+		scoreArea.setBounds(43, 515, 169, 30);
+		scoreArea.setEditable(false);
+		scoreArea.setBackground(Color.LIGHT_GRAY);
+		frame.getContentPane().add(scoreArea);
+		
+		JTextArea roomArea = new JTextArea();
+		roomArea.setText("Room " +  Player.getCurrentRoom());
+		roomArea.setFont(new Font("Monospaced", Font.PLAIN, 50));
+		roomArea.setBounds(608, 20, 184, 75);
+		roomArea.setEditable(false);
+		roomArea.setBackground(Color.LIGHT_GRAY);
+		frame.getContentPane().add(roomArea);
+		
+		JTextArea questionArea = new JTextArea();
+		questionArea.setText(Story.getQuestion());
+		questionArea.setBounds(410, 144, 591, 40);
 		questionArea.setEditable(false);
 		questionArea.setBackground(Color.LIGHT_GRAY);
 		questionArea.setHighlighter(null);
 		questionArea.setLineWrap(true);
 		questionArea.setFont(new Font(null, Font.BOLD, 15));
+		frame.getContentPane().add(questionArea);
 		
-		roomQuestionPanel.add(roomPanel);
-		roomQuestionPanel.add(questionArea);
-		
-		//Fill 3rd Panel
-		JLabel playerImage = new JLabel("");
+		JLabel playerImage = new JLabel();
 		Image playerIcon = Player.getPhoto();
 		playerImage.setIcon(new ImageIcon(playerIcon));
-		playerPanel.add(playerImage);
+		playerImage.setForeground(Color.GRAY);
+		playerImage.setBounds(43, 144, 200, 300);
+		frame.getContentPane().add(playerImage);
 		
-		//Fill 4th Panel
-		JLabel door1Image = new JLabel("");
-		JLabel door2Image = new JLabel("");
-		JLabel door3Image = new JLabel("");
+		JButton door1 = new JButton("");
+		door1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				doorSelected=1;
+			}
+		});
+		door1.setBounds(428, 195, 150, 300);
+		
+		JButton door2 = new JButton("");
+		door2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				doorSelected=2;
+			}
+		});
+		door2.setBounds(628, 195, 150, 300);
+		
+		JButton door3 = new JButton("");
+		door3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				doorSelected=3;
+			}
+		});
+		door3.setBounds(836, 195, 150, 300);
+
 		Image doorIcon = new ImageIcon("Images/LogOut.png").getImage();
-		door1Image.setIcon(new ImageIcon(doorIcon));
-		door2Image.setIcon(new ImageIcon(doorIcon));
-		door3Image.setIcon(new ImageIcon(doorIcon));
-		doorsImagePanel.add(door1Image);
-		doorsImagePanel.add(door2Image);
-		doorsImagePanel.add(door3Image);
+		door1.setIcon(new ImageIcon(doorIcon));
+		door2.setIcon(new ImageIcon(doorIcon));
+		door3.setIcon(new ImageIcon(doorIcon));
 		
-		//Fill 5th Panel
-		JButton skipBtn = new JButton("Skip question");
+		frame.getContentPane().add(door1);	
+		frame.getContentPane().add(door2);
+		frame.getContentPane().add(door3);	
+
+		
+		JButton skipBtn = new JButton("Skip question");	//Fill 5th Panel
 		skipBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 					GameFunctions.skipBtn(frame);
 			}
 		});
-		JButton restartBtn = new JButton("      Restart      ");
+		skipBtn.setBounds(1034, 570, 150, 40);
+		frame.getContentPane().add(skipBtn);
+		
+		
+		
+		JButton restartBtn = new JButton("Restart");
 		restartBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int response = JOptionPane.showOptionDialog(null, "Are you sure you want to Restart?", "Restart", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 				if (response == JOptionPane.YES_NO_OPTION) {
-					Sound.stopPlaying();
+					//MainMenu.stopAudioStream();
 					frame.dispose();
 					Player.reset();
 					MainMenu.launchMainMenu();
 				}
 			}
 		});
-		JButton exitBtn = new JButton("         Exit         ");
+		restartBtn.setBounds(1059, 519, 125, 40);
+		frame.getContentPane().add(restartBtn);
+		
+		
+		JButton exitBtn = new JButton("Exit");
 		exitBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int response = JOptionPane.showOptionDialog(null, "Are you sure you want to Exit?", "Exit", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
@@ -116,87 +158,69 @@ public class GamePanel {
 					System.exit(0);
 			}	
 		});
-		restartSkipExitPanel.add(Box.createVerticalGlue());
-		restartSkipExitPanel.add(skipBtn);
-		restartSkipExitPanel.add(Box.createVerticalGlue());
-		restartSkipExitPanel.add(restartBtn);
-		restartSkipExitPanel.add(Box.createVerticalGlue());
-		restartSkipExitPanel.add(exitBtn);
-		restartSkipExitPanel.add(Box.createVerticalGlue());
+		exitBtn.setBounds(1084, 621, 100, 40);
+		frame.getContentPane().add(exitBtn);
 		
-		//Fill 6th Panel
-		ArrayList<String> shuffledAnswers = new ArrayList<>(Story.getAnswers());
-		//shuffle the answers
-		Collections.shuffle(shuffledAnswers);
+		ArrayList<String> shuffledAnswers = new ArrayList<>(Story.getAnswers());	//Fill 6th Panel
+		Collections.shuffle(shuffledAnswers);	//shuffle the answers
 		
 		JTextArea answer1Area = new JTextArea(shuffledAnswers.get(0));
 		answer1Area.setEditable(false);
 		answer1Area.setBackground(Color.LIGHT_GRAY);
 		answer1Area.setHighlighter(null);
 		answer1Area.setLineWrap(true);
-		answer1Area.setFont(new Font(null, Font.BOLD, 15));
+		answer1Area.setFont(new Font(null, Font.BOLD, 13));
+		answer1Area.setBounds(428, 506, 150, 40);
+		frame.getContentPane().add(answer1Area);
 
 		JTextArea answer2Area = new JTextArea(shuffledAnswers.get(1));
 		answer2Area.setEditable(false);
 		answer2Area.setBackground(Color.LIGHT_GRAY);
 		answer2Area.setHighlighter(null);
 		answer2Area.setLineWrap(true);
-		answer2Area.setFont(new Font(null, Font.BOLD, 15));
+		answer2Area.setFont(new Font(null, Font.BOLD, 13));
+		answer2Area.setBounds(628, 506, 150, 40);
+		frame.getContentPane().add(answer2Area);
 
 		JTextArea answer3Area = new JTextArea(shuffledAnswers.get(2));
 		answer3Area.setEditable(false);
 		answer3Area.setBackground(Color.LIGHT_GRAY);
 		answer3Area.setHighlighter(null);
 		answer3Area.setLineWrap(true);
-		answer3Area.setFont(new Font(null, Font.BOLD, 15));
+		answer3Area.setFont(new Font(null, Font.BOLD, 13));
+		answer3Area.setBounds(836, 506, 150, 40);
+		frame.getContentPane().add(answer3Area);
 		
-		JRadioButton door1RBtn = new JRadioButton("Door 1");
-		JRadioButton door2RBtn = new JRadioButton("Door 2");
-		JRadioButton door3RBtn = new JRadioButton("Door 3");
-		door1RBtn.setBackground(Color.LIGHT_GRAY);
-		door2RBtn.setBackground(Color.LIGHT_GRAY);
-		door3RBtn.setBackground(Color.LIGHT_GRAY);
-		ButtonGroup doorsGroup = new ButtonGroup();
-		doorsGroup.add(door1RBtn);
-		doorsGroup.add(door2RBtn);
-		doorsGroup.add(door3RBtn);
 		
-		JLabel emptyLabel = new JLabel();
-		JButton confirmBtn = new JButton("Confirm");
-		
+		JButton confirmBtn = new JButton("Confirm");	
 		confirmBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//1st Btn selected
-				if (door1RBtn.isSelected()) {
+				if (doorSelected == 1) {	//1st Btn selected
 					if (answer1Area.getText().equals(Story.getFirstRightAnswer()) || answer1Area.getText().equals(Story.getSecondRightAnswer())) {	//correct answer
 						GameFunctions.rightAnswer();
 						
 					}
-					//wrong answer
-					else {
-						GameFunctions.wrongAnswer();
-						livesLabel.setText("Lives: " + Player.getLives());
-						
+					else {	//wrong answer
+						GameFunctions.wrongAnswer();		
+						livesArea.setText("Lives: " + Player.getLives());
 					}
 				}
-				//2nd Btn selected
-				else if (door2RBtn.isSelected()) {
+				else if (doorSelected == 2) {	//2nd Btn selected
 					if (answer2Area.getText().equals(Story.getFirstRightAnswer()) || answer2Area.getText().equals(Story.getSecondRightAnswer())) {
 						GameFunctions.rightAnswer();
 					}
 					else {
 						GameFunctions.wrongAnswer();
-						livesLabel.setText("Lives: " + Player.getLives());	
+						livesArea.setText("Lives: " + Player.getLives());
 					}
 				}
-				//3rd Btn selected
-				else if (door3RBtn.isSelected()) {
+				else if (doorSelected == 3) {	//3rd Btn selected
 					if (answer3Area.getText().equals(Story.getFirstRightAnswer()) || answer3Area.getText().equals(Story.getSecondRightAnswer())) {
 						GameFunctions.rightAnswer();
 					}
 					else {
 						GameFunctions.wrongAnswer();
-						livesLabel.setText("Lives: " + Player.getLives());
+						livesArea.setText("Lives: " + Player.getLives());
 					}		
 				}
 				else {
@@ -204,40 +228,13 @@ public class GamePanel {
 				}
 			}
 		}
-		);
-		answersDoorsRBtnPanel.add(answer1Area);
-		answersDoorsRBtnPanel.add(answer2Area);
-		answersDoorsRBtnPanel.add(answer3Area);
-		answersDoorsRBtnPanel.add(door1RBtn);
-		answersDoorsRBtnPanel.add(door2RBtn);
-		answersDoorsRBtnPanel.add(door3RBtn);
-		answersDoorsRBtnPanel.add(emptyLabel);
-		answersDoorsRBtnPanel.add(confirmBtn);
-		
-		//Fill mainPanel
-		mainPanel.add(livesTimeScorePanel);
-		mainPanel.add(roomQuestionPanel);
-		mainPanel.add(playerPanel);
-		mainPanel.add(doorsImagePanel);
-		mainPanel.add(restartSkipExitPanel);
-		mainPanel.add(answersDoorsRBtnPanel);
-		
-		//BackgroundColors
-		livesTimeScorePanel.setBackground(Color.LIGHT_GRAY);
-		roomQuestionPanel.setBackground(Color.LIGHT_GRAY);
-		playerPanel.setBackground(Color.LIGHT_GRAY);
-		doorsImagePanel.setBackground(Color.LIGHT_GRAY);
-		restartSkipExitPanel.setBackground(Color.LIGHT_GRAY);
-		answersDoorsRBtnPanel.setBackground(Color.LIGHT_GRAY);
-		
-		//Frame settings
-		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("images\\stickman.png"));
-		frame.setContentPane(mainPanel);
-		frame.setSize(1200, 700);
-		frame.setResizable(false);
-		frame.setLocationRelativeTo(null);
-		frame.setVisible(true);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		);	
+		confirmBtn.setBounds(640, 580, 118, 40);
+		frame.getContentPane().add(confirmBtn);
+
+
+
+	
 	}
 	
 	public void updateTime() {
@@ -245,10 +242,11 @@ public class GamePanel {
 		Thread clock= new Thread() {
 			public void run() {
 				while (true){
-					timerLabel.setText("Time Left: " + GameFunctions.TimeConversion(Player.getRemainingTime()));
+					timeArea.setText("Time Left: " + GameFunctions.TimeConversion(Player.getRemainingTime()));
 					try {
 						sleep(1000);
 					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}
