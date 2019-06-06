@@ -48,7 +48,7 @@ public class GameFunctions {
 		if (Player.getCurrentRoom()==Story.getNumberOfLevels())
 			playerWon();
 		
-		if (Player.getLives() < 3)
+		if (Player.getLives() < 2)
 			Player.addALife();
 		
 		if (Player.gotBonus())
