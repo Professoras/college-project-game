@@ -72,6 +72,7 @@ public class GameFunctions {
 		Sound.playSoundEffect("sounds/WrongAnswer.wav");
 		Player.removeALife();
 		if (Player.getLives() == 0) {
+			Sound.stopBackgroundMusic();
 			Sound.playSoundEffect("sounds/Lose.wav");
 			showMessage("GAME OVER!!!\n0 lives left!",1800);
 			System.exit(1);
@@ -80,6 +81,8 @@ public class GameFunctions {
 	}
 	
 	public static void timeIsUp() {
+		Sound.stopBackgroundMusic();
+		Sound.playSoundEffect("sounds/Lose.wav");
 		showMessage("Time is up! You lost!",3000);
 		System.exit(1);
 	}
