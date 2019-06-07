@@ -22,14 +22,7 @@ public class Player {
 	}
 	
 	public static void updateScore() {
-		if (GameFunctions.getNewRoundTimeMark()-Player.getRemainingTime()<=5) { 
-			//Player gets bonus points if he or she answers correctly in the first 5 seconds of the new round
-			score+=1000;
-			bonus=true;
-		}
-		else
-			bonus=false;
-		score +=1000;
+		score +=1000 + (100 * time);
 	}
 	
 	public static boolean gotBonus() {
