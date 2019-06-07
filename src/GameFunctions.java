@@ -51,10 +51,7 @@ public class GameFunctions {
 		if (Player.getLives() < 2)
 			Player.addALife();
 		
-		if (Player.gotBonus())
-			showMessage("Fantastic job! 2x POINTS!!\nOn to the next round!\nLives left: "+Player.getLives(),1300);
-		else
-			showMessage("Good job!\nOn to the next round!\nLives left: "+Player.getLives(),1300);
+		showMessage("Good job!\nOn to the next round!\nLives left: "+Player.getLives(),1300);
 		
 		Player.updateCurrentRoom();
 		
