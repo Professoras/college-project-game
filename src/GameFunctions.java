@@ -13,7 +13,7 @@ public class GameFunctions {
 	private static int newRoundTime;
 	
 	public static void launchTheGame(int charid) {
-		Sound.startPlaying("sounds/Main.wav");
+		Sound.startBackgroundMusic("sounds/Main.wav");
 		Player.setPhoto(charid);
 		Player.startTheTimer();
 		openNewGamePanel();
@@ -31,8 +31,8 @@ public class GameFunctions {
 	}
 	
 	public static void playerWon() {
-		Sound.stopPlaying();
-		Sound.playShortSound("sounds/Win.wav");
+		Sound.stopBackgroundMusic();
+		Sound.playSoundEffect("sounds/Win.wav");
 		Player.stopTheTimer();
 		
 		int totalTime=Player.getTotalTime()-Player.getRemainingTime();
@@ -42,7 +42,7 @@ public class GameFunctions {
 	}
 	
 	public static void rightAnswer() {
-		Sound.playShortSound("sounds/CorrectAnswer.wav");
+		Sound.playSoundEffect("sounds/CorrectAnswer.wav");
 		Player.updateScore();
 		
 		if (Player.getCurrentRoom()==Story.getNumberOfLevels())
@@ -60,7 +60,7 @@ public class GameFunctions {
 		
 		if (Player.getCurrentRoom()<Story.getNumberOfLevels() && coinflip()==1) {
 			int reducedTime=Enemy.reduceTime();
-			Sound.playShortSound("sounds/DamageFromEnemy.wav");
+			Sound.playSoundEffect("sounds/DamageFromEnemy.wav");
 			showEnemy(GamePanel.getFrame(),reducedTime);
 			Player.reduceTime(reducedTime);	
 		}
@@ -69,10 +69,10 @@ public class GameFunctions {
 	}
 	
 	public static void wrongAnswer() {
-		Sound.playShortSound("sounds/WrongAnswer.wav");
+		Sound.playSoundEffect("sounds/WrongAnswer.wav");
 		Player.removeALife();
 		if (Player.getLives() == 0) {
-			Sound.playShortSound("sounds/Lose.wav");
+			Sound.playSoundEffect("sounds/Lose.wav");
 			showMessage("GAME OVER!!!\n0 lives left!",1800);
 			System.exit(1);
 		}

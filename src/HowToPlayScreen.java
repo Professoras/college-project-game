@@ -28,6 +28,7 @@ public class HowToPlayScreen extends JFrame {
 		}
 		
 		text = new JTextArea();
+		text.setEditable(false);
 		text.setToolTipText("");
 		text.setAlignmentX(CENTER_ALIGNMENT);
 		text.setAlignmentY(CENTER_ALIGNMENT);

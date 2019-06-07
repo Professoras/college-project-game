@@ -16,7 +16,7 @@ import java.nio.file.Paths;
 public class WelcomeScreen extends JFrame{
 
 
-	private JButton startButton,howToPlayButton,exitButton,backButton,char1,char2;
+	private JButton startButton,howToPlayButton,exitButton,char1,char2;
 	private JLabel label;
 	private JTextArea text;
 	private static int howToPlayFrameFlag = 0, locationXOfFrame = 0 , locationYOfFrame = 0, characterSelected = 0;
@@ -60,7 +60,7 @@ public class WelcomeScreen extends JFrame{
 		exitButton.addActionListener(listener3);	
 		welcomeScreenFrame.getContentPane().add(exitButton);
 				
-		JLabel label = new JLabel("");
+		label = new JLabel("");
 		label.setBounds(0, 0, 484, 482);
 		label.setIcon(new ImageIcon("images\\Labyrinth_03.jpg"));
 		welcomeScreenFrame.getContentPane().add(label);
@@ -146,7 +146,7 @@ public class WelcomeScreen extends JFrame{
 			if(howToPlayFrameFlag == 1) { 
 				return;
             }		
-			HowToPlayScreen screen = new HowToPlayScreen();
+			new HowToPlayScreen();
 			howToPlayFrameFlag = 1;
 		}
 	}
@@ -238,7 +238,7 @@ public class WelcomeScreen extends JFrame{
 			for (final Window w : frames) {
 			    w.dispose();
 			}
-			Sound.stopPlaying();
+			Sound.stopBackgroundMusic();
 			GameFunctions.launchTheGame(characterSelected);
 		}
 	}

@@ -68,8 +68,8 @@ public class Player {
 		        		reduceTime(1);
 		        	}
 		        	if (time == 9) {
-		        		Sound.stopPlaying();
-		        		Sound.playShortSound("sounds/Ending.wav");
+		        		Sound.stopBackgroundMusic();
+		        		Sound.startBackgroundMusic("sounds/Ending.wav");
 		        	}
 		    	}
 			});
@@ -113,7 +113,7 @@ public class Player {
 		lives = 2;
 		current_room = 1;
 		score = 0;
-		time=60;
+		time = totalTime;
 		skipAvailable = true;
 		gameTimer.stop();
 	}

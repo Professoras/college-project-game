@@ -22,7 +22,6 @@ public class GamePanel {
 	
 	public GamePanel() {
 		
-		
 		if (frame==null)
 			frame = new JFrame("Escape Room");
 		else {
@@ -38,7 +37,6 @@ public class GamePanel {
 		frame.getContentPane().setBackground(Color.LIGHT_GRAY);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		
 		
 		timeArea = new JTextArea();
 		timeArea.setFont(new Font("Monospaced", Font.PLAIN, 14));
@@ -93,6 +91,7 @@ public class GamePanel {
 		door1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				doorSelected=1;
+				Sound.playSoundEffect("sounds/Door.wav");
 			}
 		});
 		door1.setBounds(428, 195, 150, 300);
@@ -101,6 +100,7 @@ public class GamePanel {
 		door2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				doorSelected=2;
+				Sound.playSoundEffect("sounds/Door.wav");
 			}
 		});
 		door2.setBounds(628, 195, 150, 300);
@@ -109,6 +109,7 @@ public class GamePanel {
 		door3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				doorSelected=3;
+				Sound.playSoundEffect("sounds/Door.wav");
 			}
 		});
 		door3.setBounds(836, 195, 150, 300);
@@ -122,8 +123,7 @@ public class GamePanel {
 		frame.getContentPane().add(door2);
 		frame.getContentPane().add(door3);	
 
-		
-		JButton skipBtn = new JButton("Skip question");	//Fill 5th Panel
+		JButton skipBtn = new JButton("Skip question");
 		skipBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 					GameFunctions.skipBtn(frame);
@@ -132,24 +132,20 @@ public class GamePanel {
 		skipBtn.setBounds(1034, 570, 150, 40);
 		frame.getContentPane().add(skipBtn);
 		
-		
-		
 		JButton restartBtn = new JButton("Restart");
 		restartBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int response = JOptionPane.showOptionDialog(null, "Are you sure you want to Restart?", "Restart", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 				if (response == JOptionPane.YES_NO_OPTION) {
-					//MainMenu.stopAudioStream();
 					frame.dispose();
 					Player.reset();
-					Sound.stopPlaying();
-					MainMenu.launchMainMenu();
+					Sound.stopBackgroundMusic();
+					Main.launchMainMenu();
 				}
 			}
 		});
 		restartBtn.setBounds(1059, 519, 125, 40);
 		frame.getContentPane().add(restartBtn);
-		
 		
 		JButton exitBtn = new JButton("Exit");
 		exitBtn.addActionListener(new ActionListener() {
@@ -162,7 +158,7 @@ public class GamePanel {
 		exitBtn.setBounds(1084, 621, 100, 40);
 		frame.getContentPane().add(exitBtn);
 		
-		ArrayList<String> shuffledAnswers = new ArrayList<>(Story.getAnswers());	//Fill 6th Panel
+		ArrayList<String> shuffledAnswers = new ArrayList<>(Story.getAnswers());
 		Collections.shuffle(shuffledAnswers);	//shuffle the answers
 		
 		JTextArea answer1Area = new JTextArea(shuffledAnswers.get(0));
@@ -192,14 +188,12 @@ public class GamePanel {
 		answer3Area.setBounds(836, 506, 150, 40);
 		frame.getContentPane().add(answer3Area);
 		
-		
 		JButton confirmBtn = new JButton("Confirm");	
 		confirmBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (doorSelected == 1) {	//1st Btn selected
 					if (answer1Area.getText().equals(Story.getFirstRightAnswer()) || answer1Area.getText().equals(Story.getSecondRightAnswer())) {	//correct answer
 						GameFunctions.rightAnswer();
-						
 					}
 					else {	//wrong answer
 						GameFunctions.wrongAnswer();		
@@ -232,10 +226,6 @@ public class GamePanel {
 		);	
 		confirmBtn.setBounds(640, 580, 118, 40);
 		frame.getContentPane().add(confirmBtn);
-
-
-
-	
 	}
 	
 	public void updateTime() {
@@ -247,7 +237,6 @@ public class GamePanel {
 					try {
 						sleep(1000);
 					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}

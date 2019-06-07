@@ -12,7 +12,8 @@ public class Sound {
 	private static Clip mainClip;
 	private static Clip shortClip;
 	
-	public static void startPlaying(String soundName) {
+	//starts the Background Music
+	public static void startBackgroundMusic(String soundName) {
 		DataLine.Info dataInfo = new DataLine.Info(Clip.class, null);
 		try {
 			mainClip = (Clip)AudioSystem.getLine(dataInfo); 
@@ -33,11 +34,13 @@ public class Sound {
 		mainClip.loop(Clip.LOOP_CONTINUOUSLY);
 	}
 	
-	public static void stopPlaying() {
+	//stops the Background Music
+	public static void stopBackgroundMusic() {
 		mainClip.close();
 	}
 	
-	public static void playShortSound(String soundName) {
+	//starts the Sound Effects that play at the same time as the Background Music
+	public static void playSoundEffect(String soundName) {
 		DataLine.Info dataInfo = new DataLine.Info(Clip.class, null);
 		try {
 			shortClip = (Clip)AudioSystem.getLine(dataInfo); 
