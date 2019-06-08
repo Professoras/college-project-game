@@ -10,12 +10,13 @@ public class Player {
 	private static int lives = 2;
 	private static int current_room = 1;
 	private static int score = 0;
-	private static int time = 35;
-	private static final int totalTime = 35;
+	private static int time = 12;
+	private static final int totalTime = 12;
 	private static Timer gameTimer;
 	private static boolean skipAvailable = true;
 	private static boolean bonus;
 	private static Image photo;
+	private static int under10s=1;
 	
 	public static int getScore() {
 		return score;
@@ -67,16 +68,23 @@ public class Player {
 		        	else {
 		        		reduceTime(1);
 		        	}
-		        	if (time == 9) {
+		        	if (under10s==1 && time <10) {
 		        		Sound.stopBackgroundMusic();
 		        		Sound.startBackgroundMusic("sounds/Ending.wav");
+		        		under10s=0;
 		        	}
 		    	}
 			});
 		gameTimer.setRepeats(true);
 		gameTimer.start();
+		GamePanel.updateTime();
 	}
 	
+
+	public static void stopTheTimer() {
+		gameTimer.stop();
+		GamePanel.stopTheTime();
+	}
 	
 	public static int getRemainingTime() {
 		return time;
@@ -84,10 +92,6 @@ public class Player {
 	
 	public static void reduceTime(int reduceTimeSeconds) {
 		time-=reduceTimeSeconds;
-	}
-	
-	public static void stopTheTimer() {
-		gameTimer.stop();
 	}
 	
 	public static int getTotalTime() {

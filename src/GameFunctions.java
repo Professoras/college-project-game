@@ -48,7 +48,7 @@ public class GameFunctions {
 	}
 	
 	public static void rightAnswer() {
-		
+		Player.stopTheTimer();
 		Sound.playSoundEffect("sounds/CorrectAnswer.wav");
 		Player.updateScore();
 		
@@ -58,31 +58,30 @@ public class GameFunctions {
 		if (Player.getLives() < 2)
 			Player.addALife();
 		
-		Player.stopTheTimer();
+		
 		wasRight=1;
 		gifTime=1;
 		if (Player.gotBonus())
 			showMessage("Fantastic job!\n2x POINTS!\nOn to the next round!\nLives left: "+Player.getLives(),2200);
 		else
 			showMessage("Good job!\nOn to the next round!\nLives left: "+Player.getLives(),2200);
-		Player.startTheTimer();
+		
 		
 		Player.updateCurrentRoom();
 		
 		if (Player.getCurrentRoom()<Story.getNumberOfLevels() && coinflip()==1) {
 			int reducedTime=Enemy.reduceTime();
 			Sound.playSoundEffect("sounds/DamageFromEnemy.wav");
-			Player.stopTheTimer();
 			showEnemy(GamePanel.getFrame(),reducedTime);
 			Player.reduceTime(reducedTime);	
-			Player.startTheTimer();
+			
 		}
-		
+		Player.startTheTimer();
 		openNewGamePanel();
 	}
 	
 	public static void wrongAnswer() {
-		
+		Player.stopTheTimer();
 		Sound.playSoundEffect("sounds/WrongAnswer.wav");
 		Player.removeALife();
 		gifTime=1;
@@ -93,7 +92,7 @@ public class GameFunctions {
 			showMessage("GAME OVER!!!\n0 lives left!",3500);
 			System.exit(1);
 		}
-		Player.stopTheTimer();
+		
 		wasWrong=1;
 		showMessage("Wrong answer!\nLives left: "+Player.getLives(),2400);
 		Player.startTheTimer();
@@ -117,7 +116,6 @@ public class GameFunctions {
 	
 	public static void skipBtn(JFrame aframe) {
 		gifTime=1;
-		Player.stopTheTimer();
 		if (Player.isSkipAvailable()) {
 			if(Player.getLives() > 1) {
 				showMessage("You skipped the question!" + System.lineSeparator() + "The correct answers were:\n" +"1.)"+Story.getFirstRightAnswer()+"\n2.)"+Story.getSecondRightAnswer()+ System.lineSeparator() + "You lost 1 life!",4000);

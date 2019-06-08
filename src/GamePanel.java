@@ -7,19 +7,22 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
+import javax.swing.Timer;
 
 public class GamePanel {
 	private static JFrame frame;
-	private JTextArea timeArea,livesArea;
+	private static JTextArea timeArea,livesArea;
 	private int doorSelected = 0;
-
 	private static int under10s=1;
+	private static Timer clock;
+	
 	public GamePanel() {
 		
 		if (frame==null)
@@ -27,6 +30,8 @@ public class GamePanel {
 		else {
 			frame.getContentPane().removeAll();
 			frame.repaint();
+			under10s=1;
+			System.out.println("gamepanel");
 		}
 		
 		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("images\\stickman.png"));
@@ -43,8 +48,9 @@ public class GamePanel {
 		timeArea.setEditable(false);
 		timeArea.setBounds(43, 455, 169, 30);
 		timeArea.setBackground(Color.LIGHT_GRAY);
-		frame.getContentPane().add(timeArea);	
-		updateTime();
+		frame.getContentPane().add(timeArea);
+		timeArea.setText("Time Left: " + GameFunctions.TimeConversion(Player.getRemainingTime()));
+		setTimeTextAreaForeground();
 		
 		livesArea = new JTextArea();
 		livesArea.setFont(new Font("Monospaced", Font.PLAIN, 14));
@@ -128,6 +134,7 @@ public class GamePanel {
 		JButton skipBtn = new JButton("Skip question");
 		skipBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+					Player.stopTheTimer();
 					GameFunctions.skipBtn(frame);
 			}
 		});
@@ -229,27 +236,21 @@ public class GamePanel {
 		frame.getContentPane().add(confirmBtn);
 	}
 	
-	private void updateTime() {
+	public static void updateTime() {
 		
-		Thread clock= new Thread() {
-			public void run() {
-				while (true){
+		clock= new Timer(1000, new AbstractAction() {
+			public void actionPerformed(ActionEvent ae) {
 					timeArea.setText("Time Left: " + GameFunctions.TimeConversion(Player.getRemainingTime()));
-					if (under10s==1 && Player.getRemainingTime()<10) {
-					    timeArea.setForeground(Color.red);
-					    timeArea.setFont(new Font("Monospaced", Font.PLAIN, 19));
-					    under10s=0;
-					}
-					try {
-						sleep(1000);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
+					setTimeTextAreaForeground();
 				}
-			}
-		};
+			});
 		
+		clock.setRepeats(true);
 		clock.start();
+	}
+	
+	public static void stopTheTime() {
+		clock.stop();
 	}
 	
 	private void setLivesTextAreaForeground() {
@@ -257,6 +258,14 @@ public class GamePanel {
 			livesArea.setForeground(Color.RED);
 		else
 			livesArea.setForeground(Color.GREEN);
+	}
+	
+	private static void setTimeTextAreaForeground() {
+		if (under10s==1 && Player.getRemainingTime()<10) {
+			timeArea.setFont(new Font("Monospaced", Font.PLAIN, 19));
+			timeArea.setForeground(Color.red);
+		    under10s=0;
+		}
 	}
 	public static JFrame getFrame() {
 		return frame;
