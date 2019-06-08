@@ -51,6 +51,8 @@ public class GamePanel {
 		frame.getContentPane().add(timeArea);
 		timeArea.setText("Time Left: " + GameFunctions.TimeConversion(Player.getRemainingTime()));
 		setTimeTextAreaForeground();
+		updateTime();
+		//setTimeTextAreaForeground();
 		
 		livesArea = new JTextArea();
 		livesArea.setFont(new Font("Monospaced", Font.PLAIN, 14));
@@ -225,7 +227,9 @@ public class GamePanel {
 					}		
 				}
 				else {
+					Player.stopTheTimer();
 					JOptionPane.showMessageDialog(frame, "Need to select an answer first!", "Information", JOptionPane.INFORMATION_MESSAGE);
+					Player.startTheTimer();
 				}
 				livesArea.setText("Lives: " + Player.getLives());
 				setLivesTextAreaForeground();
