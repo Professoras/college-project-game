@@ -51,15 +51,19 @@ public class GameFunctions {
 		if (Player.getLives() < 2)
 			Player.addALife();
 		
+		Player.stopTheTimer();
 		showMessage("Good job!\nOn to the next round!\nLives left: "+Player.getLives(),1300);
+		Player.startTheTimer();
 		
 		Player.updateCurrentRoom();
 		
 		if (Player.getCurrentRoom()<Story.getNumberOfLevels() && coinflip()==1) {
 			int reducedTime=Enemy.reduceTime();
 			Sound.playSoundEffect("sounds/DamageFromEnemy.wav");
+			Player.stopTheTimer();
 			showEnemy(GamePanel.getFrame(),reducedTime);
 			Player.reduceTime(reducedTime);	
+			Player.startTheTimer();
 		}
 		
 		openNewGamePanel();
@@ -74,7 +78,9 @@ public class GameFunctions {
 			showMessage("GAME OVER!!!\n0 lives left!",1800);
 			System.exit(1);
 		}
+		Player.stopTheTimer();
 		showMessage("Wrong answer!\nLives left: "+Player.getLives(),1200);
+		Player.startTheTimer();
 	}
 	
 	public static void timeIsUp() {
@@ -93,6 +99,7 @@ public class GameFunctions {
 	}
 	
 	public static void skipBtn(JFrame aframe) {
+		Player.stopTheTimer();
 		if (Player.isSkipAvailable()) {
 			if(Player.getLives() > 1) {
 				showMessage("You skipped the question!" + System.lineSeparator() + "The correct answers were:\n" +"1.)"+Story.getFirstRightAnswer()+"\n2.)"+Story.getSecondRightAnswer()+ System.lineSeparator() + "You lost 1 life!",1800);
@@ -101,7 +108,7 @@ public class GameFunctions {
 				if (Player.getCurrentRoom()==Story.getNumberOfLevels())
 					playerWon();
 				Player.updateCurrentRoom();
-				aframe.dispose();
+				//aframe.dispose();
 				openNewGamePanel();
 			}
 			else
@@ -109,6 +116,7 @@ public class GameFunctions {
 		}
 		else
 			showMessage("You already used the skip option once!",1600);
+		Player.startTheTimer();
 	}
 	
 	public static void showEnemy(JFrame aframe,int reducedTime) {
