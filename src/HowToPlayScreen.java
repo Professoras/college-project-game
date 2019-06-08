@@ -16,13 +16,13 @@ public class HowToPlayScreen extends JFrame {
 		this.setForeground(Color.WHITE);
 		this.setTitle("How to play : ");
 		this.setIconImage(Toolkit.getDefaultToolkit().getImage("images\\Question Mark.png"));
-		this.setBounds(100, 100, 407, 330);
+		this.setBounds(100, 100, 530, 330);
 		this.getContentPane().setLayout(null);
 
 		//read how to play file
 		String howToPlayText = "";
 		try {
-			howToPlayText = new String(Files.readAllBytes(Paths.get("Docs\\howtoplay.txt")), "ISO-8859-7");
+			howToPlayText = new String(Files.readAllBytes(Paths.get("Docs\\howtoplay.txt")), "UTF-8");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -35,7 +35,7 @@ public class HowToPlayScreen extends JFrame {
 		text.setText(howToPlayText);
 		text.setBackground(Color.DARK_GRAY);
 		text.setForeground(Color.WHITE);
-		text.setBounds(5, 10, 400, 300);
+		text.setBounds(5, 10, 520, 300);
 		this.getContentPane().add(text);
 		text.setColumns(10);
 
