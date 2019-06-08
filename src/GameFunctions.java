@@ -114,7 +114,7 @@ public class GameFunctions {
         return p3 + ":" + p1;
 	}
 	
-	public static void skipBtn(JFrame aframe) {
+	public static void skipBtn() {
 		gifTime=1;
 		skip=1;
 		if (Player.isSkipAvailable()) {
@@ -125,7 +125,6 @@ public class GameFunctions {
 				if (Player.getCurrentRoom()==Story.getNumberOfLevels())
 					playerWon();
 				Player.updateCurrentRoom();
-				//aframe.dispose();
 				Player.reduceTime(5);
 				openNewGamePanel(); 
 			}

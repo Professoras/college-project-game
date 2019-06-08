@@ -135,7 +135,7 @@ public class GamePanel {
 		skipBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 					Player.stopTheTimer();
-					GameFunctions.skipBtn(frame);
+					GameFunctions.skipBtn();
 			}
 		});
 		skipBtn.setBounds(1034, 570, 150, 40);
