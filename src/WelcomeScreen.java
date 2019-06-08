@@ -165,8 +165,6 @@ public class WelcomeScreen extends JFrame{
 	//back button from character selection screen
 	class ButtonListener4 implements ActionListener {
 		public void actionPerformed(ActionEvent c) {
-			char1.setSelected(false);
-			char2.setSelected(false);
 			try {
 				new WelcomeScreen();
 			} catch (IOException e) {
