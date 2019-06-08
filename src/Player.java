@@ -77,13 +77,11 @@ public class Player {
 			});
 		gameTimer.setRepeats(true);
 		gameTimer.start();
-		//GamePanel.updateTime();
 	}
 	
 
 	public static void stopTheTimer() {
 		gameTimer.stop();
-		//GamePanel.stopTheTime();
 	}
 	
 	public static int getRemainingTime() {

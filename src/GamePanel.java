@@ -18,7 +18,7 @@ import javax.swing.Timer;
 
 public class GamePanel {
 	private static JFrame frame;
-	private static JTextArea timeArea,livesArea;
+	private JTextArea timeArea,livesArea;
 	private int doorSelected = 0;
 	private static int under10s=1;
 	private static Timer clock;
@@ -31,7 +31,7 @@ public class GamePanel {
 			frame.getContentPane().removeAll();
 			frame.repaint();
 			under10s=1;
-			System.out.println("gamepanel");
+			//System.out.println("gamepanel");
 		}
 		
 		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("images\\stickman.png"));
@@ -52,7 +52,6 @@ public class GamePanel {
 		timeArea.setText("Time Left: " + GameFunctions.TimeConversion(Player.getRemainingTime()));
 		setTimeTextAreaForeground();
 		updateTime();
-		//setTimeTextAreaForeground();
 		
 		livesArea = new JTextArea();
 		livesArea.setFont(new Font("Monospaced", Font.PLAIN, 14));
@@ -240,7 +239,7 @@ public class GamePanel {
 		frame.getContentPane().add(confirmBtn);
 	}
 	
-	public static void updateTime() {
+	public void updateTime() {
 		
 		clock= new Timer(1000, new AbstractAction() {
 			public void actionPerformed(ActionEvent ae) {
@@ -253,10 +252,6 @@ public class GamePanel {
 		clock.start();
 	}
 	
-	public static void stopTheTime() {
-		clock.stop();
-	}
-	
 	private void setLivesTextAreaForeground() {
 		if (Player.getLives()==1)
 			livesArea.setForeground(Color.RED);
@@ -264,7 +259,7 @@ public class GamePanel {
 			livesArea.setForeground(Color.GREEN);
 	}
 	
-	private static void setTimeTextAreaForeground() {
+	private  void setTimeTextAreaForeground() {
 		if (under10s==1 && Player.getRemainingTime()<10) {
 			timeArea.setFont(new Font("Monospaced", Font.PLAIN, 19));
 			timeArea.setForeground(Color.red);

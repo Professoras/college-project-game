@@ -156,7 +156,7 @@ public class GameFunctions {
         dialog.setLocationRelativeTo(aframe);
         
 		//create timer to dispose of dialog after 4 seconds
-		Timer timer = new Timer(1950, new AbstractAction() {
+		Timer timer = new Timer(2500, new AbstractAction() {
 
 		    public void actionPerformed(ActionEvent ae) {
 		        dialog.dispose();
