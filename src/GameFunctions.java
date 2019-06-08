@@ -15,6 +15,7 @@ public class GameFunctions {
 	private static int wasRight=0;
 	private static int wasWrong=0;
 	private static int gameOver=0;
+	private static int skip=0;
 	private static int win=0;
 	
 	public static void launchTheGame(int charid) {
@@ -116,15 +117,17 @@ public class GameFunctions {
 	
 	public static void skipBtn(JFrame aframe) {
 		gifTime=1;
+		skip=1;
 		if (Player.isSkipAvailable()) {
 			if(Player.getLives() > 1) {
-				showMessage("You skipped the question!" + System.lineSeparator() + "The correct answers were:\n" +"1.)"+Story.getFirstRightAnswer()+"\n2.)"+Story.getSecondRightAnswer()+ System.lineSeparator() + "You lost 1 life!",4000);
+				showMessage("You skipped the question!" + System.lineSeparator() + "The correct answers were:\n" +"1.)"+Story.getFirstRightAnswer()+"\n2.)"+Story.getSecondRightAnswer()+ System.lineSeparator() + "You lost 1 life and 5 seconds!",4000);
 				Player.removeALife();
 				Player.setSkipNotAvailable();
 				if (Player.getCurrentRoom()==Story.getNumberOfLevels())
 					playerWon();
 				Player.updateCurrentRoom();
 				//aframe.dispose();
+				Player.reduceTime(5);
 				openNewGamePanel();
 			}
 			else
@@ -225,16 +228,21 @@ public class GameFunctions {
 		if (win==1)
 			return "Images/win.gif";
 		
+		if (skip==1) {
+			skip=0;
+			if (Player.isSkipAvailable())
+				if (Player.getLives()>1)
+					return "Images/skip.gif";
+				else
+					return "Images/skip_2.gif";
+			else
+				return "Images/skip_3.gif";
+		
+		}
+		
 		if (Player.getRemainingTime()==0)
 			return "Images/time_is_up.gif";
 		
-		if (Player.isSkipAvailable())
-			if (Player.getLives()>1)
-				return "Images/skip.gif";
-			else
-				return "Images/skip_2.gif";
-		else
-			return "Images/skip_3.gif";
-		
+		return "1";
 	}
 }

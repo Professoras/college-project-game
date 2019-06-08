@@ -91,7 +91,10 @@ public class Player {
 	}
 	
 	public static void reduceTime(int reduceTimeSeconds) {
-		time-=reduceTimeSeconds;
+		if (time-reduceTimeSeconds<0)
+			time=0;
+		else
+			time-=reduceTimeSeconds;
 	}
 	
 	public static int getTotalTime() {
