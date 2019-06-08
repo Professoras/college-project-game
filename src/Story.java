@@ -1,6 +1,7 @@
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
@@ -27,7 +28,8 @@ public class Story {
 		try {
 			Object obj = new Object();
 			try {
-				obj = parser.parse(new FileReader("JSONS/questions.json"));
+				 //new FileReader("JSONS/questions.json")
+				obj = parser.parse(new InputStreamReader(new FileInputStream("JSONS/questions.json"),"UTF-8"));
 			} catch (org.json.simple.parser.ParseException e) {
 				e.printStackTrace();
 			}
