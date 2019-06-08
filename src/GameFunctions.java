@@ -118,7 +118,7 @@ public class GameFunctions {
 		gifTime=1;
 		skip=1;
 		if (Player.isSkipAvailable()) {
-			if(Player.getLives() > 1) {
+			if(Player.getLives() > 1 && Player.getCurrentRoom()<3) {
 				showMessage("You skipped the question!" + System.lineSeparator() + "The correct answers were:\n" +"1.)"+Story.getFirstRightAnswer()+"\n2.)"+Story.getSecondRightAnswer()+ System.lineSeparator() + "You lost 1 life and 5 seconds!",4000);
 				Player.removeALife();
 				Player.setSkipNotAvailable();
@@ -128,6 +128,8 @@ public class GameFunctions {
 				Player.reduceTime(5);
 				openNewGamePanel(); 
 			}
+			else if (Player.getCurrentRoom()==3)
+				showMessage("You can't use the skip option in the final level!",2000);
 			else
 				showMessage("You don't have enough lives to skip the question!",2000);
 		}
@@ -230,7 +232,7 @@ public class GameFunctions {
 		if (skip==1) {
 			skip=0;
 			if (Player.isSkipAvailable())
-				if (Player.getLives()>1)
+				if (Player.getLives()>1 && Player.getCurrentRoom()<3)
 					return "Images/skip.gif";
 				else
 					return "Images/skip_2.gif";
