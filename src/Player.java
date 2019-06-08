@@ -10,7 +10,7 @@ public class Player {
 	private static int lives = 2;
 	private static int current_room = 1;
 	private static int score = 0;
-	private static int time = 5;
+	private static int time = 35;
 	private static final int totalTime = 35;
 	private static Timer gameTimer;
 	private static boolean skipAvailable = true;
@@ -23,6 +23,13 @@ public class Player {
 	
 	public static void updateScore() {
 		score +=1000 + (100 * time);
+		//if the player answers in less than 5 seconds, he or she receives double points
+		if (GameFunctions.getNewRoundTimeMark()-Player.getRemainingTime()<=5) {
+			bonus=true;
+			score+=score;
+		}
+		else
+			bonus=false;
 	}
 	
 	public static boolean gotBonus() {

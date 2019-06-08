@@ -61,7 +61,10 @@ public class GameFunctions {
 		Player.stopTheTimer();
 		wasRight=1;
 		gifTime=1;
-		showMessage("Good job!\nOn to the next round!\nLives left: "+Player.getLives(),1100);
+		if (Player.gotBonus())
+			showMessage("Fantastic job!\n2x POINTS!\nOn to the next round!\nLives left: "+Player.getLives(),2200);
+		else
+			showMessage("Good job!\nOn to the next round!\nLives left: "+Player.getLives(),2200);
 		Player.startTheTimer();
 		
 		Player.updateCurrentRoom();
@@ -207,7 +210,10 @@ public class GameFunctions {
 		
 		if (wasRight==1) {
 			wasRight=0;
-			return "Images/right.gif";
+			if (Player.gotBonus())
+				return "Images/double_points.gif";
+			else
+				return "Images/right.gif";
 		}
 		
 		if (wasWrong==1) {
