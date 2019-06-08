@@ -19,7 +19,7 @@ public class GamePanel {
 	private JTextArea timeArea,livesArea;
 	private int doorSelected = 0;
 
-	
+	private static int under10s=1;
 	public GamePanel() {
 		
 		if (frame==null)
@@ -52,6 +52,8 @@ public class GamePanel {
 		livesArea.setEditable(false);
 		livesArea.setBounds(43, 485, 169, 30);
 		livesArea.setBackground(Color.LIGHT_GRAY);
+		setLivesTextAreaForeground();
+		
 		frame.getContentPane().add(livesArea);
 		
 		JTextArea scoreArea = new JTextArea();
@@ -196,8 +198,7 @@ public class GamePanel {
 						GameFunctions.rightAnswer();
 					}
 					else {	//wrong answer
-						GameFunctions.wrongAnswer();		
-						livesArea.setText("Lives: " + Player.getLives());
+						GameFunctions.wrongAnswer();
 					}
 				}
 				else if (doorSelected == 2) {	//2nd Btn selected
@@ -206,7 +207,6 @@ public class GamePanel {
 					}
 					else {
 						GameFunctions.wrongAnswer();
-						livesArea.setText("Lives: " + Player.getLives());
 					}
 				}
 				else if (doorSelected == 3) {	//3rd Btn selected
@@ -215,12 +215,14 @@ public class GamePanel {
 					}
 					else {
 						GameFunctions.wrongAnswer();
-						livesArea.setText("Lives: " + Player.getLives());
 					}		
 				}
 				else {
 					JOptionPane.showMessageDialog(frame, "Need to select an answer first!", "Information", JOptionPane.INFORMATION_MESSAGE);
 				}
+				System.out.println(1);
+				livesArea.setText("Lives: " + Player.getLives());
+				setLivesTextAreaForeground();
 			}
 		}
 		);	
@@ -228,12 +230,17 @@ public class GamePanel {
 		frame.getContentPane().add(confirmBtn);
 	}
 	
-	public void updateTime() {
+	private void updateTime() {
 		
 		Thread clock= new Thread() {
 			public void run() {
-				while (true){
+				while (Player.getRemainingTime()>0){
 					timeArea.setText("Time Left: " + GameFunctions.TimeConversion(Player.getRemainingTime()));
+					if (under10s==1 && Player.getRemainingTime()<10) {
+					    timeArea.setForeground(Color.red);
+					    timeArea.setFont(new Font("Monospaced", Font.PLAIN, 19));
+					    under10s=0;
+					}
 					try {
 						sleep(1000);
 					} catch (InterruptedException e) {
@@ -246,6 +253,12 @@ public class GamePanel {
 		clock.start();
 	}
 	
+	private void setLivesTextAreaForeground() {
+		if (Player.getLives()==1)
+			livesArea.setForeground(Color.RED);
+		else
+			livesArea.setForeground(Color.GREEN);
+	}
 	public static JFrame getFrame() {
 		return frame;
 	}

@@ -16,6 +16,11 @@ public class Story {
 	private static final int NUMBEROFQUESTIONS = 3;
 	private static final int storyLevels=3;
 	
+	
+	//JSON file is of this format
+	//{level: {question_i:[answer1,answer2,answer3]}}
+	
+	//parses JSON file to grab the respective level's Q&A pool
 	public static void getLevelQuestions(int level) {
 		JSONParser parser = new JSONParser();
 		
@@ -44,7 +49,7 @@ public class Story {
 		Random randomGenerator = new Random();
 		int random_int= randomGenerator.nextInt(NUMBEROFQUESTIONS);
 		getLevelQuestions(level);
-		//System.out.println(level_question_set); //testing purposes
+		//transforms random question from JSON into hashmap -> question: [answers]
 		HashMap<String, ArrayList<String>> question_and_ans_struct = (HashMap) level_question_set.get(random_int);
 		
 		question = (String) question_and_ans_struct.keySet().toArray()[0];

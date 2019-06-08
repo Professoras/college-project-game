@@ -11,11 +11,11 @@ import javax.swing.Timer;
 public class GameFunctions {
 	
 	private static int newRoundTime;
-	private static int gifTime;
-	private static int wasRight;
-	private static int wasWrong;
-	private static int gameOver;
-	private static int win;
+	private static int gifTime=0;
+	private static int wasRight=0;
+	private static int wasWrong=0;
+	private static int gameOver=0;
+	private static int win=0;
 	
 	public static void launchTheGame(int charid) {
 		Sound.startBackgroundMusic("sounds/Main.wav");
@@ -61,7 +61,7 @@ public class GameFunctions {
 		Player.stopTheTimer();
 		wasRight=1;
 		gifTime=1;
-		showMessage("Good job!\nOn to the next round!\nLives left: "+Player.getLives(),2500);
+		showMessage("Good job!\nOn to the next round!\nLives left: "+Player.getLives(),1100);
 		Player.startTheTimer();
 		
 		Player.updateCurrentRoom();
@@ -92,7 +92,7 @@ public class GameFunctions {
 		}
 		Player.stopTheTimer();
 		wasWrong=1;
-		showMessage("Wrong answer!\nLives left: "+Player.getLives(),1200);
+		showMessage("Wrong answer!\nLives left: "+Player.getLives(),2400);
 		Player.startTheTimer();
 	}
 	
@@ -203,32 +203,32 @@ public class GameFunctions {
 	
 	private static String getGIF() {
 		gifTime=0;
+		
 		if (wasRight==1) {
 			wasRight=0;
 			return "Images/right.gif";
 		}
 		
-		else if (wasWrong==1) {
+		if (wasWrong==1) {
 			wasWrong=0;
 			return "Images/wrong.gif";
 		}
 		
-		else if (gameOver==1) {
+		if (gameOver==1) {
 			return "Images/game_over.gif";
 		}
-		else if (win==1) {
+		if (win==1) {
 			return "Images/win.gif";
 		}
-		else if (Player.isSkipAvailable())
+		
+		if (Player.isSkipAvailable())
 			if (Player.getLives()>1)
 				return "Images/skip.gif";
 			else
 				return "Images/skip_2.gif";
-		else if (!Player.isSkipAvailable()) {
+		else {
 			return "Images/skip_3.gif";
 		}
-		else 
-			return "1";
 		
 	}
 }
