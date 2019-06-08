@@ -59,7 +59,6 @@ public class GameFunctions {
 		if (Player.getLives() < 2)
 			Player.addALife();
 		
-		
 		wasRight=1;
 		gifTime=1;
 		if (Player.gotBonus())
@@ -128,13 +127,14 @@ public class GameFunctions {
 				Player.updateCurrentRoom();
 				//aframe.dispose();
 				Player.reduceTime(5);
-				openNewGamePanel();
+				openNewGamePanel(); 
 			}
 			else
 				showMessage("You don't have enough lives to skip the question!",2000);
 		}
 		else
 			showMessage("You already used the skip option once!",2000);
+		
 		Player.startTheTimer();
 	}
 	
