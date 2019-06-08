@@ -11,6 +11,11 @@ import javax.swing.Timer;
 public class GameFunctions {
 	
 	private static int newRoundTime;
+	private static int gifTime;
+	private static int wasRight;
+	private static int wasWrong;
+	private static int gameOver;
+	private static int win;
 	
 	public static void launchTheGame(int charid) {
 		Sound.startBackgroundMusic("sounds/Main.wav");
@@ -36,12 +41,14 @@ public class GameFunctions {
 		Player.stopTheTimer();
 		
 		int totalTime=Player.getTotalTime()-Player.getRemainingTime();
-		
+		gifTime=1;
+		win=1;
 		GameFunctions.showMessage("CONGRATULATIONS!\nYOU WON!\nYour new highscore: "+Player.getScore()+"\nTime: "+totalTime+"s\n"+"Lives left: "+Player.getLives(),5000);
 		System.exit(1);
 	}
 	
 	public static void rightAnswer() {
+		
 		Sound.playSoundEffect("sounds/CorrectAnswer.wav");
 		Player.updateScore();
 		
@@ -52,7 +59,9 @@ public class GameFunctions {
 			Player.addALife();
 		
 		Player.stopTheTimer();
-		showMessage("Good job!\nOn to the next round!\nLives left: "+Player.getLives(),1300);
+		wasRight=1;
+		gifTime=1;
+		showMessage("Good job!\nOn to the next round!\nLives left: "+Player.getLives(),2500);
 		Player.startTheTimer();
 		
 		Player.updateCurrentRoom();
@@ -70,15 +79,19 @@ public class GameFunctions {
 	}
 	
 	public static void wrongAnswer() {
+		
 		Sound.playSoundEffect("sounds/WrongAnswer.wav");
 		Player.removeALife();
+		gifTime=1;
 		if (Player.getLives() == 0) {
 			Sound.stopBackgroundMusic();
 			Sound.playSoundEffect("sounds/Lose.wav");
-			showMessage("GAME OVER!!!\n0 lives left!",1800);
+			gameOver=1;
+			showMessage("GAME OVER!!!\n0 lives left!",3500);
 			System.exit(1);
 		}
 		Player.stopTheTimer();
+		wasWrong=1;
 		showMessage("Wrong answer!\nLives left: "+Player.getLives(),1200);
 		Player.startTheTimer();
 	}
@@ -99,10 +112,11 @@ public class GameFunctions {
 	}
 	
 	public static void skipBtn(JFrame aframe) {
+		gifTime=1;
 		Player.stopTheTimer();
 		if (Player.isSkipAvailable()) {
 			if(Player.getLives() > 1) {
-				showMessage("You skipped the question!" + System.lineSeparator() + "The correct answers were:\n" +"1.)"+Story.getFirstRightAnswer()+"\n2.)"+Story.getSecondRightAnswer()+ System.lineSeparator() + "You lost 1 life!",1800);
+				showMessage("You skipped the question!" + System.lineSeparator() + "The correct answers were:\n" +"1.)"+Story.getFirstRightAnswer()+"\n2.)"+Story.getSecondRightAnswer()+ System.lineSeparator() + "You lost 1 life!",4000);
 				Player.removeALife();
 				Player.setSkipNotAvailable();
 				if (Player.getCurrentRoom()==Story.getNumberOfLevels())
@@ -112,10 +126,10 @@ public class GameFunctions {
 				openNewGamePanel();
 			}
 			else
-				showMessage("You don't have enough lives to skip the question!",1600);
+				showMessage("You don't have enough lives to skip the question!",2000);
 		}
 		else
-			showMessage("You already used the skip option once!",1600);
+			showMessage("You already used the skip option once!",2000);
 		Player.startTheTimer();
 	}
 	
@@ -161,7 +175,8 @@ public class GameFunctions {
 	
 	public static void showMessage(String info, int timeinms) {
 		JOptionPane optionPane = new JOptionPane(info, JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null);
-		
+		if (gifTime==1)
+			optionPane.add(new JLabel(new ImageIcon(getGIF()),JLabel.LEADING));
 		final JDialog dialog = new JDialog();
 		dialog.setTitle("Message");
 		dialog.setModal(true);
@@ -184,5 +199,36 @@ public class GameFunctions {
 		//start timer to close JDialog as dialog modal we must start the timer before its visible
 		timer.start();
 		dialog.setVisible(true);
+	}
+	
+	private static String getGIF() {
+		gifTime=0;
+		if (wasRight==1) {
+			wasRight=0;
+			return "Images/right.gif";
+		}
+		
+		else if (wasWrong==1) {
+			wasWrong=0;
+			return "Images/wrong.gif";
+		}
+		
+		else if (gameOver==1) {
+			return "Images/game_over.gif";
+		}
+		else if (win==1) {
+			return "Images/win.gif";
+		}
+		else if (Player.isSkipAvailable())
+			if (Player.getLives()>1)
+				return "Images/skip.gif";
+			else
+				return "Images/skip_2.gif";
+		else if (!Player.isSkipAvailable()) {
+			return "Images/skip_3.gif";
+		}
+		else 
+			return "1";
+		
 	}
 }
