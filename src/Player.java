@@ -10,7 +10,7 @@ public class Player {
 	private static int lives = 2;
 	private static int current_room = 1;
 	private static int score = 0;
-	private static int time = 35;
+	private static int time = 5;
 	private static final int totalTime = 35;
 	private static Timer gameTimer;
 	private static boolean skipAvailable = true;

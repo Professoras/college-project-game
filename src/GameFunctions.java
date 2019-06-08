@@ -99,6 +99,7 @@ public class GameFunctions {
 	public static void timeIsUp() {
 		Sound.stopBackgroundMusic();
 		Sound.playSoundEffect("sounds/Lose.wav");
+		gifTime=1;
 		showMessage("Time is up! You lost!",3000);
 		System.exit(1);
 	}
@@ -214,21 +215,22 @@ public class GameFunctions {
 			return "Images/wrong.gif";
 		}
 		
-		if (gameOver==1) {
+		if (gameOver==1)
 			return "Images/game_over.gif";
-		}
-		if (win==1) {
+		
+		if (win==1)
 			return "Images/win.gif";
-		}
+		
+		if (Player.getRemainingTime()==0)
+			return "Images/time_is_up.gif";
 		
 		if (Player.isSkipAvailable())
 			if (Player.getLives()>1)
 				return "Images/skip.gif";
 			else
 				return "Images/skip_2.gif";
-		else {
+		else
 			return "Images/skip_3.gif";
-		}
 		
 	}
 }

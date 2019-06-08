@@ -220,7 +220,6 @@ public class GamePanel {
 				else {
 					JOptionPane.showMessageDialog(frame, "Need to select an answer first!", "Information", JOptionPane.INFORMATION_MESSAGE);
 				}
-				System.out.println(1);
 				livesArea.setText("Lives: " + Player.getLives());
 				setLivesTextAreaForeground();
 			}
@@ -234,7 +233,7 @@ public class GamePanel {
 		
 		Thread clock= new Thread() {
 			public void run() {
-				while (Player.getRemainingTime()>0){
+				while (true){
 					timeArea.setText("Time Left: " + GameFunctions.TimeConversion(Player.getRemainingTime()));
 					if (under10s==1 && Player.getRemainingTime()<10) {
 					    timeArea.setForeground(Color.red);
