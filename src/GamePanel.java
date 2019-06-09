@@ -160,7 +160,7 @@ public class GamePanel {
 					GameFunctions.skipBtn();
 			}
 		});
-		skipBtn.setBounds(1051, 570, 133, 40);
+		skipBtn.setBounds(1059, 570, 125, 40);
 		skipBtn.setOpaque(false);
 		skipBtn.setContentAreaFilled(false);
 		frame.getContentPane().add(skipBtn);
