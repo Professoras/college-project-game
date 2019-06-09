@@ -104,7 +104,7 @@ public class WelcomeScreen extends JFrame{
 			welcomeScreenFrame.getContentPane().add(backButton);			
 			
 			char1 = new JButton("");
-			char1.setIcon(new ImageIcon("images\\char1selection.png"));
+			char1.setIcon(new ImageIcon("images\\char1.png"));
 			char1.setBackground(Color.WHITE);
 			char1.setBounds(28, 90, 200, 300);
 			ButtonListener5 listener1 = new ButtonListener5();
@@ -189,7 +189,7 @@ public class WelcomeScreen extends JFrame{
 		public void actionPerformed(ActionEvent a) {
 			characterSelected = 1;
 			char1.setIcon(new ImageIcon("images\\char1selected.png"));
-			char2.setIcon(new ImageIcon("images\\char2selection.png"));
+			char2.setIcon(new ImageIcon("images\\char2.png"));
 		}
 	}
 	
@@ -198,7 +198,7 @@ public class WelcomeScreen extends JFrame{
 		public void actionPerformed(ActionEvent b) {	
 			characterSelected = 2;
 			char2.setIcon(new ImageIcon("images\\char2selected.png"));
-			char1.setIcon(new ImageIcon("images\\char1selection.png"));
+			char1.setIcon(new ImageIcon("images\\char1.png"));
 		}
 	}
 	
