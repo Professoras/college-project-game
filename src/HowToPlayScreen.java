@@ -16,7 +16,7 @@ public class HowToPlayScreen extends JFrame {
 		this.setForeground(Color.WHITE);
 		this.setTitle("How to play : ");
 		this.setIconImage(Toolkit.getDefaultToolkit().getImage("images\\Question Mark.png"));
-		this.setBounds(100, 100, 410, 420);
+		this.setBounds(100, 100, 410, 450);
 		this.getContentPane().setLayout(null);
 
 		//read how to play file
@@ -34,10 +34,17 @@ public class HowToPlayScreen extends JFrame {
 		text.setAlignmentY(CENTER_ALIGNMENT);
 		text.setText(howToPlayText);
 		text.setBackground(Color.DARK_GRAY);
-		text.setForeground(Color.WHITE);
+		text.setForeground(Color.BLACK);
 		text.setBounds(5, 10, 410, 420);
 		this.getContentPane().add(text);
+		text.setOpaque(false);
 		text.setColumns(10);
+		
+		JLabel label = new JLabel("");
+		label.setBounds(0, 0, 484, 482);
+		label.setIcon(new ImageIcon("images\\papyrus.jpg"));
+		
+		this.getContentPane().add(label);
 		
 		this.setVisible(true);
 		this.setResizable(false);
