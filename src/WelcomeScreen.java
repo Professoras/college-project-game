@@ -16,7 +16,7 @@ import java.nio.file.Paths;
 public class WelcomeScreen extends JFrame{
 
 
-	private JButton startButton,howToPlayButton,exitButton,char1,char2;
+	private JButton playButton,rulesButton,exitButton,char1,char2;
 	private JLabel label;
 	private JTextArea text;
 	private static int howToPlayFrameFlag = 0, locationXOfFrame = 0 , locationYOfFrame = 0, characterSelected = 0;
@@ -33,23 +33,23 @@ public class WelcomeScreen extends JFrame{
 			welcomeScreenFrame.getContentPane().removeAll();
 			welcomeScreenFrame.repaint();
 		}
-		startButton = new JButton("");
-		startButton.setIcon(new ImageIcon("images\\StartButtonV2.png"));
-		startButton.setBackground(new Color(0, 128, 128));
-		startButton.setForeground(new Color(0, 128, 128));
-		startButton.setBounds(150, 150, 200, 60);
+		playButton = new JButton("");
+		playButton.setIcon(new ImageIcon("images\\PlayButton.png"));
+		playButton.setBackground(new Color(0, 128, 128));
+		playButton.setForeground(new Color(0, 128, 128));
+		playButton.setBounds(150, 150, 200, 60);
 		ButtonListener listener = new ButtonListener();
-		startButton.addActionListener(listener);
-		welcomeScreenFrame.getContentPane().add(startButton);
+		playButton.addActionListener(listener);
+		welcomeScreenFrame.getContentPane().add(playButton);
 		
-		howToPlayButton = new JButton("");
-		howToPlayButton.setForeground(new Color(0, 128, 128));
-		howToPlayButton.setBackground(new Color(0, 128, 128));
-		howToPlayButton.setIcon(new ImageIcon("images\\HowToButton.png"));
-		howToPlayButton.setBounds(150, 220, 200, 60);		
+		rulesButton = new JButton("");
+		rulesButton.setForeground(new Color(0, 128, 128));
+		rulesButton.setBackground(new Color(0, 128, 128));
+		rulesButton.setIcon(new ImageIcon("images\\RulesButton.png"));
+		rulesButton.setBounds(150, 220, 200, 60);		
 		ButtonListener2 listener2 = new ButtonListener2();
-		howToPlayButton.addActionListener(listener2);	
-		welcomeScreenFrame.getContentPane().add(howToPlayButton);
+		rulesButton.addActionListener(listener2);	
+		welcomeScreenFrame.getContentPane().add(rulesButton);
 		
 		exitButton = new JButton("");
 		exitButton.setForeground(new Color(0, 128, 128));
@@ -62,24 +62,30 @@ public class WelcomeScreen extends JFrame{
 				
 		label = new JLabel("");
 		label.setBounds(0, 0, 484, 482);
-		label.setIcon(new ImageIcon("images\\Labyrinth_03.jpg"));
+		label.setIcon(new ImageIcon("images\\keys.jpg"));
 		welcomeScreenFrame.getContentPane().add(label);
 		
-		//fullscreen
-		//this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
-		//this.setUndecorated(true);
+		//transparency for buttons
+		playButton.setOpaque(false);
+		playButton.setContentAreaFilled(false);
+		rulesButton.setOpaque(false);
+		rulesButton.setContentAreaFilled(false);
+		exitButton.setOpaque(false);
+		exitButton.setContentAreaFilled(false);
+		
+
 		welcomeScreenFrame.pack();
 		welcomeScreenFrame.setLocationRelativeTo(null);
 		welcomeScreenFrame.setVisible(true);
-		welcomeScreenFrame.setTitle("                                                       Escape Room 007\r\n");
+		welcomeScreenFrame.setTitle("Escape Room 007\r\n");
 		welcomeScreenFrame.setSize(490, 510);
 		welcomeScreenFrame.setResizable(false);
 		welcomeScreenFrame.setForeground(new Color(255, 255, 255));
-		welcomeScreenFrame.setIconImage(Toolkit.getDefaultToolkit().getImage("images\\stickman.png"));
+		welcomeScreenFrame.setIconImage(Toolkit.getDefaultToolkit().getImage("images\\icon.png"));
 		welcomeScreenFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
-	//start button
+	//play button
 	class ButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent a) {
 			
@@ -95,11 +101,10 @@ public class WelcomeScreen extends JFrame{
 			backButton.addActionListener(listener4);	
 			
 			getContentPane().setLayout(null);
-			welcomeScreenFrame.getContentPane().add(backButton);
-			
+			welcomeScreenFrame.getContentPane().add(backButton);			
 			
 			char1 = new JButton("");
-			char1.setIcon(new ImageIcon("images\\char1.jpg"));
+			char1.setIcon(new ImageIcon("images\\char1selection.png"));
 			char1.setBackground(Color.WHITE);
 			char1.setBounds(28, 90, 200, 300);
 			ButtonListener5 listener1 = new ButtonListener5();
@@ -108,7 +113,7 @@ public class WelcomeScreen extends JFrame{
 			welcomeScreenFrame.getContentPane().add(char1);	
 			
 			char2 = new JButton("");
-			char2.setIcon(new ImageIcon("images\\char2.jpg"));
+			char2.setIcon(new ImageIcon("images\\char2.png"));
 			char2.setBackground(Color.WHITE);
 			char2.setBounds(259, 90, 200, 300);
 			ButtonListener6 listener2 = new ButtonListener6();
@@ -117,7 +122,7 @@ public class WelcomeScreen extends JFrame{
 			welcomeScreenFrame.getContentPane().add(char2);
 					
 			JButton nextButton = new JButton();
-			nextButton.setIcon(new ImageIcon("images\\OkButton.png"));
+			nextButton.setIcon(new ImageIcon("images\\NextButton.png"));
 			nextButton.setForeground(new Color(0, 128, 128));
 			nextButton.setBackground(new Color(0, 128, 128));
 			nextButton.setBounds(140, 401, 200, 60);
@@ -126,15 +131,21 @@ public class WelcomeScreen extends JFrame{
 			
 			welcomeScreenFrame.getContentPane().add(nextButton);
 			
+			//button transparency 
+			nextButton.setOpaque(false);
+			nextButton.setContentAreaFilled(false);
+			backButton.setOpaque(false);
+			backButton.setContentAreaFilled(false);
+			
 			JLabel label = new JLabel("");
 			label.setBounds(0, 0, 484, 482);
-			label.setIcon(new ImageIcon("images\\Labyrinth_03.jpg"));
+			label.setIcon(new ImageIcon("images\\keys.jpg"));
 			
 			welcomeScreenFrame.getContentPane().add(label);
 		}
 	}
 	
-	//how to play button
+	//rules button
 	class ButtonListener2 implements ActionListener {
 		public void actionPerformed(ActionEvent b) {
 				
@@ -177,8 +188,8 @@ public class WelcomeScreen extends JFrame{
 	class ButtonListener5 implements ActionListener {
 		public void actionPerformed(ActionEvent a) {
 			characterSelected = 1;
-			char1.setIcon(new ImageIcon("images\\char1selected.jpg"));
-			char2.setIcon(new ImageIcon("images\\char2.jpg"));
+			char1.setIcon(new ImageIcon("images\\char1selected.png"));
+			char2.setIcon(new ImageIcon("images\\char2selection.png"));
 		}
 	}
 	
@@ -186,8 +197,8 @@ public class WelcomeScreen extends JFrame{
 	class ButtonListener6 implements ActionListener {
 		public void actionPerformed(ActionEvent b) {	
 			characterSelected = 2;
-			char2.setIcon(new ImageIcon("images\\char2selected.jpg"));
-			char1.setIcon(new ImageIcon("images\\char1.jpg"));
+			char2.setIcon(new ImageIcon("images\\char2selected.png"));
+			char1.setIcon(new ImageIcon("images\\char1selection.png"));
 		}
 	}
 	
@@ -221,14 +232,17 @@ public class WelcomeScreen extends JFrame{
 			okButton.setForeground(new Color(0, 128, 128));
 			okButton.setBackground(new Color(0, 128, 128));
 			okButton.setBounds(140, 330, 200, 60);
+			okButton.setOpaque(false);
+			okButton.setContentAreaFilled(false);
 			ButtonListener9 listener = new ButtonListener9();
 			okButton.addActionListener(listener);	
-			
+					
 			welcomeScreenFrame.getContentPane().setBackground(Color.DARK_GRAY);
 			welcomeScreenFrame.getContentPane().add(okButton);
 			welcomeScreenFrame.getContentPane().add(text);
 		
 		}
+	
 	//game START
 	class ButtonListener9 implements ActionListener {
 		public void actionPerformed(ActionEvent b) {
@@ -240,6 +254,7 @@ public class WelcomeScreen extends JFrame{
 			GameFunctions.launchTheGame(characterSelected);
 		}
 	}
+	
 	//ok button
 	class ButtonListener8 implements ActionListener {
 		public void actionPerformed(ActionEvent b) {	
