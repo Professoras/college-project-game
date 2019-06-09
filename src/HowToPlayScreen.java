@@ -38,7 +38,7 @@ public class HowToPlayScreen extends JFrame {
 		text.setBounds(5, 10, 410, 420);
 		this.getContentPane().add(text);
 		text.setColumns(10);
-
+		
 		this.setVisible(true);
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE );
