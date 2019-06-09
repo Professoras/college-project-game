@@ -51,7 +51,7 @@ public class Player {
 	}
 	
 	public static void setPhoto(int photoid) {
-		photo= new ImageIcon("Images/char"+photoid+".jpg").getImage(); 
+		photo= new ImageIcon("Images/char"+photoid+".png").getImage(); 
 	}
 	
 	public static Image getPhoto() {
