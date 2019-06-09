@@ -23,14 +23,15 @@ public class Player {
 	}
 	
 	public static void updateScore() {
-		score +=1000 + (100 * time);
+		int tempScore = 1000 + (100 * time);
 		//if the player answers in less than 5 seconds, he or she receives double points
 		if (GameFunctions.getNewRoundTimeMark()-Player.getRemainingTime()<=5) {
 			bonus=true;
-			score+=score;
+			tempScore = 2 * tempScore;
 		}
 		else
 			bonus=false;
+		score += tempScore;
 	}
 	
 	public static boolean gotBonus() {
