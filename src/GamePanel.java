@@ -34,7 +34,7 @@ public class GamePanel {
 			//System.out.println("gamepanel");
 		}
 		
-		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("images\\stickman.png"));
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("images\\ICON.png"));
 		frame.setSize(1200, 700);
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
@@ -92,37 +92,58 @@ public class GamePanel {
 		Image playerIcon = Player.getPhoto();
 		playerImage.setIcon(new ImageIcon(playerIcon));
 		playerImage.setForeground(Color.GRAY);
-		playerImage.setBounds(43, 144, 200, 300);
+		playerImage.setBounds(13, 144, 200, 300);
 		frame.getContentPane().add(playerImage);
 		
 		JButton door1 = new JButton("");
+		JButton door2 = new JButton("");
+		JButton door3 = new JButton("");
+		
 		door1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				door1.setIcon(new ImageIcon("images\\DOOROPEN.png"));
+				//close other doors
+				door2.setIcon(new ImageIcon("images\\DOOR.png"));
+				door3.setIcon(new ImageIcon("images\\DOOR.png"));
 				doorSelected=1;
 				Sound.playSoundEffect("sounds/Door.wav");
 			}
 		});
-		door1.setBounds(428, 195, 150, 300);
+		door1.setBounds(428, 195, 170, 300);
 		
-		JButton door2 = new JButton("");
 		door2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				door2.setIcon(new ImageIcon("images\\DOOROPEN.png"));
+				//close other doors
+				door1.setIcon(new ImageIcon("images\\DOOR.png"));
+				door3.setIcon(new ImageIcon("images\\DOOR.png"));
 				doorSelected=2;
 				Sound.playSoundEffect("sounds/Door.wav");
 			}
 		});
-		door2.setBounds(628, 195, 150, 300);
+		door2.setBounds(628, 195, 170, 300);
 		
-		JButton door3 = new JButton("");
 		door3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				door3.setIcon(new ImageIcon("images\\DOOROPEN.png"));
+				//close other doors
+				door1.setIcon(new ImageIcon("images\\DOOR.png"));
+				door2.setIcon(new ImageIcon("images\\DOOR.png"));
 				doorSelected=3;
 				Sound.playSoundEffect("sounds/Door.wav");
 			}
 		});
-		door3.setBounds(836, 195, 150, 300);
+		door3.setBounds(836, 195, 170, 300);
 
-		Image doorIcon = new ImageIcon("Images/LogOut.png").getImage();
+		//button transparency 
+		door1.setOpaque(false);
+		door1.setContentAreaFilled(false);
+		door2.setOpaque(false);
+		door2.setContentAreaFilled(false);
+		door3.setOpaque(false);
+		door3.setContentAreaFilled(false);		
+		
+		Image doorIcon = new ImageIcon("Images/Door.png").getImage();
 		door1.setIcon(new ImageIcon(doorIcon));
 		door2.setIcon(new ImageIcon(doorIcon));
 		door3.setIcon(new ImageIcon(doorIcon));
@@ -131,17 +152,21 @@ public class GamePanel {
 		frame.getContentPane().add(door2);
 		frame.getContentPane().add(door3);	
 
-		JButton skipBtn = new JButton("Skip question");
+		JButton skipBtn = new JButton();
+		skipBtn.setIcon(new ImageIcon("images\\SkipButton.png"));
 		skipBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 					Player.stopTheTimer();
 					GameFunctions.skipBtn();
 			}
 		});
-		skipBtn.setBounds(1034, 570, 150, 40);
+		skipBtn.setBounds(1051, 570, 133, 40);
+		skipBtn.setOpaque(false);
+		skipBtn.setContentAreaFilled(false);
 		frame.getContentPane().add(skipBtn);
 		
-		JButton restartBtn = new JButton("Restart");
+		JButton restartBtn = new JButton();
+		restartBtn.setIcon(new ImageIcon("images\\RestartButton.png"));
 		restartBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int response = JOptionPane.showOptionDialog(null, "Are you sure you want to Restart?", "Restart", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
@@ -154,9 +179,12 @@ public class GamePanel {
 			}
 		});
 		restartBtn.setBounds(1059, 519, 125, 40);
+		restartBtn.setOpaque(false);
+		restartBtn.setContentAreaFilled(false);
 		frame.getContentPane().add(restartBtn);
 		
-		JButton exitBtn = new JButton("Exit");
+		JButton exitBtn = new JButton();
+		exitBtn.setIcon(new ImageIcon("images\\ExitButton2.png"));
 		exitBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int response = JOptionPane.showOptionDialog(null, "Are you sure you want to Exit?", "Exit", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
@@ -164,7 +192,9 @@ public class GamePanel {
 					System.exit(0);
 			}	
 		});
-		exitBtn.setBounds(1084, 621, 100, 40);
+		exitBtn.setBounds(1084, 621, 100, 30);
+		exitBtn.setOpaque(false);
+		exitBtn.setContentAreaFilled(false);
 		frame.getContentPane().add(exitBtn);
 		
 		ArrayList<String> shuffledAnswers = new ArrayList<>(Story.getAnswers());
@@ -197,7 +227,8 @@ public class GamePanel {
 		answer3Area.setBounds(836, 506, 150, 40);
 		frame.getContentPane().add(answer3Area);
 		
-		JButton confirmBtn = new JButton("Confirm");	
+		JButton confirmBtn = new JButton();	
+		confirmBtn.setIcon(new ImageIcon("images\\ConfirmButton.png"));
 		confirmBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (doorSelected == 1) {	//1st Btn selected
@@ -234,7 +265,9 @@ public class GamePanel {
 			}
 		}
 		);	
-		confirmBtn.setBounds(640, 580, 118, 40);
+		confirmBtn.setBounds(640, 580, 120, 40);
+		confirmBtn.setOpaque(false);
+		confirmBtn.setContentAreaFilled(false);
 		frame.getContentPane().add(confirmBtn);
 	}
 	
