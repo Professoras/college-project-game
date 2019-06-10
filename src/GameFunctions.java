@@ -1,12 +1,18 @@
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
+
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.Timer;
+import javax.swing.UIManager;
+import javax.swing.border.LineBorder;
 
 public class GameFunctions {
 	
@@ -17,6 +23,7 @@ public class GameFunctions {
 	private static int gameOver=0;
 	private static int skip=0;
 	private static int win=0;
+	private static int showEnemy=0;
 	
 	public static void launchTheGame(int charid) {
 		Sound.startBackgroundMusic("sounds/Main.wav");
@@ -71,8 +78,9 @@ public class GameFunctions {
 		
 		if (Player.getCurrentRoom()<Story.getNumberOfLevels() && coinflip()==1) {
 			int reducedTime=Enemy.reduceTime();
+			showEnemy=1;
 			Sound.playSoundEffect("sounds/DamageFromEnemy.wav");
-			showEnemy(GamePanel.getFrame(),reducedTime);
+			showMessage("The enemy has cut "+reducedTime+" second(s) off of your time!",2500);
 			Player.reduceTime(reducedTime);	
 			
 		}
@@ -128,7 +136,7 @@ public class GameFunctions {
 				Player.reduceTime(5);
 				openNewGamePanel(); 
 			}
-			else if (Player.getCurrentRoom()==3)
+			else if (Player.getCurrentRoom()==Story.getNumberOfLevels())
 				showMessage("You can't use the skip option in the final level!",2000);
 			else
 				showMessage("You don't have enough lives to skip the question!",2000);
@@ -137,38 +145,6 @@ public class GameFunctions {
 			showMessage("You already used the skip option once!",2000);
 		
 		Player.startTheTimer();
-	}
-	
-	public static void showEnemy(JFrame aframe,int reducedTime) {
-		String message= "The enemy has cut "+reducedTime+" second(s) off of your time!";
-		
-		JOptionPane optionPane = new JOptionPane(message, JOptionPane.WARNING_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null);
-		optionPane.add(new JLabel(new ImageIcon("Images/enemy.jpg"),JLabel.LEADING));
-		
-		JDialog dialog = new JDialog();
-		dialog.setModal(true);
-        dialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
-        dialog.setTitle("DANGER!");
-        dialog.setBackground(Color.LIGHT_GRAY);
-        dialog.setContentPane(optionPane);
-        
-        dialog.pack();
-        
-        dialog.setLocationRelativeTo(aframe);
-        
-		//create timer to dispose of dialog after 4 seconds
-		Timer timer = new Timer(2500, new AbstractAction() {
-
-		    public void actionPerformed(ActionEvent ae) {
-		        dialog.dispose();
-		    }
-		});
-		//the timer should only go off once
-		timer.setRepeats(false);
-
-		//start timer to close JDialog as dialog modal we must start the timer before its visible
-		timer.start();
-		dialog.setVisible(true);
 	}
 	
 	public static void setNewRoundTimeMark(int time) {
@@ -180,18 +156,39 @@ public class GameFunctions {
 	}
 	
 	public static void showMessage(String info, int timeinms) {
-		JOptionPane optionPane = new JOptionPane(info, JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null);
+		JLabel media=null;
+		JTextArea textarea= new JTextArea(info);
+		textarea.setFont(new Font("SANS_SERIF", Font.PLAIN, 15));
+		textarea.setEditable(false);
+		textarea.setForeground(Color.BLACK);
+		
+		JOptionPane optionPane = new JOptionPane(textarea, JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null);
+		textarea.setBackground(optionPane.getBackground());
+		if (showEnemy==1) {
+			showEnemy=0;
+			media = new JLabel(new ImageIcon("Images/enemy.jpg"),JLabel.LEADING);
+		}
+		
 		if (gifTime==1)
-			optionPane.add(new JLabel(new ImageIcon(getGIF()),JLabel.LEADING));
+			media= new JLabel(new ImageIcon(getGIF()),JLabel.LEADING);
+		
+		if (media!=null) {
+			media.setBorder(new LineBorder(Color.BLACK, 2));
+	        JPanel iconPanel = new JPanel(new GridBagLayout());
+	        iconPanel.add(media);
+	        optionPane.add(iconPanel);
+		}
+		
+		
 		final JDialog dialog = new JDialog();
+		
 		dialog.setTitle("Message");
 		dialog.setModal(true);
-
 		dialog.setContentPane(optionPane);
-
 		dialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 		dialog.pack();
 		dialog.setLocationRelativeTo(GamePanel.getFrame());
+		
 		//create timer to dispose of dialog after x seconds
 		Timer timer = new Timer(timeinms, new AbstractAction() {
 
