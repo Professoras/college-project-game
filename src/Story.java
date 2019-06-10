@@ -15,7 +15,7 @@ public class Story {
 	private static JSONArray level_question_set;
 	private static ArrayList<String> answers;
 	private static final int NUMBEROFQUESTIONS = 3;
-	private static final int storyLevels=3;
+	private static final int storyLevels = 3;
 	
 	
 	//JSON file is of this format
@@ -49,7 +49,7 @@ public class Story {
 	
 	public static void findQuestion(int level) {
 		Random randomGenerator = new Random();
-		int random_int= randomGenerator.nextInt(NUMBEROFQUESTIONS);
+		int random_int = randomGenerator.nextInt(NUMBEROFQUESTIONS);
 		getLevelQuestions(level);
 		//transforms random question from JSON into hashmap -> question: [answers]
 		HashMap<String, ArrayList<String>> question_and_ans_struct = (HashMap) level_question_set.get(random_int);
