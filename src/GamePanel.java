@@ -17,21 +17,22 @@ import javax.swing.JTextArea;
 import javax.swing.Timer;
 
 public class GamePanel {
+	//main frame where the game takes place
 	private static JFrame frame;
 	private static JTextArea timeArea,livesArea;
 	private int doorSelected = 0;
-	private static int under10s=1;
+	private static int under10s = 1;
 	private static Timer clock;
 	
 	public GamePanel() {
 		
-		if (frame==null)
+		if (frame == null)
 			frame = new JFrame("Escape Room");
 		else {
 			frame.getContentPane().removeAll();
 			frame.repaint();
-			under10s=1;
-			//System.out.println("gamepanel");
+			under10s = 1;
+			//System.out.println("gamepanel"); testing purposes
 		}
 		
 		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("images\\ICON.png"));
@@ -95,6 +96,7 @@ public class GamePanel {
 		playerImage.setBounds(13, 144, 200, 300);
 		frame.getContentPane().add(playerImage);
 		
+		//Door class did not implemented (in contradiction to SDS). Instead each door is represented with a JButton
 		JButton door1 = new JButton("");
 		JButton door2 = new JButton("");
 		JButton door3 = new JButton("");
@@ -105,7 +107,7 @@ public class GamePanel {
 				//close other doors
 				door2.setIcon(new ImageIcon("images\\DOOR.png"));
 				door3.setIcon(new ImageIcon("images\\DOOR.png"));
-				doorSelected=1;
+				doorSelected = 1;
 				Sound.playSoundEffect("sounds/Door.wav");
 			}
 		});
@@ -117,7 +119,7 @@ public class GamePanel {
 				//close other doors
 				door1.setIcon(new ImageIcon("images\\DOOR.png"));
 				door3.setIcon(new ImageIcon("images\\DOOR.png"));
-				doorSelected=2;
+				doorSelected = 2;
 				Sound.playSoundEffect("sounds/Door.wav");
 			}
 		});
@@ -129,7 +131,7 @@ public class GamePanel {
 				//close other doors
 				door1.setIcon(new ImageIcon("images\\DOOR.png"));
 				door2.setIcon(new ImageIcon("images\\DOOR.png"));
-				doorSelected=3;
+				doorSelected = 3;
 				Sound.playSoundEffect("sounds/Door.wav");
 			}
 		});
@@ -231,15 +233,18 @@ public class GamePanel {
 		confirmBtn.setIcon(new ImageIcon("images\\ConfirmButton.png"));
 		confirmBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (doorSelected == 1) {	//1st Btn selected
-					if (answer1Area.getText().equals(Story.getFirstRightAnswer()) || answer1Area.getText().equals(Story.getSecondRightAnswer())) {	//correct answer
+				//1st Door selected
+				if (doorSelected == 1) {
+					//correct answer
+					if (answer1Area.getText().equals(Story.getFirstRightAnswer()) || answer1Area.getText().equals(Story.getSecondRightAnswer())) {
 						GameFunctions.rightAnswer();
 					}
-					else {	//wrong answer
+					//wrong answer
+					else {
 						GameFunctions.wrongAnswer();
 					}
 				}
-				else if (doorSelected == 2) {	//2nd Btn selected
+				else if (doorSelected == 2) {
 					if (answer2Area.getText().equals(Story.getFirstRightAnswer()) || answer2Area.getText().equals(Story.getSecondRightAnswer())) {
 						GameFunctions.rightAnswer();
 					}
@@ -247,7 +252,7 @@ public class GamePanel {
 						GameFunctions.wrongAnswer();
 					}
 				}
-				else if (doorSelected == 3) {	//3rd Btn selected
+				else if (doorSelected == 3) {
 					if (answer3Area.getText().equals(Story.getFirstRightAnswer()) || answer3Area.getText().equals(Story.getSecondRightAnswer())) {
 						GameFunctions.rightAnswer();
 					}
@@ -273,7 +278,7 @@ public class GamePanel {
 	
 	public static void updateTime() {
 		
-		clock= new Timer(1000, new AbstractAction() {
+		clock = new Timer(1000, new AbstractAction() {
 			public void actionPerformed(ActionEvent ae) {
 					timeArea.setText("Time Left: " + GameFunctions.TimeConversion(Player.getRemainingTime()));
 					setTimeTextAreaForeground();
@@ -288,18 +293,19 @@ public class GamePanel {
 		clock.stop();
 	}
 	
+	//The colour of the displayed lives is green and becomes red when the remaining lives drop below 1
 	private void setLivesTextAreaForeground() {
-		if (Player.getLives()==1)
+		if (Player.getLives() == 1)
 			livesArea.setForeground(Color.RED);
 		else
 			livesArea.setForeground(Color.GREEN);
 	}
 	
 	private static void setTimeTextAreaForeground() {
-		if (under10s==1 && Player.getRemainingTime()<10) {
+		if (under10s == 1 && Player.getRemainingTime() < 10) {
 			timeArea.setFont(new Font("Monospaced", Font.PLAIN, 19));
 			timeArea.setForeground(Color.red);
-		    under10s=0;
+		    under10s = 0;
 		}
 	}
 	public static JFrame getFrame() {

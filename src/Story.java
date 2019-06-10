@@ -15,7 +15,7 @@ public class Story {
 	private static JSONArray level_question_set;
 	private static ArrayList<String> answers;
 	private static final int NUMBEROFQUESTIONS = 3;
-	private static final int storyLevels = 3;
+	private static final int STORYLEVELS = 3;
 	
 	
 	//JSON file is of this format
@@ -47,6 +47,7 @@ public class Story {
 		};
 	}
 	
+	//chooses and updates the question and the correlated answers every level
 	public static void findQuestion(int level) {
 		Random randomGenerator = new Random();
 		int random_int = randomGenerator.nextInt(NUMBEROFQUESTIONS);
@@ -75,6 +76,6 @@ public class Story {
 	}
 	
 	public static int getNumberOfLevels() {
-		return storyLevels;
+		return STORYLEVELS;
 	}
 }

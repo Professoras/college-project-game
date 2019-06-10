@@ -20,14 +20,14 @@ public class GameFunctions {
 	//if gifTime is 1, the showMessage() method includes a gif
 	private static int gifTime = 0;
 	//These flags determine which gif will be displayed
-	private static int wasRight=0;
-	private static int wasWrong=0;
-	private static int gameOver=0;
-	private static int skip=0;
-	private static int win=0;
-	private static int showEnemy=0;
+	private static int wasRight = 0;
+	private static int wasWrong = 0;
+	private static int gameOver = 0;
+	private static int skip = 0;
+	private static int win = 0;
+	private static int showEnemy = 0;
 
-	
+	//starts the game with the selected character
 	public static void launchTheGame(int charid) {
 		Sound.startBackgroundMusic("sounds/Main.wav");
 		Player.setPhoto(charid);
@@ -35,6 +35,7 @@ public class GameFunctions {
 		openNewGamePanel();
 	}
 	
+	//opens a new level of the game and chooses a question to display
 	public static void openNewGamePanel() {
 		Story.findQuestion(Player.getCurrentRoom());
 		GameFunctions.setNewRoundTimeMark(Player.getRemainingTime());
@@ -46,24 +47,26 @@ public class GameFunctions {
 		return (int)(Math.random()*2);
 	}
 	
+	//when the player answers correctly the final question, he or she receives a corresponding message and the game ends
 	public static void playerWon() {
 		Sound.stopBackgroundMusic();
 		Sound.playSoundEffect("sounds/Win.wav");
 		Player.stopTheTimer();
 		
-		int totalTime = Player.getTotalTime()-Player.getRemainingTime();
+		int totalTime = Player.getTotalTime() - Player.getRemainingTime();
 		gifTime = 1;
 		win = 1;
 		GameFunctions.showMessage("CONGRATULATIONS!\nYOU WON!\nYour new highscore: "+Player.getScore()+"\nTime: "+totalTime+"s\n"+"Lives left: "+Player.getLives(),5000);
 		System.exit(1);
 	}
 	
+	//actions that happen after a correct answer
 	public static void rightAnswer() {
 		Player.stopTheTimer();
 		Sound.playSoundEffect("sounds/CorrectAnswer.wav");
 		Player.updateScore();
 		
-		if (Player.getCurrentRoom()==Story.getNumberOfLevels())
+		if (Player.getCurrentRoom() == Story.getNumberOfLevels())
 			playerWon();
 		
 		if (Player.getLives() < 2)
@@ -81,16 +84,16 @@ public class GameFunctions {
 		
 		if (Player.getCurrentRoom() < Story.getNumberOfLevels() && coinflip() == 1) {
 			int reducedTime=Enemy.reduceTime();
-			showEnemy=1;
+			showEnemy = 1;
 			Sound.playSoundEffect("sounds/DamageFromEnemy.wav");
 			showMessage("The enemy has cut "+reducedTime+" second(s) off of your time!",2500);
 			Player.reduceTime(reducedTime);	
-			
 		}
 		Player.startTheTimer();
 		openNewGamePanel();
 	}
 	
+	//actions that happen after a wrong answer
 	public static void wrongAnswer() {
 		Player.stopTheTimer();
 		Sound.playSoundEffect("sounds/WrongAnswer.wav");
@@ -104,11 +107,12 @@ public class GameFunctions {
 			System.exit(1);
 		}
 		
-		wasWrong=1;
+		wasWrong = 1;
 		showMessage("Wrong answer!\nLives left: "+Player.getLives(),2400);
 		Player.startTheTimer();
 	}
 	
+	//when the player runs out of time, he or she receives a corresponding message and the game ends
 	public static void timeIsUp() {
 		Sound.stopBackgroundMusic();
 		Sound.playSoundEffect("sounds/Lose.wav");
@@ -117,14 +121,19 @@ public class GameFunctions {
 		System.exit(1);
 	}
 	
+	//converts the seconds to minutes:seconds format
 	public static String TimeConversion(int x) {
-		int p1 = x % 60;
+		/*int p1 = x % 60;
         int p2 = x / 60;
         int p3 = p2 % 60;
         p2 = p2 / 60;
-        return p3 + ":" + p1;
+        return p3 + ":" + p1;*/
+		int p1 = x % 60;
+		int p2 = x / 60;
+		return p2 + ":" + p1;
 	}
 	
+    //in addition to removing a life (as stated at SDS), skip option also subtracts 5 seconds from the remaining time
 	public static void skipBtn() {
 		gifTime = 1;
 		skip = 1;
@@ -140,7 +149,7 @@ public class GameFunctions {
 				openNewGamePanel(); 
 			}
 
-			else if (Player.getCurrentRoom()==Story.getNumberOfLevels())
+			else if (Player.getCurrentRoom() == Story.getNumberOfLevels())
 
 				showMessage("You can't use the skip option in the final level!",2000);
 			else
@@ -161,25 +170,26 @@ public class GameFunctions {
 		return newRoundTime;
 	}
 	
+	//displayes a window with a message (and a gif if gifTime = 1)
 	public static void showMessage(String info, int timeinms) {
 
-		JLabel media=null;
-		JTextArea textarea= new JTextArea(info);
+		JLabel media = null;
+		JTextArea textarea = new JTextArea(info);
 		textarea.setFont(new Font("SANS_SERIF", Font.PLAIN, 15));
 		textarea.setEditable(false);
 		textarea.setForeground(Color.BLACK);
 		
 		JOptionPane optionPane = new JOptionPane(textarea, JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null);
 		textarea.setBackground(optionPane.getBackground());
-		if (showEnemy==1) {
-			showEnemy=0;
+		if (showEnemy == 1) {
+			showEnemy = 0;
 			media = new JLabel(new ImageIcon("Images/enemy.jpg"),JLabel.LEADING);
 		}
 		
-		if (gifTime==1)
-			media= new JLabel(new ImageIcon(getGIF()),JLabel.LEADING);
+		if (gifTime == 1)
+			media = new JLabel(new ImageIcon(getGIF()),JLabel.LEADING);
 		
-		if (media!=null) {
+		if (media != null) {
 			media.setBorder(new LineBorder(Color.BLACK, 2));
 	        JPanel iconPanel = new JPanel(new GridBagLayout());
 	        iconPanel.add(media);
@@ -243,7 +253,6 @@ public class GameFunctions {
 					return "Images/skip_2.gif";
 			else
 				return "Images/skip_3.gif";
-		
 		}
 		
 		if (Player.getRemainingTime() == 0)
