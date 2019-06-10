@@ -223,23 +223,28 @@ public class WelcomeScreen extends JFrame{
 			text.setText(story);
 			text.setBackground(Color.DARK_GRAY);
 			text.setForeground(Color.WHITE);
-			text.setBounds(10, 40, 484, 400);
-			text.setAlignmentX(CENTER_ALIGNMENT);
-			text.setAlignmentY(CENTER_ALIGNMENT);			
+			text.setBounds(10, 10, 484, 400);
+			text.setFont(new Font("Courier New", Font.BOLD, 12));
+			text.setEditable(false);
+			text.setOpaque(false);			
 			
 			JButton okButton = new JButton("");
 			okButton.setIcon(new ImageIcon("images\\OkButton.png"));
 			okButton.setForeground(new Color(0, 128, 128));
 			okButton.setBackground(new Color(0, 128, 128));
-			okButton.setBounds(140, 330, 200, 60);
+			okButton.setBounds(140, 390, 200, 60);
 			okButton.setOpaque(false);
 			okButton.setContentAreaFilled(false);
 			ButtonListener9 listener = new ButtonListener9();
 			okButton.addActionListener(listener);	
 					
-			welcomeScreenFrame.getContentPane().setBackground(Color.DARK_GRAY);
+			JLabel label = new JLabel("");
+			label.setBounds(0, 0, 484, 482);
+			label.setIcon(new ImageIcon("images\\lake.jpg"));
+		
 			welcomeScreenFrame.getContentPane().add(okButton);
 			welcomeScreenFrame.getContentPane().add(text);
+			welcomeScreenFrame.getContentPane().add(label);
 		
 		}
 	
