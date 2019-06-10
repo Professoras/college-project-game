@@ -42,7 +42,7 @@ public class HowToPlayScreen extends JFrame {
 		
 		JLabel label = new JLabel("");
 		label.setBounds(0, 0, 484, 482);
-		label.setIcon(new ImageIcon("images\\papyrus.jpg"));
+		label.setIcon(new ImageIcon("images\\p.jpg"));
 		
 		this.getContentPane().add(label);
 		

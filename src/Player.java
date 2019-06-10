@@ -16,7 +16,7 @@ public class Player {
 	private static boolean skipAvailable = true;
 	private static boolean bonus;
 	private static Image photo;
-	private static int under10s=1;
+	private static int under10s = 1;
 	
 	public static int getScore() {
 		return score;
