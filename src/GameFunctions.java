@@ -195,7 +195,7 @@ public class GameFunctions {
 		dialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 		dialog.pack();
 		dialog.setLocationRelativeTo(GamePanel.getFrame());
-		
+		dialog.setResizable(false);
 		//create timer to dispose of dialog after x seconds
 		Timer timer = new Timer(timeinms, new AbstractAction() {
 

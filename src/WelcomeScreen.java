@@ -1,17 +1,19 @@
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Toolkit;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 public class WelcomeScreen extends JFrame{
 
@@ -222,7 +224,7 @@ public class WelcomeScreen extends JFrame{
 			text.setToolTipText("");
 			text.setText(story);
 			text.setBackground(Color.DARK_GRAY);
-			text.setForeground(Color.WHITE);
+			text.setForeground(Color.BLACK);
 			text.setBounds(10, 10, 484, 400);
 			text.setFont(new Font("Courier New", Font.BOLD, 12));
 			text.setEditable(false);
