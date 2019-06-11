@@ -7,7 +7,7 @@ import javax.swing.*;
 
 
 public class HowToPlayScreen extends JFrame {
-
+	//Frame that contains the rules of the game
 	private JTextArea text;
 
 	public HowToPlayScreen() {

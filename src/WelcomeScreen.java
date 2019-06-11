@@ -17,7 +17,7 @@ import javax.swing.JTextArea;
 
 public class WelcomeScreen extends JFrame{
 
-
+	//FigurePanel did not implemented (in contradiction to SDS). Instead the character select feature is included here
 	private JButton playButton,rulesButton,exitButton,char1,char2;
 	private JLabel label;
 	private JTextArea text;
@@ -27,11 +27,11 @@ public class WelcomeScreen extends JFrame{
 	public WelcomeScreen() throws IOException {		
 
 		getContentPane().setLayout(null);
-		if (welcomeScreenFrame==null) {
+		if (welcomeScreenFrame == null) {
 			welcomeScreenFrame = new JFrame("Escape Room");
 		}
 		else {
-			characterSelected=0;
+			characterSelected = 0;
 			welcomeScreenFrame.getContentPane().removeAll();
 			welcomeScreenFrame.repaint();
 		}

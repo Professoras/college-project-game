@@ -7,10 +7,12 @@ import javax.swing.Timer;
 
 public class Player {
 	
+    //We decided to not instantiate the player because there will be no records saved for each player (in contradiction to SDS)
 	private static int lives = 2;
 	private static int current_room = 1;
 	private static int score = 0;
 	private static int time = 35;
+	//total time reduced to 35 seconds from 5 minutes (in contradiction to SDS) to match the difficulty
 	private static final int totalTime = 35;
 	private static Timer gameTimer;
 	private static boolean skipAvailable = true;
@@ -25,12 +27,12 @@ public class Player {
 	public static void updateScore() {
 		int tempScore = 1000 + (100 * time);
 		//if the player answers in less than 5 seconds, he or she receives double points
-		if (GameFunctions.getNewRoundTimeMark()-Player.getRemainingTime()<=5) {
-			bonus=true;
+		if (GameFunctions.getNewRoundTimeMark() - Player.getRemainingTime() <= 5) {
+			bonus = true;
 			tempScore = 2 * tempScore;
 		}
 		else
-			bonus=false;
+			bonus = false;
 		score += tempScore;
 	}
 	
@@ -69,10 +71,10 @@ public class Player {
 		        	else {
 		        		reduceTime(1);
 		        	}
-		        	if (under10s==1 && time <10) {
+		        	if (under10s == 1 && time < 10) {
 		        		Sound.stopBackgroundMusic();
 		        		Sound.startBackgroundMusic("sounds/Ending.wav");
-		        		under10s=0;
+		        		under10s = 0;
 		        	}
 		    	}
 			});
@@ -91,11 +93,12 @@ public class Player {
 		return time;
 	}
 	
+    //reduces the time left of the Player by the given amount
 	public static void reduceTime(int reduceTimeSeconds) {
-		if (time-reduceTimeSeconds<0)
-			time=0;
+		if (time - reduceTimeSeconds < 0)
+			time = 0;
 		else
-			time-=reduceTimeSeconds;
+			time -= reduceTimeSeconds;
 	}
 	
 	public static int getTotalTime() {
@@ -117,6 +120,7 @@ public class Player {
 		skipAvailable = false;
 	}
 	
+    //when the game restarts, it resets these fields to the default values
 	public static void reset() {
 		lives = 2;
 		current_room = 1;
@@ -124,5 +128,6 @@ public class Player {
 		time = totalTime;
 		skipAvailable = true;
 		gameTimer.stop();
+		under10s = 1;
 	}
 }

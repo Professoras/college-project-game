@@ -9,6 +9,7 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 public class Sound {
+	//manages the sound output
 	private static Clip mainClip;
 	private static Clip shortClip;
 	
