@@ -231,7 +231,7 @@ public class WelcomeScreen extends JFrame{
 			text.setOpaque(false);			
 			
 			JButton okButton = new JButton("");
-			okButton.setIcon(new ImageIcon("images\\OkButton.png"));
+			okButton.setIcon(new ImageIcon("images\\ΚButton.png"));
 			okButton.setForeground(new Color(0, 128, 128));
 			okButton.setBackground(new Color(0, 128, 128));
 			okButton.setBounds(140, 390, 200, 60);
