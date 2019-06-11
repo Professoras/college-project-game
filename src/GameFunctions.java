@@ -238,16 +238,16 @@ public class GameFunctions {
 		
 		if (wasRight == 1) {
 			wasRight = 0;
-			return "Images/right2.gif";
+			return "Images/right.gif";
 		}
 		
 		if (wasWrong == 1) {
 			wasWrong = 0;
-			return "Images/wrong2.gif";
+			return "Images/wrong.gif";
 		}
 		
 		if (gameOver == 1)
-			return "Images/game_over2.gif";
+			return "Images/game_over.gif";
 		
 		if (win == 1)
 			return "Images/won.gif";
@@ -256,12 +256,12 @@ public class GameFunctions {
 			skip = 0;
 			if (Player.isSkipAvailable())
 				if (Player.getLives() > 1 && Player.getCurrentRoom() < 3)
-					return "Images/skip2.gif";	
+					return "Images/skip.gif";	
 		}
 	
 		
 		if (Player.getRemainingTime() == 0)
-			return "Images/timeisup2.gif";
+			return "Images/timeisup.gif";
 		
 		return "1";
 	}
