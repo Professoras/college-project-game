@@ -103,7 +103,7 @@ public class GameFunctions {
 			Sound.stopBackgroundMusic();
 			Sound.playSoundEffect("sounds/Lose.wav");
 			gameOver = 1;
-			showMessage("GAME OVER!!!\n0 lives left!",2800);
+			showMessage("GAME OVER!!!\n0 lives left!",3200);
 			System.exit(1);
 		}
 		
