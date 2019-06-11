@@ -165,7 +165,7 @@ public class GameFunctions {
 		return newRoundTime;
 	}
 	
-	//displayes a window with a message (and a gif if gifTime = 1)
+	//displays a window with a message (and a gif if gifTime = 1)
 	public static void showMessage(String info, int timeinms) {
 
 		final JDialog dialog = new JDialog();
