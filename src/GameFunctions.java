@@ -1,4 +1,6 @@
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -7,11 +9,9 @@ import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.Timer;
-import javax.swing.UIManager;
 import javax.swing.border.LineBorder;
 
 public class GameFunctions {
@@ -54,7 +54,7 @@ public class GameFunctions {
 		int totalTime = Player.getTotalTime()-Player.getRemainingTime();
 		gifTime = 1;
 		win = 1;
-		GameFunctions.showMessage("CONGRATULATIONS!\nYOU WON!\nYour new highscore: "+Player.getScore()+"\nTime: "+totalTime+"s\n"+"Lives left: "+Player.getLives(),5000);
+		GameFunctions.showMessage("Congratulations, you've won!\nYour new highscore: "+Player.getScore()+"\nTime: "+totalTime+"s",5000);
 		System.exit(1);
 	}
 	
@@ -72,9 +72,9 @@ public class GameFunctions {
 		wasRight = 1;
 		gifTime = 1;
 		if (Player.gotBonus())
-			showMessage("Fantastic job!\n2x POINTS!\nOn to the next round!\nLives left: "+Player.getLives(),2200);
+			showMessage("Fantastic job! Double points!",2200);
 		else
-			showMessage("Good job!\nOn to the next round!\nLives left: "+Player.getLives(),2200);
+			showMessage("Good job!",2200);
 		
 		
 		Player.updateCurrentRoom();
@@ -162,40 +162,54 @@ public class GameFunctions {
 	}
 	
 	public static void showMessage(String info, int timeinms) {
-
+		final JDialog dialog = new JDialog();
+		dialog.setBackground(Color.LIGHT_GRAY);
+		
+		JPanel mainPanel = new JPanel(new BorderLayout());
 		JLabel media=null;
+		JPanel textpanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		JTextArea textarea= new JTextArea(info);
-		textarea.setFont(new Font("SANS_SERIF", Font.PLAIN, 15));
+		
+		textarea.setFont(new Font("Monospaced", Font.PLAIN, 17));
 		textarea.setEditable(false);
 		textarea.setForeground(Color.BLACK);
-		
-		JOptionPane optionPane = new JOptionPane(textarea, JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null);
-		textarea.setBackground(optionPane.getBackground());
+		textarea.setBackground(dialog.getBackground());
+		textpanel.add(textarea);
+		textpanel.setBackground(dialog.getBackground());
+		mainPanel.add(textpanel,BorderLayout.NORTH);
+
 		if (showEnemy==1) {
 			showEnemy=0;
-			media = new JLabel(new ImageIcon("Images/enemy.jpg"),JLabel.LEADING);
+			media = new JLabel(new ImageIcon("Images/test.gif"),JLabel.LEADING);
 		}
 		
 		if (gifTime==1)
 			media= new JLabel(new ImageIcon(getGIF()),JLabel.LEADING);
 		
 		if (media!=null) {
-			media.setBorder(new LineBorder(Color.BLACK, 2));
-	        JPanel iconPanel = new JPanel(new GridBagLayout());
-	        iconPanel.add(media);
-	        optionPane.add(iconPanel);
+			JPanel iconPanel = new JPanel(new GridBagLayout());
+			media.setHorizontalAlignment(JLabel.CENTER);
+			media.setVerticalAlignment(JLabel.CENTER);
+			media.setBorder(new LineBorder(Color.RED, 1));
+			iconPanel.add(media);
+			iconPanel.setBackground(dialog.getBackground());
+			mainPanel.add(iconPanel,BorderLayout.SOUTH);
 		}
 		
-	
-		final JDialog dialog = new JDialog();
+		
+		mainPanel.setBackground(dialog.getBackground());
+		
+		dialog.setContentPane(mainPanel);
 		
 		dialog.setTitle("Message");
 		dialog.setModal(true);
-		dialog.setContentPane(optionPane);
 		dialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 		dialog.pack();
 		dialog.setLocationRelativeTo(GamePanel.getFrame());
 		dialog.setResizable(false);
+		// 600x450 gif size
+		
+		
 		//create timer to dispose of dialog after x seconds
 		Timer timer = new Timer(timeinms, new AbstractAction() {
 
@@ -218,37 +232,39 @@ public class GameFunctions {
 		if (wasRight == 1) {
 			wasRight = 0;
 			if (Player.gotBonus())
-				return "Images/double_points.gif";
+				return "Images/test.gif";
 			else
-				return "Images/right.gif";
+				return "Images/test.gif";
 		}
 		
 		if (wasWrong == 1) {
 			wasWrong = 0;
-			return "Images/wrong.gif";
+			return "Images/test.gif";
 		}
 		
 		if (gameOver == 1)
-			return "Images/game_over.gif";
+			return "Images/test.gif";
 		
 		if (win == 1)
-			return "Images/win.gif";
+			return "Images/test.gif";
 		
 		if (skip == 1 ) {
 			skip = 0;
 			if (Player.isSkipAvailable())
-				if (Player.getLives() > 1 && Player.getCurrentRoom() < 3)
-					return "Images/skip.gif";
+				if (Player.getLives() > 1 && Player.getCurrentRoom() < 3) {
+					return "Images/test.gif";
+				}
 				else
-					return "Images/skip_2.gif";
+					return "Images/test.gif";
 			else
-				return "Images/skip_3.gif";
+				return "Images/test.gif";
 		
 		}
 		
 		if (Player.getRemainingTime() == 0)
-			return "Images/time_is_up.gif";
+			return "Images/test.gif";
 		
 		return "1";
 	}
+	
 }
