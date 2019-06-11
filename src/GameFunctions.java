@@ -56,7 +56,7 @@ public class GameFunctions {
 		int totalTime = Player.getTotalTime() - Player.getRemainingTime();
 		gifTime = 1;
 		win = 1;
-		GameFunctions.showMessage("Congratulations, you've won!\nYour new highscore: "+Player.getScore()+"\nTime: "+totalTime+"s",5000);
+		GameFunctions.showMessage("Congratulations, you've won!\nYour new highscore: "+Player.getScore()+"\nTime: "+totalTime+"s",9050);
 		System.exit(1);
 	}
 	
@@ -75,9 +75,9 @@ public class GameFunctions {
 		wasRight = 1;
 		gifTime = 1;
 		if (Player.gotBonus())
-			showMessage("Fantastic job! Double points!",2200);
+			showMessage("Fantastic job! Double points!",3700);
 		else
-			showMessage("Good job!",2200);
+			showMessage("Good job!",3700);
 		
 		
 		Player.updateCurrentRoom();
@@ -103,7 +103,7 @@ public class GameFunctions {
 			Sound.stopBackgroundMusic();
 			Sound.playSoundEffect("sounds/Lose.wav");
 			gameOver = 1;
-			showMessage("GAME OVER!!!\n0 lives left!",3500);
+			showMessage("GAME OVER!!!\n0 lives left!",2800);
 			System.exit(1);
 		}
 		
@@ -117,17 +117,12 @@ public class GameFunctions {
 		Sound.stopBackgroundMusic();
 		Sound.playSoundEffect("sounds/Lose.wav");
 		gifTime = 1;
-		showMessage("Time is up! You lost!",3000);
+		showMessage("Time is up! You lost!",5000);
 		System.exit(1);
 	}
 	
 	//converts the seconds to minutes:seconds format
 	public static String TimeConversion(int x) {
-		/*int p1 = x % 60;
-        int p2 = x / 60;
-        int p3 = p2 % 60;
-        p2 = p2 / 60;
-        return p3 + ":" + p1;*/
 		int p1 = x % 60;
 		int p2 = x / 60;
 		return p2 + ":" + p1;
@@ -243,41 +238,33 @@ public class GameFunctions {
 		
 		if (wasRight == 1) {
 			wasRight = 0;
-			if (Player.gotBonus())
-				return "Images/test.gif";
-			else
-				return "Images/test.gif";
+			return "Images/right2.gif";
 		}
 		
 		if (wasWrong == 1) {
 			wasWrong = 0;
-			return "Images/test.gif";
+			return "Images/wrong2.gif";
 		}
 		
 		if (gameOver == 1)
-			return "Images/test.gif";
+			return "Images/game_over2.gif";
 		
 		if (win == 1)
-			return "Images/test.gif";
+			return "Images/won.gif";
 		
 		if (skip == 1 ) {
 			skip = 0;
 			if (Player.isSkipAvailable())
-				if (Player.getLives() > 1 && Player.getCurrentRoom() < 3) {
-					return "Images/test.gif";
-				}
-				else
-					return "Images/test.gif";
-			else
-
-				return "Images/test.gif";	
-
+				if (Player.getLives() > 1 && Player.getCurrentRoom() < 3)
+					return "Images/skip2.gif";	
 		}
+	
 		
 		if (Player.getRemainingTime() == 0)
-			return "Images/test.gif";
+			return "Images/timeisup2.gif";
 		
 		return "1";
 	}
+		
 	
 }
