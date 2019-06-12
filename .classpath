@@ -3,7 +3,7 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="Docs"/>
-	<classpathentry kind="lib" path="json-simple-1.1.jar"/>
-	<classpathentry kind="lib" path="org.json.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Orestes/Documents/GitHub/college-project-game/json-simple-1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Orestes/Documents/GitHub/college-project-game/org.json.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
