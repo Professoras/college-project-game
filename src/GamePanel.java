@@ -290,8 +290,8 @@ public class GamePanel {
 		frame.getContentPane().add(confirmBtn);
 		
 		JLabel backgroundImageLabel = new JLabel();
-		backgroundImageLabel.setBounds(0, 0, 1184, 662);
-		backgroundImageLabel.setIcon(new ImageIcon("Images\\bg_test.png"));
+		backgroundImageLabel.setBounds(0, 0, 1195, 700);
+		backgroundImageLabel.setIcon(new ImageIcon("Images\\wall.png"));
 		frame.getContentPane().add(backgroundImageLabel);
 		
 	}
