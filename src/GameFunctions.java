@@ -56,7 +56,7 @@ public class GameFunctions {
 		int totalTime = Player.getTotalTime() - Player.getRemainingTime();
 		gifTime = 1;
 		win = 1;
-		GameFunctions.showMessage("Congratulations, you've won!\nYour new highscore: "+Player.getScore()+"\nTime: "+totalTime+"s",9050);
+		GameFunctions.showMessage("Congratulations, you've won!\nYour new highscore: "+Player.getScore()+"\nTime: "+totalTime+"s",9080);
 		System.exit(1);
 	}
 	

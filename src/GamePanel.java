@@ -48,7 +48,7 @@ public class GamePanel {
 		frame.getContentPane().setLayout(null);
 		
 		timeArea = new JTextArea();
-		timeArea.setFont(new Font("Monospaced", Font.PLAIN, 14));
+		timeArea.setFont(new Font("Monospaced", Font.PLAIN, 16));
 		timeArea.setEditable(false);
 		timeArea.setBounds(43, 455, 169, 30);
 		timeArea.setBackground(Color.LIGHT_GRAY);
@@ -58,7 +58,7 @@ public class GamePanel {
 		setTimeTextAreaForeground();
 		
 		livesArea = new JTextArea();
-		livesArea.setFont(new Font("Monospaced", Font.PLAIN, 14));
+		livesArea.setFont(new Font("Monospaced", Font.PLAIN, 16));
 		livesArea.setText("Lives: " + Player.getLives());
 		livesArea.setEditable(false);
 		livesArea.setBounds(43, 485, 169, 30);
@@ -69,7 +69,7 @@ public class GamePanel {
 		frame.getContentPane().add(livesArea);
 		
 		JTextArea scoreArea = new JTextArea();
-		scoreArea.setFont(new Font("Monospaced", Font.PLAIN, 14));
+		scoreArea.setFont(new Font("Monospaced", Font.PLAIN, 16));
 		scoreArea.setText("Score: " + Player.getScore());
 		scoreArea.setBounds(43, 515, 169, 30);
 		scoreArea.setEditable(false);
@@ -93,7 +93,7 @@ public class GamePanel {
 		questionArea.setBackground(Color.LIGHT_GRAY);
 		questionArea.setHighlighter(null);
 		questionArea.setLineWrap(true);
-		questionArea.setFont(new Font(null, Font.BOLD, 15));
+		questionArea.setFont(new Font(null, Font.BOLD, 14));
 		questionArea.setOpaque(false);
 		frame.getContentPane().add(questionArea);
 		
@@ -218,7 +218,7 @@ public class GamePanel {
 		answer1Area.setBackground(Color.LIGHT_GRAY);
 		answer1Area.setHighlighter(null);
 		answer1Area.setLineWrap(true);
-		answer1Area.setFont(new Font(null, Font.BOLD, 13));
+		answer1Area.setFont(new Font(null, Font.BOLD, 14));
 		answer1Area.setBounds(428, 506, 150, 40);
 		answer1Area.setOpaque(false);
 		frame.getContentPane().add(answer1Area);
@@ -228,7 +228,7 @@ public class GamePanel {
 		answer2Area.setBackground(Color.LIGHT_GRAY);
 		answer2Area.setHighlighter(null);
 		answer2Area.setLineWrap(true);
-		answer2Area.setFont(new Font(null, Font.BOLD, 13));
+		answer2Area.setFont(new Font(null, Font.BOLD, 14));
 		answer2Area.setBounds(628, 506, 150, 40);
 		answer2Area.setOpaque(false);
 		frame.getContentPane().add(answer2Area);
@@ -238,7 +238,7 @@ public class GamePanel {
 		answer3Area.setBackground(Color.LIGHT_GRAY);
 		answer3Area.setHighlighter(null);
 		answer3Area.setLineWrap(true);
-		answer3Area.setFont(new Font(null, Font.BOLD, 13));
+		answer3Area.setFont(new Font(null, Font.BOLD, 14));
 		answer3Area.setBounds(836, 506, 150, 40);
 		answer3Area.setOpaque(false);
 		frame.getContentPane().add(answer3Area);
