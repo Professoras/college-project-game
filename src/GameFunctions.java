@@ -2,9 +2,14 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
@@ -144,7 +149,6 @@ public class GameFunctions {
 			}
 
 			else if (Player.getCurrentRoom() == Story.getNumberOfLevels())
-
 				showMessage("You can't use the skip option in the final level!",2000);
 			else
 				showMessage("You don't have enough lives to skip the question!",2000);
@@ -181,6 +185,7 @@ public class GameFunctions {
 		textArea.setBackground(dialog.getBackground());
 		textPanel.add(textArea);
 		textPanel.setBackground(dialog.getBackground());
+		textArea.setOpaque(false);
 		mainPanel.add(textPanel,BorderLayout.NORTH);
 
 		if (showEnemy==1) {
@@ -206,15 +211,12 @@ public class GameFunctions {
 		mainPanel.setBackground(dialog.getBackground());
 		
 		dialog.setContentPane(mainPanel);
-		
 		dialog.setTitle("Message");
 		dialog.setModal(true);
 		dialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 		dialog.pack();
 		dialog.setLocationRelativeTo(GamePanel.getFrame());
-		dialog.setResizable(false);
-		// 600x450 gif size
-		
+		dialog.setResizable(true);
 		
 		//create timer to dispose of dialog after x seconds
 		Timer timer = new Timer(timeinms, new AbstractAction() {
@@ -253,12 +255,9 @@ public class GameFunctions {
 		
 		if (skip == 1 ) {
 			skip = 0;
-			if (Player.isSkipAvailable())
-				if (Player.getLives() > 1 && Player.getCurrentRoom() < 3)
-					return "Images/skip.gif";	
+			return "Images/skip.gif";	
 		}
 	
-		
 		if (Player.getRemainingTime() == 0)
 			return "Images/timeisup.gif";
 		

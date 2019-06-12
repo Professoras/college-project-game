@@ -50,7 +50,7 @@ public class GamePanel {
 		timeArea = new JTextArea();
 		timeArea.setFont(new Font("Monospaced", Font.BOLD, 14));
 		timeArea.setEditable(false);
-		timeArea.setBounds(43, 455, 169, 30);
+		timeArea.setBounds(43, 470, 169, 30);
 		timeArea.setBackground(Color.LIGHT_GRAY);
 		frame.getContentPane().add(timeArea);
 		timeArea.setText("Time Left: " + GameFunctions.TimeConversion(Player.getRemainingTime()));
@@ -61,7 +61,7 @@ public class GamePanel {
 		livesArea.setFont(new Font("Monospaced", Font.BOLD, 14));
 		livesArea.setText("Lives: " + Player.getLives());
 		livesArea.setEditable(false);
-		livesArea.setBounds(43, 480, 169, 30);
+		livesArea.setBounds(43, 490, 169, 30);
 		livesArea.setBackground(Color.LIGHT_GRAY);
 		livesArea.setOpaque(false);
 		setLivesTextAreaForeground();
@@ -71,7 +71,7 @@ public class GamePanel {
 		JTextArea scoreArea = new JTextArea();
 		scoreArea.setFont(new Font("Monospaced", Font.BOLD, 14));
 		scoreArea.setText("Score: " + Player.getScore());
-		scoreArea.setBounds(43, 505, 169, 30);
+		scoreArea.setBounds(43, 510, 169, 30);
 		scoreArea.setEditable(false);
 		scoreArea.setBackground(Color.LIGHT_GRAY);
 		scoreArea.setOpaque(false);
@@ -80,7 +80,7 @@ public class GamePanel {
 		JTextArea roomArea = new JTextArea();
 		roomArea.setText("Room " +  Player.getCurrentRoom());
 		roomArea.setFont(new Font("Monospaced", Font.PLAIN, 50));
-		roomArea.setBounds(608, 20, 184, 75);
+		roomArea.setBounds(605, 26, 184, 75);
 		roomArea.setEditable(false);
 		roomArea.setBackground(Color.LIGHT_GRAY);
 		roomArea.setOpaque(false);
@@ -173,7 +173,7 @@ public class GamePanel {
 					GameFunctions.skipBtn();
 			}
 		});
-		skipBtn.setBounds(1059, 570, 125, 40);
+		skipBtn.setBounds(1059, 580, 125, 40);
 		skipBtn.setOpaque(false);
 		skipBtn.setContentAreaFilled(false);
 		frame.getContentPane().add(skipBtn);
@@ -191,7 +191,7 @@ public class GamePanel {
 				}
 			}
 		});
-		restartBtn.setBounds(1059, 519, 125, 40);
+		restartBtn.setBounds(1059, 529, 125, 40);
 		restartBtn.setOpaque(false);
 		restartBtn.setContentAreaFilled(false);
 		frame.getContentPane().add(restartBtn);
@@ -205,7 +205,7 @@ public class GamePanel {
 					System.exit(0);
 			}	
 		});
-		exitBtn.setBounds(1084, 621, 100, 30);
+		exitBtn.setBounds(1084, 631, 100, 30);
 		exitBtn.setOpaque(false);
 		exitBtn.setContentAreaFilled(false);
 		frame.getContentPane().add(exitBtn);
@@ -284,7 +284,7 @@ public class GamePanel {
 			}
 		}
 		);	
-		confirmBtn.setBounds(640, 580, 120, 40);
+		confirmBtn.setBounds(640, 588, 120, 40);
 		confirmBtn.setOpaque(false);
 		confirmBtn.setContentAreaFilled(false);
 		frame.getContentPane().add(confirmBtn);
@@ -323,7 +323,7 @@ public class GamePanel {
 	
 	private static void setTimeTextAreaForeground() {
 		if (under10s == 1 && Player.getRemainingTime() < 10) {
-			timeArea.setFont(new Font("Monospaced", Font.PLAIN, 19));
+			timeArea.setFont(new Font("Monospaced", Font.PLAIN, 17));
 			timeArea.setForeground(Color.red);
 		    under10s = 0;
 		}
