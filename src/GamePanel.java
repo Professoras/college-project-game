@@ -277,6 +277,12 @@ public class GamePanel {
 		confirmBtn.setOpaque(false);
 		confirmBtn.setContentAreaFilled(false);
 		frame.getContentPane().add(confirmBtn);
+		
+		JLabel backgroundImageLabel = new JLabel();
+		backgroundImageLabel.setBounds(0, 0, 1184, 662);
+		backgroundImageLabel.setIcon(new ImageIcon("images\\wall.png"));
+		frame.getContentPane().add(backgroundImageLabel);
+		
 	}
 	
 	public static void updateTime() {
