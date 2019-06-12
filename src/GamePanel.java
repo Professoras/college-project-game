@@ -1,15 +1,18 @@
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.Area;
 import java.util.ArrayList;
 import java.util.Collections;
 
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -217,6 +220,7 @@ public class GamePanel {
 		answer1Area.setLineWrap(true);
 		answer1Area.setFont(new Font(null, Font.BOLD, 13));
 		answer1Area.setBounds(428, 506, 150, 40);
+		answer1Area.setOpaque(false);
 		frame.getContentPane().add(answer1Area);
 
 		JTextArea answer2Area = new JTextArea(shuffledAnswers.get(1));
@@ -226,6 +230,7 @@ public class GamePanel {
 		answer2Area.setLineWrap(true);
 		answer2Area.setFont(new Font(null, Font.BOLD, 13));
 		answer2Area.setBounds(628, 506, 150, 40);
+		answer2Area.setOpaque(false);
 		frame.getContentPane().add(answer2Area);
 
 		JTextArea answer3Area = new JTextArea(shuffledAnswers.get(2));
@@ -235,6 +240,7 @@ public class GamePanel {
 		answer3Area.setLineWrap(true);
 		answer3Area.setFont(new Font(null, Font.BOLD, 13));
 		answer3Area.setBounds(836, 506, 150, 40);
+		answer3Area.setOpaque(false);
 		frame.getContentPane().add(answer3Area);
 		
 		JButton confirmBtn = new JButton();	
@@ -285,7 +291,7 @@ public class GamePanel {
 		
 		JLabel backgroundImageLabel = new JLabel();
 		backgroundImageLabel.setBounds(0, 0, 1184, 662);
-		backgroundImageLabel.setIcon(new ImageIcon("images\\wall.png"));
+		backgroundImageLabel.setIcon(new ImageIcon("Images\\bg_test.png"));
 		frame.getContentPane().add(backgroundImageLabel);
 		
 	}
