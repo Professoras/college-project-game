@@ -134,6 +134,10 @@ public class WelcomeScreen extends JFrame{
 			welcomeScreenFrame.getContentPane().add(nextButton);
 			
 			//button transparency 
+			char2.setOpaque(false);
+			char2.setContentAreaFilled(false);
+			char1.setOpaque(false);
+			char1.setContentAreaFilled(false);
 			nextButton.setOpaque(false);
 			nextButton.setContentAreaFilled(false);
 			backButton.setOpaque(false);
@@ -231,7 +235,7 @@ public class WelcomeScreen extends JFrame{
 			storyTextArea.setOpaque(false);			
 			
 			JButton okButton = new JButton("");
-			okButton.setIcon(new ImageIcon("images\\ΚButton.png"));
+			okButton.setIcon(new ImageIcon("images\\OkButton.png"));
 			okButton.setForeground(new Color(0, 128, 128));
 			okButton.setBackground(new Color(0, 128, 128));
 			okButton.setBounds(140, 390, 200, 60);
