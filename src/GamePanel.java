@@ -51,6 +51,7 @@ public class GamePanel {
 		timeArea.setBackground(Color.LIGHT_GRAY);
 		frame.getContentPane().add(timeArea);
 		timeArea.setText("Time Left: " + GameFunctions.TimeConversion(Player.getRemainingTime()));
+		timeArea.setOpaque(false);
 		setTimeTextAreaForeground();
 		
 		livesArea = new JTextArea();
@@ -59,6 +60,7 @@ public class GamePanel {
 		livesArea.setEditable(false);
 		livesArea.setBounds(43, 485, 169, 30);
 		livesArea.setBackground(Color.LIGHT_GRAY);
+		livesArea.setOpaque(false);
 		setLivesTextAreaForeground();
 		
 		frame.getContentPane().add(livesArea);
@@ -69,6 +71,7 @@ public class GamePanel {
 		scoreArea.setBounds(43, 515, 169, 30);
 		scoreArea.setEditable(false);
 		scoreArea.setBackground(Color.LIGHT_GRAY);
+		scoreArea.setOpaque(false);
 		frame.getContentPane().add(scoreArea);
 		
 		JTextArea roomArea = new JTextArea();
@@ -77,6 +80,7 @@ public class GamePanel {
 		roomArea.setBounds(608, 20, 184, 75);
 		roomArea.setEditable(false);
 		roomArea.setBackground(Color.LIGHT_GRAY);
+		roomArea.setOpaque(false);
 		frame.getContentPane().add(roomArea);
 		
 		JTextArea questionArea = new JTextArea();
@@ -87,6 +91,7 @@ public class GamePanel {
 		questionArea.setHighlighter(null);
 		questionArea.setLineWrap(true);
 		questionArea.setFont(new Font(null, Font.BOLD, 15));
+		questionArea.setOpaque(false);
 		frame.getContentPane().add(questionArea);
 		
 		JLabel playerImage = new JLabel();
