@@ -19,8 +19,8 @@ public class WelcomeScreen extends JFrame{
 
 	//FigurePanel did not implemented (in contradiction to SDS). Instead the character select feature is included here
 	private JButton playButton,rulesButton,exitButton,char1,char2;
-	private JLabel label;
-	private JTextArea text;
+	private JLabel imageLabel;
+	private JTextArea storyTextArea;
 	private static int howToPlayFrameFlag = 0, locationXOfFrame = 0 , locationYOfFrame = 0, characterSelected = 0;
 	private static JFrame welcomeScreenFrame;
 	
@@ -40,8 +40,8 @@ public class WelcomeScreen extends JFrame{
 		playButton.setBackground(new Color(0, 128, 128));
 		playButton.setForeground(new Color(0, 128, 128));
 		playButton.setBounds(150, 150, 200, 60);
-		ButtonListener listener = new ButtonListener();
-		playButton.addActionListener(listener);
+		PlayButtonListener playListener = new PlayButtonListener();
+		playButton.addActionListener(playListener);
 		welcomeScreenFrame.getContentPane().add(playButton);
 		
 		rulesButton = new JButton("");
@@ -49,8 +49,8 @@ public class WelcomeScreen extends JFrame{
 		rulesButton.setBackground(new Color(0, 128, 128));
 		rulesButton.setIcon(new ImageIcon("images\\RulesButton.png"));
 		rulesButton.setBounds(150, 220, 200, 60);		
-		ButtonListener2 listener2 = new ButtonListener2();
-		rulesButton.addActionListener(listener2);	
+		RulesButtonListener rulesListener = new RulesButtonListener();
+		rulesButton.addActionListener(rulesListener);	
 		welcomeScreenFrame.getContentPane().add(rulesButton);
 		
 		exitButton = new JButton("");
@@ -58,14 +58,14 @@ public class WelcomeScreen extends JFrame{
 		exitButton.setBackground(new Color(0, 128, 128));
 		exitButton.setIcon(new ImageIcon("images\\ExitButton.png"));
 		exitButton.setBounds(150, 290, 200, 60);		
-		ButtonListener3 listener3 = new ButtonListener3();
-		exitButton.addActionListener(listener3);	
+		ExitButtonListener exitListener = new ExitButtonListener();
+		exitButton.addActionListener(exitListener);	
 		welcomeScreenFrame.getContentPane().add(exitButton);
 				
-		label = new JLabel("");
-		label.setBounds(0, 0, 484, 482);
-		label.setIcon(new ImageIcon("images\\keys.jpg"));
-		welcomeScreenFrame.getContentPane().add(label);
+		imageLabel = new JLabel("");
+		imageLabel.setBounds(0, 0, 484, 482);
+		imageLabel.setIcon(new ImageIcon("images\\keys.jpg"));
+		welcomeScreenFrame.getContentPane().add(imageLabel);
 		
 		//transparency for buttons
 		playButton.setOpaque(false);
@@ -88,7 +88,7 @@ public class WelcomeScreen extends JFrame{
 	}
 	
 	//play button
-	class ButtonListener implements ActionListener {
+	class PlayButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent a) {
 			
 			welcomeScreenFrame.getContentPane().removeAll();
@@ -99,8 +99,8 @@ public class WelcomeScreen extends JFrame{
 			backButton.setBackground(new Color(0, 128, 128));
 			backButton.setIcon(new ImageIcon("images\\BackButton.png"));
 			backButton.setBounds(140, 20, 200, 60);		
-			ButtonListener4 listener4 = new ButtonListener4();
-			backButton.addActionListener(listener4);	
+			BackButtonListener backListener = new BackButtonListener();
+			backButton.addActionListener(backListener);	
 			
 			getContentPane().setLayout(null);
 			welcomeScreenFrame.getContentPane().add(backButton);			
@@ -109,8 +109,8 @@ public class WelcomeScreen extends JFrame{
 			char1.setIcon(new ImageIcon("images\\char1.png"));
 			char1.setBackground(Color.WHITE);
 			char1.setBounds(28, 90, 200, 300);
-			ButtonListener5 listener1 = new ButtonListener5();
-			char1.addActionListener(listener1);
+			Char1ButtonListener char1Listener = new Char1ButtonListener();
+			char1.addActionListener(char1Listener);
 			
 			welcomeScreenFrame.getContentPane().add(char1);	
 			
@@ -118,8 +118,8 @@ public class WelcomeScreen extends JFrame{
 			char2.setIcon(new ImageIcon("images\\char2.png"));
 			char2.setBackground(Color.WHITE);
 			char2.setBounds(259, 90, 200, 300);
-			ButtonListener6 listener2 = new ButtonListener6();
-			char2.addActionListener(listener2);			
+			Char2ButtonListener char2Listener = new Char2ButtonListener();
+			char2.addActionListener(char2Listener);			
 			
 			welcomeScreenFrame.getContentPane().add(char2);
 					
@@ -128,8 +128,8 @@ public class WelcomeScreen extends JFrame{
 			nextButton.setForeground(new Color(0, 128, 128));
 			nextButton.setBackground(new Color(0, 128, 128));
 			nextButton.setBounds(140, 401, 200, 60);
-			ButtonListener8 listener3 = new ButtonListener8();
-			nextButton.addActionListener(listener3);		
+			NextButtonListener nextListener = new NextButtonListener();
+			nextButton.addActionListener(nextListener);		
 			
 			welcomeScreenFrame.getContentPane().add(nextButton);
 			
@@ -139,16 +139,16 @@ public class WelcomeScreen extends JFrame{
 			backButton.setOpaque(false);
 			backButton.setContentAreaFilled(false);
 			
-			JLabel label = new JLabel("");
-			label.setBounds(0, 0, 484, 482);
-			label.setIcon(new ImageIcon("images\\keys.jpg"));
+			JLabel imageLabel = new JLabel("");
+			imageLabel.setBounds(0, 0, 484, 482);
+			imageLabel.setIcon(new ImageIcon("images\\keys.jpg"));
 			
-			welcomeScreenFrame.getContentPane().add(label);
+			welcomeScreenFrame.getContentPane().add(imageLabel);
 		}
 	}
 	
 	//rules button
-	class ButtonListener2 implements ActionListener {
+	class RulesButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent b) {
 				
 			//x axis location of the frame 
@@ -165,7 +165,7 @@ public class WelcomeScreen extends JFrame{
 	}
 	
 	//exit button
-	class ButtonListener3 implements ActionListener {
+	class ExitButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent c) {
 			Frame[] frames = Frame.getFrames();
 			for (final Window w : frames) {
@@ -176,7 +176,7 @@ public class WelcomeScreen extends JFrame{
 	}
 	
 	//back button from character selection screen
-	class ButtonListener4 implements ActionListener {
+	class BackButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent c) {
 			try {
 				new WelcomeScreen();
@@ -187,7 +187,7 @@ public class WelcomeScreen extends JFrame{
 	}
 	
 	//character 1 selected
-	class ButtonListener5 implements ActionListener {
+	class Char1ButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent a) {
 			characterSelected = 1;
 			char1.setIcon(new ImageIcon("images\\char1selected.png"));
@@ -196,7 +196,7 @@ public class WelcomeScreen extends JFrame{
 	}
 	
 	//character 2 selected
-	class ButtonListener6 implements ActionListener {
+	class Char2ButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent b) {	
 			characterSelected = 2;
 			char2.setIcon(new ImageIcon("images\\char2selected.png"));
@@ -220,15 +220,15 @@ public class WelcomeScreen extends JFrame{
 				e.printStackTrace();
 			}
 				
-			text = new JTextArea();
-			text.setToolTipText("");
-			text.setText(story);
-			text.setBackground(Color.DARK_GRAY);
-			text.setForeground(Color.BLACK);
-			text.setBounds(10, 10, 484, 400);
-			text.setFont(new Font("Courier New", Font.BOLD, 12));
-			text.setEditable(false);
-			text.setOpaque(false);			
+			storyTextArea = new JTextArea();
+			storyTextArea.setToolTipText("");
+			storyTextArea.setText(story);
+			storyTextArea.setBackground(Color.DARK_GRAY);
+			storyTextArea.setForeground(Color.BLACK);
+			storyTextArea.setBounds(10, 10, 484, 400);
+			storyTextArea.setFont(new Font("Courier New", Font.BOLD, 12));
+			storyTextArea.setEditable(false);
+			storyTextArea.setOpaque(false);			
 			
 			JButton okButton = new JButton("");
 			okButton.setIcon(new ImageIcon("images\\ΚButton.png"));
@@ -237,21 +237,21 @@ public class WelcomeScreen extends JFrame{
 			okButton.setBounds(140, 390, 200, 60);
 			okButton.setOpaque(false);
 			okButton.setContentAreaFilled(false);
-			ButtonListener9 listener = new ButtonListener9();
-			okButton.addActionListener(listener);	
+			OkButtonListener okListener = new OkButtonListener();
+			okButton.addActionListener(okListener);	
 					
-			JLabel label = new JLabel("");
-			label.setBounds(0, 0, 484, 482);
-			label.setIcon(new ImageIcon("images\\lake.jpg"));
+			JLabel imageLabel = new JLabel("");
+			imageLabel.setBounds(0, 0, 484, 482);
+			imageLabel.setIcon(new ImageIcon("images\\lake.jpg"));
 		
 			welcomeScreenFrame.getContentPane().add(okButton);
-			welcomeScreenFrame.getContentPane().add(text);
-			welcomeScreenFrame.getContentPane().add(label);
+			welcomeScreenFrame.getContentPane().add(storyTextArea);
+			welcomeScreenFrame.getContentPane().add(imageLabel);
 		
 		}
 	
-	//game START
-	class ButtonListener9 implements ActionListener {
+	//game START when ok button pressed
+	class OkButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent b) {
 			Frame[] frames = Frame.getFrames();
 			for (final Window w : frames) {
@@ -262,8 +262,8 @@ public class WelcomeScreen extends JFrame{
 		}
 	}
 	
-	//ok button
-	class ButtonListener8 implements ActionListener {
+	//next button
+	class NextButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent b) {	
 			if (characterSelected >= 1 )
 				ShowStory();
@@ -277,7 +277,7 @@ public class WelcomeScreen extends JFrame{
 		howToPlayFrameFlag = x;
     }
 	
-	//get location of jframe
+	//get location of WelcomeScreenFrame
 	public static int getWelcomeScreenFrameX(){
 		return 	locationXOfFrame;
     }
