@@ -182,10 +182,10 @@ public class GameFunctions {
 		textArea.setFont(new Font("Monospaced", Font.PLAIN, 17));
 		textArea.setEditable(false);
 		textArea.setForeground(Color.BLACK);
-		textArea.setBackground(dialog.getBackground());
+		textArea.setOpaque(false);
 		textPanel.add(textArea);
 		textPanel.setBackground(dialog.getBackground());
-		textArea.setOpaque(false);
+		
 		mainPanel.add(textPanel,BorderLayout.NORTH);
 
 		if (showEnemy==1) {
