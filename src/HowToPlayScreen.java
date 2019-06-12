@@ -8,7 +8,7 @@ import javax.swing.*;
 
 public class HowToPlayScreen extends JFrame {
 	//Frame that contains the rules of the game
-	private JTextArea text;
+	private JTextArea rulesTextArea;
 
 	public HowToPlayScreen() {
 
@@ -27,24 +27,24 @@ public class HowToPlayScreen extends JFrame {
 			e.printStackTrace();
 		}
 		
-		text = new JTextArea();
-		text.setEditable(false);
-		text.setToolTipText("");
-		text.setAlignmentX(CENTER_ALIGNMENT);
-		text.setAlignmentY(CENTER_ALIGNMENT);
-		text.setText(howToPlayText);
-		text.setBackground(Color.DARK_GRAY);
-		text.setForeground(Color.BLACK);
-		text.setBounds(5, 10, 410, 420);
-		this.getContentPane().add(text);
-		text.setOpaque(false);
-		text.setColumns(10);
+		rulesTextArea = new JTextArea();
+		rulesTextArea.setEditable(false);
+		rulesTextArea.setToolTipText("");
+		rulesTextArea.setAlignmentX(CENTER_ALIGNMENT);
+		rulesTextArea.setAlignmentY(CENTER_ALIGNMENT);
+		rulesTextArea.setText(howToPlayText);
+		rulesTextArea.setBackground(Color.DARK_GRAY);
+		rulesTextArea.setForeground(Color.BLACK);
+		rulesTextArea.setBounds(5, 10, 410, 420);
+		this.getContentPane().add(rulesTextArea);
+		rulesTextArea.setOpaque(false);
+		rulesTextArea.setColumns(10);
 		
-		JLabel label = new JLabel("");
-		label.setBounds(0, 0, 484, 482);
-		label.setIcon(new ImageIcon("images\\p.jpg"));
+		JLabel imageLabel = new JLabel("");
+		imageLabel.setBounds(0, 0, 484, 482);
+		imageLabel.setIcon(new ImageIcon("images\\p.jpg"));
 		
-		this.getContentPane().add(label);
+		this.getContentPane().add(imageLabel);
 		
 		this.setVisible(true);
 		this.setResizable(false);

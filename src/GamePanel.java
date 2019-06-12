@@ -140,10 +140,13 @@ public class GamePanel {
 		//button transparency 
 		door1.setOpaque(false);
 		door1.setContentAreaFilled(false);
+		door1.setBorderPainted(false);
 		door2.setOpaque(false);
 		door2.setContentAreaFilled(false);
+		door2.setBorderPainted(false);
 		door3.setOpaque(false);
-		door3.setContentAreaFilled(false);		
+		door3.setContentAreaFilled(false);	
+		door3.setBorderPainted(false);
 		
 		Image doorIcon = new ImageIcon("Images/Door.png").getImage();
 		door1.setIcon(new ImageIcon(doorIcon));
