@@ -35,7 +35,6 @@ public class GamePanel {
 			frame.getContentPane().removeAll();
 			frame.repaint();
 			under10s = 1;
-			//System.out.println("gamepanel"); testing purposes
 		}
 		
 		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("images\\ICON.png"));

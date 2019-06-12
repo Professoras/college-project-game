@@ -141,8 +141,6 @@ public class GameFunctions {
 				showMessage("You skipped the question!" + System.lineSeparator() + "The correct answers were:\n" +"1.)"+Story.getFirstRightAnswer()+"\n2.)"+Story.getSecondRightAnswer()+ System.lineSeparator() + "You lost 1 life and 5 seconds!",4000);
 				Player.removeALife();
 				Player.setSkipNotAvailable();
-				if (Player.getCurrentRoom()==Story.getNumberOfLevels())
-					playerWon();
 				Player.updateCurrentRoom();
 				Player.reduceTime(5);
 				openNewGamePanel(); 
@@ -220,7 +218,6 @@ public class GameFunctions {
 		
 		//create timer to dispose of dialog after x seconds
 		Timer timer = new Timer(timeinms, new AbstractAction() {
-
 		    public void actionPerformed(ActionEvent ae) {
 		        dialog.dispose();
 		    }
