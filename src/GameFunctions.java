@@ -265,6 +265,5 @@ public class GameFunctions {
 		
 		return "1";
 	}
-		
-	
+
 }
