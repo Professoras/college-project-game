@@ -100,7 +100,7 @@ public class GamePanel {
 		Image playerIcon = Player.getPhoto();
 		playerImage.setIcon(new ImageIcon(playerIcon));
 		playerImage.setForeground(Color.GRAY);
-		playerImage.setBounds(13, 144, 200, 300);
+		playerImage.setBounds(13, 156, 200, 300);
 		frame.getContentPane().add(playerImage);
 		
 		//Door class did not implemented (in contradiction to SDS). Instead each door is represented with a JButton
