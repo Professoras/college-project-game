@@ -87,7 +87,8 @@ public class WelcomeScreen extends JFrame{
 		welcomeScreenFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
-	//play button
+	//Play button. Previous name: ButtonListener1 renamed to
+	//PlayButtonListener for better readability.
 	class PlayButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent a) {
 			
@@ -151,7 +152,7 @@ public class WelcomeScreen extends JFrame{
 		}
 	}
 	
-	//rules button
+	//rules button. Renamed from ButtonListener2
 	class RulesButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent b) {
 				
@@ -168,7 +169,7 @@ public class WelcomeScreen extends JFrame{
 		}
 	}
 	
-	//exit button
+	//exit button. Renamed from ButtonListener3.
 	class ExitButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent c) {
 			Frame[] frames = Frame.getFrames();
@@ -179,7 +180,8 @@ public class WelcomeScreen extends JFrame{
 		}
 	}
 	
-	//back button from character selection screen
+	//back button from character selection screen. Renamed from ButtonListener4.
+	//The same applies to the rest ButtonListeners.
 	class BackButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent c) {
 			try {
@@ -208,8 +210,7 @@ public class WelcomeScreen extends JFrame{
 		}
 	}
 	
-	//after character selection
-	
+	//After a character has been selected and the next button is pressed.
 	public void ShowStory() {	
 			
 			welcomeScreenFrame.getContentPane().removeAll();
@@ -254,7 +255,7 @@ public class WelcomeScreen extends JFrame{
 		
 		}
 	
-	//game START when ok button pressed
+	//Game START when ok button is pressed.
 	class OkButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent b) {
 			Frame[] frames = Frame.getFrames();
@@ -276,7 +277,9 @@ public class WelcomeScreen extends JFrame{
 		}
 	}
 	
-	//number of how to play screens max = 1 
+	//Number of how to play screens max = 1 
+	//A way to avoid multiple copies of the
+	//rules/how to play screen.
 	public static void setHowToPlayFrameFlag(int x){
 		howToPlayFrameFlag = x;
     }
