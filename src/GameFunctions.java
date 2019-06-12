@@ -79,9 +79,6 @@ public class GameFunctions {
 		else
 			showMessage("Good job!",3700);
 		
-		
-		Player.updateCurrentRoom();
-		
 		if (Player.getCurrentRoom() < Story.getNumberOfLevels() && coinflip() == 1) {
 			int reducedTime=Enemy.reduceTime();
 			showEnemy = 1;
@@ -89,6 +86,8 @@ public class GameFunctions {
 			showMessage("The enemy has cut "+reducedTime+" second(s) off of your time!",2500);
 			Player.reduceTime(reducedTime);	
 		}
+		
+		Player.updateCurrentRoom();
 		Player.startTheTimer();
 		openNewGamePanel();
 	}
@@ -130,10 +129,10 @@ public class GameFunctions {
 	
     //in addition to removing a life (as stated at SDS), skip option also subtracts 5 seconds from the remaining time
 	public static void skipBtn() {
-		gifTime = 1;
-		skip = 1;
 		if (Player.isSkipAvailable()) {
 			if(Player.getLives() > 1 && Player.getCurrentRoom() < 3) {
+				gifTime = 1;
+				skip = 1;
 				showMessage("You skipped the question!" + System.lineSeparator() + "The correct answers were:\n" +"1.)"+Story.getFirstRightAnswer()+"\n2.)"+Story.getSecondRightAnswer()+ System.lineSeparator() + "You lost 1 life and 5 seconds!",4000);
 				Player.removeALife();
 				Player.setSkipNotAvailable();
@@ -173,20 +172,20 @@ public class GameFunctions {
 		
 		JPanel mainPanel = new JPanel(new BorderLayout());
 		JLabel media=null;
-		JPanel textpanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-		JTextArea textarea= new JTextArea(info);
+		JPanel textPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+		JTextArea textArea= new JTextArea(info);
 		
-		textarea.setFont(new Font("Monospaced", Font.PLAIN, 17));
-		textarea.setEditable(false);
-		textarea.setForeground(Color.BLACK);
-		textarea.setBackground(dialog.getBackground());
-		textpanel.add(textarea);
-		textpanel.setBackground(dialog.getBackground());
-		mainPanel.add(textpanel,BorderLayout.NORTH);
+		textArea.setFont(new Font("Monospaced", Font.PLAIN, 17));
+		textArea.setEditable(false);
+		textArea.setForeground(Color.BLACK);
+		textArea.setBackground(dialog.getBackground());
+		textPanel.add(textArea);
+		textPanel.setBackground(dialog.getBackground());
+		mainPanel.add(textPanel,BorderLayout.NORTH);
 
 		if (showEnemy==1) {
 			showEnemy=0;
-			media = new JLabel(new ImageIcon("Images/test.gif"),JLabel.LEADING);
+			media = new JLabel(new ImageIcon("Images/enemy.png"),JLabel.LEADING);
 		}
 		
 		if (gifTime == 1)

@@ -34,9 +34,9 @@ public class Story {
 				e.printStackTrace();
 			}
 	
-			JSONObject json_questions = (JSONObject) obj;
+			JSONObject jsonQuestions = (JSONObject) obj;
 
-			JSONArray questions = (JSONArray) json_questions.get("level_"+level);
+			JSONArray questions = (JSONArray) jsonQuestions.get("level_"+level);
 			
 			level_question_set=questions;
 		
@@ -47,16 +47,16 @@ public class Story {
 		};
 	}
 	
-	//chooses and updates the question and the correlated answers every level
+	//chooses and updates the question and the associated answers for every level
 	public static void findQuestion(int level) {
 		Random randomGenerator = new Random();
-		int random_int = randomGenerator.nextInt(NUMBEROFQUESTIONS);
+		int randomInt = randomGenerator.nextInt(NUMBEROFQUESTIONS);
 		getLevelQuestions(level);
 		//transforms random question from JSON into hashmap -> question: [answers]
-		HashMap<String, ArrayList<String>> question_and_ans_struct = (HashMap) level_question_set.get(random_int);
+		HashMap<String, ArrayList<String>> questioAndAnsStruct = (HashMap) level_question_set.get(randomInt);
 		
-		question = (String) question_and_ans_struct.keySet().toArray()[0];
-		answers = (ArrayList<String>) question_and_ans_struct.get(question);
+		question = (String) questioAndAnsStruct.keySet().toArray()[0];
+		answers = (ArrayList<String>) questioAndAnsStruct.get(question);
 	}
 	
 	public static String getQuestion() {
