@@ -315,7 +315,7 @@ public class GamePanel {
 	//The colour of the displayed lives is green and becomes red when the remaining lives drop below 1
 	private void setLivesTextAreaForeground() {
 		if (Player.getLives() == 1)
-			livesArea.setForeground(Color.RED);
+			livesArea.setForeground(Color.BLACK);
 		else
 			livesArea.setForeground(Color.MAGENTA);
 	}
