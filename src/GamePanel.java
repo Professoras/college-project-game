@@ -317,7 +317,7 @@ public class GamePanel {
 		if (Player.getLives() == 1)
 			livesArea.setForeground(Color.RED);
 		else
-			livesArea.setForeground(Color.GREEN);
+			livesArea.setForeground(Color.MAGENTA);
 	}
 	
 	private static void setTimeTextAreaForeground() {
