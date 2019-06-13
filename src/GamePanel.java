@@ -92,7 +92,7 @@ public class GamePanel {
 		questionArea.setBackground(Color.LIGHT_GRAY);
 		questionArea.setHighlighter(null);
 		questionArea.setLineWrap(true);
-		questionArea.setFont(new Font(null, Font.BOLD, 14));
+		questionArea.setFont(new Font(null, Font.BOLD, 16));
 		questionArea.setOpaque(false);
 		frame.getContentPane().add(questionArea);
 		
