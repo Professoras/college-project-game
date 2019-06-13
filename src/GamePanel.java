@@ -47,7 +47,7 @@ public class GamePanel {
 		frame.getContentPane().setLayout(null);
 		
 		timeArea = new JTextArea();
-		timeArea.setFont(new Font("Monospaced", Font.BOLD, 14));
+		timeArea.setFont(new Font("Monospaced", Font.BOLD, 15));
 		timeArea.setEditable(false);
 		timeArea.setBounds(43, 470, 169, 30);
 		timeArea.setBackground(Color.LIGHT_GRAY);
@@ -57,7 +57,7 @@ public class GamePanel {
 		setTimeTextAreaForeground();
 		
 		livesArea = new JTextArea();
-		livesArea.setFont(new Font("Monospaced", Font.BOLD, 14));
+		livesArea.setFont(new Font("Monospaced", Font.BOLD, 15));
 		livesArea.setText("Lives: " + Player.getLives());
 		livesArea.setEditable(false);
 		livesArea.setBounds(43, 490, 169, 30);
@@ -68,7 +68,7 @@ public class GamePanel {
 		frame.getContentPane().add(livesArea);
 		
 		JTextArea scoreArea = new JTextArea();
-		scoreArea.setFont(new Font("Monospaced", Font.BOLD, 14));
+		scoreArea.setFont(new Font("Monospaced", Font.BOLD, 15));
 		scoreArea.setText("Score: " + Player.getScore());
 		scoreArea.setBounds(43, 510, 169, 30);
 		scoreArea.setEditable(false);
