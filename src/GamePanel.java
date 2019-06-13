@@ -218,7 +218,7 @@ public class GamePanel {
 		answer1Area.setHighlighter(null);
 		answer1Area.setLineWrap(true);
 		answer1Area.setFont(new Font(null, Font.BOLD, 14));
-		answer1Area.setBounds(428, 506, 150, 40);
+		answer1Area.setBounds(428, 516, 150, 40);
 		answer1Area.setOpaque(false);
 		frame.getContentPane().add(answer1Area);
 
@@ -228,7 +228,7 @@ public class GamePanel {
 		answer2Area.setHighlighter(null);
 		answer2Area.setLineWrap(true);
 		answer2Area.setFont(new Font(null, Font.BOLD, 14));
-		answer2Area.setBounds(628, 506, 150, 40);
+		answer2Area.setBounds(628, 516, 150, 40);
 		answer2Area.setOpaque(false);
 		frame.getContentPane().add(answer2Area);
 
@@ -238,7 +238,7 @@ public class GamePanel {
 		answer3Area.setHighlighter(null);
 		answer3Area.setLineWrap(true);
 		answer3Area.setFont(new Font(null, Font.BOLD, 14));
-		answer3Area.setBounds(836, 506, 150, 40);
+		answer3Area.setBounds(836, 516, 150, 40);
 		answer3Area.setOpaque(false);
 		frame.getContentPane().add(answer3Area);
 		
